@@ -1,0 +1,95 @@
+---
+title: "live_OLS_example"
+format: live-html
+engine: knitr
+execute:
+  echo: false
+---
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+*This is a demonstration of quarto-live, running via web assembly from html.*
+
+## 1. Generate some data
+
+```{webr}
+#| include: false
+library(ggplot2)
+```
+
+```{webr}
+x <- rnorm(50,180, 50)
+y <- 0.5*x-10 + rnorm(50,0,15)
+```
+
+```{webr}
+#| define: data
+data <- data.frame(x=x,y=y)
+```
+## 2. Which line fits the data best?
+### (how low can the RMSE go?)
+
+```{ojs}
+//| panel: sidebar
+//| echo: false
+
+viewof b1 = Inputs.range([-2, 2], {step: 0.1, label: "slope"})
+viewof b0adj = Inputs.range([-20, 20], {step: 1, label: "intercept adustment"})
+b0 = (90 - b1 * 180) + b0adj
+
+residualData = data.map(d => {
+  const yhat = b1 * d.x + b0;
+  const res  = d.y - yhat;
+  return {
+    ...d,
+    yhat,
+    residual: res,
+    sign: res >= 0 ? "positive" : "negative",
+    absRes: Math.abs(res)
+  };
+})
+
+RMSR = Math.sqrt(d3.sum(residualData, d => d.residual ** 2) / residualData.length)
+
+tex.block`y = ${b1}x + ${b0}`
+
+tex.block`\sqrt{\frac{1}{n}\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`
+```
+
+```{ojs}
+//| panel: fill
+//| echo: false
+
+xRange = d3.extent(residualData,d => d.x)
+lineData = xRange.map(x => ({x, y: b1 * x + b0}))
+
+
+Plot.plot({
+  marks: [
+    Plot.ruleX(residualData, {x: "x",
+      y1: "y",
+      y2: "yhat",
+      stroke: "sign", 
+      strokeOpacity: 0.75,
+      strokeWidth: d => 1 + d.absRes / 12,
+       title: d => `x=${d.x.toFixed(1)}
+y=${d.y.toFixed(1)}
+ŷ=${d.yhat.toFixed(1)}
+res=${d.residual.toFixed(1)}
+res²=${(d.residual**2).toFixed(1)}`
+    }),
+
+    Plot.line(lineData, { x: "x", y: "y" }),
+
+    Plot.dot(data, { x: "x", y: "y", r: 3 })
+  ],
+  x: { domain: xRange },
+  y: { domain: [0, 180], label: "y" },
+})
+```
+
+
+## 3. The OLS estimate 
+```{webr}
+lm(y~x,data) |> summary()
+```
+

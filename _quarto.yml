@@ -1,11 +1,13 @@
 project:
-  title: "UNE_Statistics_Short_Courses"
   type: book
+  
+book:
+  title: "Introduction to Linear Regression in R"
   chapters:
-   -index.qmd
-   -regression.qmd
+   - index.qmd
+   - Regression.qmd
    
-format: live-html
+format: html
 engine: knitr
 
 

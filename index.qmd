@@ -1,10 +1,24 @@
 ---
-title: "index"
 format: live-html
 webr:
   packages:
     - ggplot2
 ---
-
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
+# Preface {.unnumbered}
+
+This notebook provides an introduction (or refresher) to **linear
+regression**, a fundamental tool for modeling relationships between
+variables. We'll explore the concepts, fit models in R, interpret
+results, and visualize fits.
+
+By the end, you should be able to:
+
+-   Understand the linear regression model and its assumptions.
+
+-   Fit and interpret simple and multiple regression models in R.
+
+-   Diagnose model fit using residual plots and summary statistics.
+
+-   Use model output to make predictions and assess uncertainty.

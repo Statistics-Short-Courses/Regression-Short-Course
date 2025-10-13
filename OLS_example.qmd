@@ -1,12 +1,10 @@
 ---
 format: live-html
 engine: knitr
-execute:
-  echo: false
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-
+# Ordinary Least squares: fitting a model to data
 *This is a demonstration of quarto-live, running via web assembly from html.*
 
 ## 1. Generate some data
@@ -61,7 +59,6 @@ tex.block`\sqrt{\frac{1}{n}\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`
 
 xRange = d3.extent(residualData,d => d.x)
 lineData = xRange.map(x => ({x, y: b1 * x + b0}))
-
 
 Plot.plot({
   marks: [

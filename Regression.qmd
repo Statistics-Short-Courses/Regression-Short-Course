@@ -11,21 +11,21 @@ editor:
 
 #  Linear models
 
-##  Motivation and Example
+##  Linear relationships between variables
 
-Linear regression models how a *response variable* (Y) depends on one
-or more *predictors* (X).
+Regression analysis models how a *response variable* ($Y$) depends on one
+or more *predictors* (X). Linear regression assumes that there is a linear relationship between $X$ and $Y$ That is, that we can express Y as X  multiplied by and added to some constant values ($\beta$). For example, with one predictor variable we have a 'simple linear regression':
 
-$$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i, \quad \varepsilon_i \sim N(0, \sigma^2)$$
+$$Y \approx \beta_0 + \beta_1 X$$.
 
-This equation tells us that we can model the the '$i^{th}$' observation $Y_i$, by taking a 'linear combination' of the $i^{th}$ observation of X - that is $X_i$ multiplied or added to some constant values $\beta0, \beta$ - plus some random error $\varepsilon_i$ which we assume to be normally distributed. 
+Here the two constants, $\beta_0$ and $\beta_1$, tell us about the relationship between X and Y. Specifically, $\beta_0$ tells us what Y looks like when $X=0$, and $\beta_1$ tells us how much Y changes when X increases by 1. 
+
 
 to make this more concrete, lets look at a basic example.  
 
 ### Example 1: A simple linear model
 
-#### deterministic linear predictor
-Lets start with our predictor variable, $X$. Say we have records for 10 employees at a company, including their time working at the company. These values, in years are:
+You've been offered a job at ~company A~, and  Say we have records for 10 employees at a company, including their time working at the company. These values, in years are:
 ```{r}
 x <- c(15,6, 9, 11,2, 7, 4, 5, 12,1) 
 x
@@ -61,7 +61,7 @@ ggplot(cbind('Years employed'=x, "Predicted salary($k)"= y_hat), aes(`Years empl
   geom_abline(intercept= 50, slope=5)
 ```
 
-#### Random error
+## Random error
 But what is $\hat{Y}$? it is the predicted salary based on the 'average' rate of pay rise each year. The actual pay rise varies from individual to individual, year to year, based on factors we don't have information about (e.g. job performance, time-off, good luck).
 
 Thankfully, we have data on the *actual* salary of these employees too. Lets have a look:

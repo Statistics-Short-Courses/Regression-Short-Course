@@ -14,7 +14,7 @@
     "href": "Regression.html",
     "title": "1  Linear models",
     "section": "",
-    "text": "1.1 Motivation and Example\nLinear regression models how a response variable (Y) depends on one or more predictors (X).\n\\[Y_i = \\beta_0 + \\beta_1 X_i + \\varepsilon_i, \\quad \\varepsilon_i \\sim N(0, \\sigma^2)\\]\nThis equation tells us that we can model the the ‘\\(i^{th}\\)’ observation \\(Y_i\\), by taking a ‘linear combination’ of the \\(i^{th}\\) observation of X - that is \\(X_i\\) multiplied or added to some constant values \\(\\beta0, \\beta\\) - plus some random error \\(\\varepsilon_i\\) which we assume to be normally distributed.\nto make this more concrete, lets look at a basic example.",
+    "text": "1.1 Linear relationships between variables\nRegression analysis models how a response variable (\\(Y\\)) depends on one or more predictors (X). Linear regression assumes that there is a linear relationship between \\(X\\) and \\(Y\\) That is, that we can express Y as X multiplied by and added to some constant values (\\(\\beta\\)). For example, with one predictor variable we have a ‘simple linear regression’:\n\\[Y \\approx \\beta_0 + \\beta_1 X\\].\nHere the two constants, \\(\\beta_0\\) and \\(\\beta_1\\), tell us about the relationship between X and Y. Specifically, \\(\\beta_0\\) tells us what Y looks like when \\(X=0\\), and \\(\\beta_1\\) tells us how much Y changes when X increases by 1.\nto make this more concrete, lets look at a basic example.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Linear models</span>"
     ]
@@ -44,7 +44,7 @@
     "href": "OLS_example.html#which-line-fits-the-data-best",
     "title": "2  Ordinary Least squares: fitting a model to data",
     "section": "2.2 2. Which line fits the data best?",
-    "text": "2.2 2. Which line fits the data best?\n\n2.2.1 (how low can the RMSE go?)\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})",
+    "text": "2.2 2. Which line fits the data best?\n\n2.2.1 (how low can the RMSE go?)\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Ordinary Least squares: fitting a model to data</span>"
     ]
@@ -57,6 +57,146 @@
     "text": "2.3 3. The OLS estimate",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Ordinary Least squares: fitting a model to data</span>"
+    ]
+  },
+  {
+    "objectID": "Regression.html#linear-relationships-between-variables",
+    "href": "Regression.html#linear-relationships-between-variables",
+    "title": "1  Linear models",
+    "section": "",
+    "text": "1.1.1 Example 1: A simple linear model\nYou’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. Say we have records for 10 employees at a company, including their time working at the company. These values, in years are:\n\nx &lt;- c(15,6, 9, 11,2, 7, 4, 5, 12,1) \nx\n\n [1] 15  6  9 11  2  7  4  5 12  1\n\n\nOur aim in this example is to predict the salary of each participant \\(Y_i\\).\nWe know that everybody starts at this company at a base salary of $50,000, and every year they stay employed they get a pay rise of - on average - $5000.\nUsing this information, we can construct a simple linear model of salary from employment time. Given an employment time of \\(X_i\\) years, we can represent a employee’s expected salary (\\(\\hat{Y}_i\\)) mathematically as\n\\[\n\\hat{Y}_i= \\$50,000 + \\$5,000\\cdot X_i.\n\\]\nlets compute these expected values for our 10 employees\n\ny_hat &lt;- 50 + 5*x\ny_hat\n\n [1] 125  80  95 105  60  85  70  75 110  55\n\n\nand look at a plot of this data\n\nlibrary(ggplot2)\nggplot(cbind('Years employed'=x, \"Predicted salary($k)\"= y_hat), aes(`Years employed`, `Predicted salary($k)`))+ \n  geom_point()\n\n\n\n\n\n\n\n\nThe relationship between \\(X\\) and \\(\\hat{Y}\\) is perfectly linear - for an employee of \\(X_i\\) years, we can calulate \\(\\hat{Y}_i\\) using the linear equation above. Note that this applies not just to our sample of 10 employees, but to any other employee at the company - like yourself.\nFor example, an 11th employee has been working at the company for 8 years, his expected salary will therefore be \\(\\hat{Y}_{11}= \\$50,000 + \\$5,000\\cdot8 = \\$90,000\\).\n\n\n1.1.2 Excersise:\ncalculate (using R) your expected salary after working for this company for 10 years\n\n\n\n\n\n\n\n\n\n\n\nEvaluating our linear equation across the range of X, gives us a straigth line with y-intercept $50k and slope of $5k/year.\n\nggplot(cbind('Years employed'=x, \"Predicted salary($k)\"= y_hat), aes(`Years employed`, `Predicted salary($k)`))+ \n  geom_point()+\n  geom_abline(intercept= 50, slope=5)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Linear models</span>"
+    ]
+  },
+  {
+    "objectID": "Regression.html#random-error",
+    "href": "Regression.html#random-error",
+    "title": "1  Linear models",
+    "section": "1.2 Random error",
+    "text": "1.2 Random error\nBut what is \\(\\hat{Y}\\)? it is the predicted salary based on the ‘average’ rate of pay rise each year. The actual pay rise varies from individual to individual, year to year, based on factors we don’t have information about (e.g. job performance, time-off, good luck).\nThankfully, we have data on the actual salary of these employees too. Lets have a look:\n\ny &lt;- (50 + 5*x + rnorm(10, mean=0, sd=4)) |&gt; round(1)\ny\n\n [1] 122.8  81.8  95.4 111.4  66.0  84.4  80.2  79.8 117.4  50.9\n\n\n\nggplot(cbind('Years'=x, \"Salary($k)\"= y), aes(Years, `Salary($k)`))+ \n  geom_point()\n\n\n\n\n\n\n\n\nOverlaying our linear model from before,\n\nggplot(cbind('Years'=x, \"Salary($k)\"= y), aes(Years, `Salary($k)`))+ \n  geom_point()+\n  geom_abline(intercept= 50, slope=5)\n\n\n\n\n\n\n\n\nWe can see that our predictions were not always (in fact, never exactly) correct, however our simple linear equation does fairly well at characterising the general relationship between the length of employment and (actual) salary.\n\n1.2.0.1 Your turn\nA second company also has a job available. Base salary on start is higher here at $70,000, but payrises are less - you are told that on average employees working for the company for 5 years have $20,000 higher salary than when they started. We want to construct a simple linear model to estimate Salary at company 2 after X years of employment.\n\\[\nY_i = \\beta_0 + \\beta_1 X_i + \\varepsilon_i\n\\]\nWhat are the coefficients \\(\\beta_0\\) and $beta_1 in this case?",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Linear models</span>"
+    ]
+  },
+  {
+    "objectID": "LinearModels.html",
+    "href": "LinearModels.html",
+    "title": "1  Working with linear models",
+    "section": "",
+    "text": "1.1 Linear relationships between variables\nRegression analysis models how a response variable (\\(Y\\)) depends on one or more predictors (X). Linear regression assumes that there is a linear relationship between \\(X\\) and \\(Y\\) That is, that we can express Y as X multiplied by and added to some constant values (\\(\\beta\\)). For example, with one predictor variable we have a ‘simple linear regression’:\n\\[Y \\approx \\beta_0 + \\beta_1 X\\].\nHere the two constants, \\(\\beta_0\\) and \\(\\beta_1\\), tell us about the relationship between X and Y. Specifically, \\(\\beta_0\\) tells us what Y looks like when \\(X=0\\), and \\(\\beta_1\\) tells us how much Y changes when X increases by 1.\nto make this more concrete, lets look at a basic example.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Working with linear models</span>"
+    ]
+  },
+  {
+    "objectID": "LinearModels.html#linear-relationships-between-variables",
+    "href": "LinearModels.html#linear-relationships-between-variables",
+    "title": "1  Working with linear models",
+    "section": "",
+    "text": "1.1.1 Example 1: A simple linear model\nYou’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. Say we have records for 10 employees at a company, including their time working at the company. These values, in years are:\n\nx &lt;- c(15,6, 9, 11,2, 7, 4, 5, 12,1) \nx\n\n [1] 15  6  9 11  2  7  4  5 12  1\n\n\nOur aim in this example is to predict the salary of each participant \\(Y_i\\).\nWe know that everybody starts at this company at a base salary of $50,000, and every year they stay employed they get a pay rise of - on average - $5000.\nUsing this information, we can construct a simple linear model of salary from employment time. Given an employment time of \\(X_i\\) years, we can represent a employee’s expected salary (\\(\\hat{Y}_i\\)) mathematically as\n\\[\nE[Y]= \\$50,000 + \\$5,000\\cdot X_i.\n\\]\nlets compute these expected values for our 10 employees\n\nE_Y &lt;- 50 + 5*x\nE_Y\n\n [1] 125  80  95 105  60  85  70  75 110  55\n\n\nand look at a plot of this data\n\nlibrary(ggplot2)\nggplot(cbind('Years employed'=x, \"Predicted salary($k)\"= E_Y), aes(`Years employed`, `Predicted salary($k)`))+ \n  geom_point()\n\n\n\n\n\n\n\n\nThe relationship between \\(X\\) and \\(\\hat{Y}\\) is perfectly linear - for an employee of \\(X_i\\) years, we can calulate \\(\\hat{Y}_i\\) using the linear equation above. Note that this applies not just to our sample of 10 employees, but to any other employee at the company - like yourself.\nFor example, an 11th employee has been working at the company for 8 years, his expected salary will therefore be \\(\\hat{Y}_{11}= \\$50,000 + \\$5,000\\cdot8 = \\$90,000\\).\n\n\n1.1.2 Excersise:\ncalculate (using R) your expected salary after working for this company for 10 years\n\n\n\n\n\n\n\n\n\n\n\nEvaluating our linear equation across the range of X, gives us a straigth line with y-intercept $50k and slope of $5k/year.\n\nggplot(cbind('Years employed'=x, \"Predicted salary($k)\"= E_Y), aes(`Years employed`, `Predicted salary($k)`))+ \n  geom_point()+\n  geom_abline(intercept= 50, slope=5)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Working with linear models</span>"
+    ]
+  },
+  {
+    "objectID": "LinearModels.html#random-error",
+    "href": "LinearModels.html#random-error",
+    "title": "1  Working with linear models",
+    "section": "1.2 Random error",
+    "text": "1.2 Random error\nBut what is \\(\\hat{Y}\\)? it is the predicted salary based on the ‘average’ rate of pay rise each year. The actual pay rise varies from individual to individual, year to year, based on factors we don’t have information about (e.g. job performance, time-off, good luck).\nThankfully, we have data on the actual salary of these employees too. Lets have a look:\n\ny &lt;- (50 + 5*x + rnorm(10, mean=0, sd=4)) |&gt; round(1)\ny\n\n [1] 122.9  83.3  99.2 109.0  55.3  81.4  66.4  78.4 107.8  53.4\n\n\n\nggplot(cbind('Years'=x, \"Salary($k)\"= y), aes(Years, `Salary($k)`))+ \n  geom_point()\n\n\n\n\n\n\n\n\nOverlaying our linear model from before,\n\nggplot(cbind('Years'=x, \"Salary($k)\"= y), aes(Years, `Salary($k)`))+ \n  geom_point()+\n  geom_abline(intercept= 50, slope=5)\n\n\n\n\n\n\n\n\nWe can see that our predictions were not always (in fact, never exactly) correct, however our simple linear equation does fairly well at characterising the general relationship between the length of employment and (actual) salary.\n\n1.2.0.1 Your turn\nA second company also has a job available. Base salary on start is higher here at $70,000, but payrises are less - you are told that on average employees working for the company for 5 years have $20,000 higher salary than when they started. We want to construct a simple linear model to estimate Salary at company 2 after X years of employment.\n\\[\nY_i = \\beta_0 + \\beta_1 X_i + \\varepsilon_i\n\\]\nWhat are the coefficients \\(\\beta_0\\) and $beta_1 in this case?",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Working with linear models</span>"
+    ]
+  },
+  {
+    "objectID": "MultipleLinearRegression.html",
+    "href": "MultipleLinearRegression.html",
+    "title": "4  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "",
+    "text": "4.1 1. Generate some data\nThis is a demonstration of quarto-live, running via web assembly from html.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Ordinary Least squares: fitting a linear model to data with lm()</span>"
+    ]
+  },
+  {
+    "objectID": "MultipleLinearRegression.html#which-line-fits-the-data-best",
+    "href": "MultipleLinearRegression.html#which-line-fits-the-data-best",
+    "title": "4  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "4.2 2. Which line fits the data best?",
+    "text": "4.2 2. Which line fits the data best?\n\n4.2.1 (how low can the RMSE go?)\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Ordinary Least squares: fitting a linear model to data with lm()</span>"
+    ]
+  },
+  {
+    "objectID": "MultipleLinearRegression.html#the-ols-estimate",
+    "href": "MultipleLinearRegression.html#the-ols-estimate",
+    "title": "4  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "4.3 3. The OLS estimate",
+    "text": "4.3 3. The OLS estimate",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Ordinary Least squares: fitting a linear model to data with lm()</span>"
+    ]
+  },
+  {
+    "objectID": "Fitting.html",
+    "href": "Fitting.html",
+    "title": "2  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "",
+    "text": "2.1 1. Generate some data\nThis is a demonstration of quarto-live, running via web assembly from html.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+    ]
+  },
+  {
+    "objectID": "Fitting.html#which-line-fits-the-data-best",
+    "href": "Fitting.html#which-line-fits-the-data-best",
+    "title": "2  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "2.2 2. Which line fits the data best?",
+    "text": "2.2 2. Which line fits the data best?\n\n2.2.1 (how low can the RMSE go?)\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+    ]
+  },
+  {
+    "objectID": "Fitting.html#the-ols-estimate",
+    "href": "Fitting.html#the-ols-estimate",
+    "title": "2  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "2.3 3. The OLS estimate",
+    "text": "2.3 3. The OLS estimate",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+    ]
+  },
+  {
+    "objectID": "Diagnostics.html",
+    "href": "Diagnostics.html",
+    "title": "3  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "",
+    "text": "3.1 1. Generate some data\nThis is a demonstration of quarto-live, running via web assembly from html.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Checking model fit</span>"
+    ]
+  },
+  {
+    "objectID": "Diagnostics.html#which-line-fits-the-data-best",
+    "href": "Diagnostics.html#which-line-fits-the-data-best",
+    "title": "3  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "3.2 2. Which line fits the data best?",
+    "text": "3.2 2. Which line fits the data best?\n\n3.2.1 (how low can the RMSE go?)\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Checking model fit</span>"
+    ]
+  },
+  {
+    "objectID": "Diagnostics.html#the-ols-estimate",
+    "href": "Diagnostics.html#the-ols-estimate",
+    "title": "3  Ordinary Least squares: fitting a linear model to data with lm()",
+    "section": "3.3 3. The OLS estimate",
+    "text": "3.3 3. The OLS estimate",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Checking model fit</span>"
     ]
   }
 ]

@@ -14,7 +14,7 @@ embed-resources: true
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-#  Linear models
+# Working with linear models
 
 ##  Linear relationships between variables
 
@@ -42,19 +42,19 @@ We know that everybody starts at this company at a base salary of \$50,000, and 
 Using this information, we can construct a simple linear model of salary from employment time. Given an employment time of $X_i$ years, we can represent a employee's expected salary ($\hat{Y}_i$) mathematically as
 
 $$
-\hat{Y}_i= \$50,000 + \$5,000\cdot X_i.
+E[Y]= \$50,000 + \$5,000\cdot X_i.
 $$
 
 lets compute these expected values for our 10 employees
 ```{r}
-y_hat <- 50 + 5*x
-y_hat
+E_Y <- 50 + 5*x
+E_Y
 ```
 
 and look at a plot of this data
 ```{r}
 library(ggplot2)
-ggplot(cbind('Years employed'=x, "Predicted salary($k)"= y_hat), aes(`Years employed`, `Predicted salary($k)`))+ 
+ggplot(cbind('Years employed'=x, "Predicted salary($k)"= E_Y), aes(`Years employed`, `Predicted salary($k)`))+ 
   geom_point()
 ```
 
@@ -85,7 +85,7 @@ if (identical(.result, 50000+(5000*10))) {
 Evaluating our linear equation across the range of X, gives us a straigth line with y-intercept \$50k and slope of \$5k/year.
 
 ```{r}
-ggplot(cbind('Years employed'=x, "Predicted salary($k)"= y_hat), aes(`Years employed`, `Predicted salary($k)`))+ 
+ggplot(cbind('Years employed'=x, "Predicted salary($k)"= E_Y), aes(`Years employed`, `Predicted salary($k)`))+ 
   geom_point()+
   geom_abline(intercept= 50, slope=5)
 ```

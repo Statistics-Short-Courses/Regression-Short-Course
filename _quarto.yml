@@ -6,8 +6,10 @@ book:
   title: "Introduction to Linear Regression in R"
   chapters:
    - index.qmd
-   - Regression.qmd
-   - OLS_example.qmd
+   - LinearModels.qmd
+   - Fitting.qmd
+   - Diagnostics.qmd
+   - MultipleLinearRegression.qmd
    
 format: html
 engine: knitr

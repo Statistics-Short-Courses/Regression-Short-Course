@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; 1. Generate some data – Introduction to Linear Regression in R</title>
+<title>2&nbsp; Ordinary Least squares: fitting a model to data – Introduction to Linear Regression in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./OLS_example.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1. Generate some data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./OLS_example.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ordinary Least squares: fitting a model to data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -158,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./OLS_example.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1. Generate some data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ordinary Least squares: fitting a model to data</span></span></a>
   </div>
 </li>
     </ul>
@@ -171,11 +171,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#which-line-fits-the-data-best" id="toc-which-line-fits-the-data-best" class="nav-link active" data-scroll-target="#which-line-fits-the-data-best"><span class="header-section-number">2.1</span> 2. Which line fits the data best?</a>
+  <li><a href="#generate-some-data" id="toc-generate-some-data" class="nav-link active" data-scroll-target="#generate-some-data"><span class="header-section-number">2.1</span> 1. Generate some data</a></li>
+  <li><a href="#which-line-fits-the-data-best" id="toc-which-line-fits-the-data-best" class="nav-link" data-scroll-target="#which-line-fits-the-data-best"><span class="header-section-number">2.2</span> 2. Which line fits the data best?</a>
   <ul class="collapse">
-  <li><a href="#how-low-can-the-rmse-go" id="toc-how-low-can-the-rmse-go" class="nav-link" data-scroll-target="#how-low-can-the-rmse-go"><span class="header-section-number">2.1.1</span> (how low can the RMSE go?)</a></li>
+  <li><a href="#how-low-can-the-rmse-go" id="toc-how-low-can-the-rmse-go" class="nav-link" data-scroll-target="#how-low-can-the-rmse-go"><span class="header-section-number">2.2.1</span> (how low can the RMSE go?)</a></li>
   </ul></li>
-  <li><a href="#the-ols-estimate" id="toc-the-ols-estimate" class="nav-link" data-scroll-target="#the-ols-estimate"><span class="header-section-number">2.2</span> 3. The OLS estimate</a></li>
+  <li><a href="#the-ols-estimate" id="toc-the-ols-estimate" class="nav-link" data-scroll-target="#the-ols-estimate"><span class="header-section-number">2.3</span> 3. The OLS estimate</a></li>
   </ul>
 </nav>
     </div>
@@ -184,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1. Generate some data</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ordinary Least squares: fitting a model to data</span></h1>
 </div>
 
 
@@ -202,6 +203,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><em>This is a demonstration of quarto-live, running via web assembly from html.</em></p>
+<section id="generate-some-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="generate-some-data"><span class="header-section-number">2.1</span> 1. Generate some data</h2>
 <div class="cell">
 <div>
 <div id="webr-1" class="exercise-cell">
@@ -232,10 +235,11 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRh
 </script>
 </div>
 </div>
-<section id="which-line-fits-the-data-best" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="which-line-fits-the-data-best"><span class="header-section-number">2.1</span> 2. Which line fits the data best?</h2>
-<section id="how-low-can-the-rmse-go" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="how-low-can-the-rmse-go"><span class="header-section-number">2.1.1</span> (how low can the RMSE go?)</h3>
+</section>
+<section id="which-line-fits-the-data-best" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="which-line-fits-the-data-best"><span class="header-section-number">2.2</span> 2. Which line fits the data best?</h2>
+<section id="how-low-can-the-rmse-go" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="how-low-can-the-rmse-go"><span class="header-section-number">2.2.1</span> (how low can the RMSE go?)</h3>
 <div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
 <div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
 <div class="sourceCode cell-code hidden" id="cb1" data-startfrom="35" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"slope"</span>})</span>
@@ -364,8 +368,8 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRh
 </div>
 </section>
 </section>
-<section id="the-ols-estimate" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="the-ols-estimate"><span class="header-section-number">2.2</span> 3. The OLS estimate</h2>
+<section id="the-ols-estimate" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="the-ols-estimate"><span class="header-section-number">2.3</span> 3. The OLS estimate</h2>
 <div class="cell">
 <div>
 <div id="webr-4" class="exercise-cell">

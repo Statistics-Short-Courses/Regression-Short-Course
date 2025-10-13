@@ -32,31 +32,31 @@
   {
     "objectID": "OLS_example.html",
     "href": "OLS_example.html",
-    "title": "2  1. Generate some data",
+    "title": "2  Ordinary Least squares: fitting a model to data",
     "section": "",
-    "text": "2.1 2. Which line fits the data best?\nThis is a demonstration of quarto-live, running via web assembly from html.",
+    "text": "2.1 1. Generate some data\nThis is a demonstration of quarto-live, running via web assembly from html.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1. Generate some data</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Ordinary Least squares: fitting a model to data</span>"
     ]
   },
   {
     "objectID": "OLS_example.html#which-line-fits-the-data-best",
     "href": "OLS_example.html#which-line-fits-the-data-best",
-    "title": "2  1. Generate some data",
-    "section": "",
-    "text": "2.1.1 (how low can the RMSE go?)\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})",
+    "title": "2  Ordinary Least squares: fitting a model to data",
+    "section": "2.2 2. Which line fits the data best?",
+    "text": "2.2 2. Which line fits the data best?\n\n2.2.1 (how low can the RMSE go?)\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1. Generate some data</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Ordinary Least squares: fitting a model to data</span>"
     ]
   },
   {
     "objectID": "OLS_example.html#the-ols-estimate",
     "href": "OLS_example.html#the-ols-estimate",
-    "title": "2  1. Generate some data",
-    "section": "2.2 3. The OLS estimate",
-    "text": "2.2 3. The OLS estimate",
+    "title": "2  Ordinary Least squares: fitting a model to data",
+    "section": "2.3 3. The OLS estimate",
+    "text": "2.3 3. The OLS estimate",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1. Generate some data</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Ordinary Least squares: fitting a model to data</span>"
     ]
   }
 ]

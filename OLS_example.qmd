@@ -6,7 +6,7 @@ execute:
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-
+# Ordinary Least squares: fitting a model to data
 *This is a demonstration of quarto-live, running via web assembly from html.*
 
 ## 1. Generate some data

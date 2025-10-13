@@ -1,0 +1,12 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to Linear Regression in R",
+    "section": "",
+    "text": "Preface\nThis notebook provides an introduction (or refresher) to linear regression, a fundamental tool for modeling relationships between variables. We’ll explore the concepts, fit models in R, interpret results, and visualize fits.\nBy the end, you should be able to:\n\nUnderstand the linear regression model and its assumptions.\nFit and interpret simple and multiple regression models in R.\nDiagnose model fit using residual plots and summary statistics.\nUse model output to make predictions and assess uncertainty.",
+    "crumbs": [
+      "Preface"
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+---
+title: "index"
+format: live-html
+webr:
+  packages:
+    - ggplot2
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+

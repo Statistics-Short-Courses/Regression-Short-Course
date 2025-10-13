@@ -1,5 +1,12 @@
 project:
   title: "UNE_Statistics_Short_Courses"
+  type: book
+  chapters:
+   -index.qmd
+   -regression.qmd
+   
+format: live-html
+engine: knitr
 
 
 

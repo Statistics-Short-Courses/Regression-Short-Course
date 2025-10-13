@@ -7,6 +7,7 @@ book:
   chapters:
    - index.qmd
    - Regression.qmd
+   - OLS_example.qmd
    
 format: html
 engine: knitr

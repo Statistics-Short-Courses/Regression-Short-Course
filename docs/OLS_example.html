@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>live_OLS_example</title>
+<title>2&nbsp; 1. Generate some data – Introduction to Linear Regression in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,33 +57,134 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="OLS_example_files/libs/clipboard/clipboard.min.js"></script>
-<script src="OLS_example_files/libs/quarto-html/quarto.js"></script>
-<script src="OLS_example_files/libs/quarto-html/popper.min.js"></script>
-<script src="OLS_example_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="OLS_example_files/libs/quarto-html/anchor.min.js"></script>
-<link href="OLS_example_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="OLS_example_files/libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="OLS_example_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="OLS_example_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="OLS_example_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="OLS_example_files/libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="OLS_example_files/libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
-<script type="module" src="OLS_example_files/libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="OLS_example_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Regression.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-77205cbbef6a5b90ba72edc25dea2156.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./OLS_example.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1. Generate some data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Linear Regression in R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./OLS_example.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1. Generate some data</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#which-line-fits-the-data-best" id="toc-which-line-fits-the-data-best" class="nav-link active" data-scroll-target="#which-line-fits-the-data-best"><span class="header-section-number">2.1</span> 2. Which line fits the data best?</a>
+  <ul class="collapse">
+  <li><a href="#how-low-can-the-rmse-go" id="toc-how-low-can-the-rmse-go" class="nav-link" data-scroll-target="#how-low-can-the-rmse-go"><span class="header-section-number">2.1.1</span> (how low can the RMSE go?)</a></li>
+  </ul></li>
+  <li><a href="#the-ols-estimate" id="toc-the-ols-estimate" class="nav-link" data-scroll-target="#the-ols-estimate"><span class="header-section-number">2.2</span> 3. The OLS estimate</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">live_OLS_example</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1. Generate some data</span></h1>
 </div>
 
 
@@ -101,8 +202,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><em>This is a demonstration of quarto-live, running via web assembly from html.</em></p>
-<section id="generate-some-data" class="level2">
-<h2 class="anchored" data-anchor-id="generate-some-data">1. Generate some data</h2>
 <div class="cell">
 <div>
 <div id="webr-1" class="exercise-cell">
@@ -133,11 +232,10 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRh
 </script>
 </div>
 </div>
-</section>
-<section id="which-line-fits-the-data-best" class="level2">
-<h2 class="anchored" data-anchor-id="which-line-fits-the-data-best">2. which line fits the data best?</h2>
-<section id="how-low-can-the-rmse-go" class="level3">
-<h3 class="anchored" data-anchor-id="how-low-can-the-rmse-go">(how low can the RMSE go?)</h3>
+<section id="which-line-fits-the-data-best" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="which-line-fits-the-data-best"><span class="header-section-number">2.1</span> 2. Which line fits the data best?</h2>
+<section id="how-low-can-the-rmse-go" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="how-low-can-the-rmse-go"><span class="header-section-number">2.1.1</span> (how low can the RMSE go?)</h3>
 <div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
 <div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
 <div class="sourceCode cell-code hidden" id="cb1" data-startfrom="35" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"slope"</span>})</span>
@@ -266,8 +364,8 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRh
 </div>
 </section>
 </section>
-<section id="the-ols-estimate" class="level2">
-<h2 class="anchored" data-anchor-id="the-ols-estimate">3. The OLS estimate</h2>
+<section id="the-ols-estimate" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="the-ols-estimate"><span class="header-section-number">2.2</span> 3. The OLS estimate</h2>
 <div class="cell">
 <div>
 <div id="webr-4" class="exercise-cell">
@@ -295,17 +393,18 @@ eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00IiwiaW5saW5lIjpmYWxzZSwibWV0
 <script type="vfs-file">
 W10=
 </script>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ilxudmlld29mIGIxID0gSW5wdXRzLnJhbmdlKFstMiwgMl0sIHtzdGVwOiAwLjEsIGxhYmVsOiBcInNsb3BlXCJ9KVxudmlld29mIGIwYWRqID0gSW5wdXRzLnJhbmdlKFstMjAsIDIwXSwge3N0ZXA6IDEsIGxhYmVsOiBcImludGVyY2VwdCBhZHVzdG1lbnRcIn0pXG5iMCA9ICg5MCAtIGIxICogMTgwKSArIGIwYWRqXG5cbnJlc2lkdWFsRGF0YSA9IGRhdGEubWFwKGQgPT4ge1xuICBjb25zdCB5aGF0ID0gYjEgKiBkLnggKyBiMDtcbiAgY29uc3QgcmVzICA9IGQueSAtIHloYXQ7XG4gIHJldHVybiB7XG4gICAgLi4uZCxcbiAgICB5aGF0LFxuICAgIHJlc2lkdWFsOiByZXMsXG4gICAgc2lnbjogcmVzID49IDAgPyBcInBvc2l0aXZlXCIgOiBcIm5lZ2F0aXZlXCIsXG4gICAgYWJzUmVzOiBNYXRoLmFicyhyZXMpXG4gIH07XG59KVxuXG5STVNSID0gTWF0aC5zcXJ0KGQzLnN1bShyZXNpZHVhbERhdGEsIGQgPT4gZC5yZXNpZHVhbCAqKiAyKSAvIHJlc2lkdWFsRGF0YS5sZW5ndGgpXG5cbnRleC5ibG9ja2B5ID0gJHtiMX14ICsgJHtiMH1gXG5cbnRleC5ibG9ja2BcXHNxcnR7XFxmcmFjezF9e259XFxzdW1fe2l9cl9pXnsyfX0gPSAke1JNU1IudG9GaXhlZCgyKX1gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcbnhSYW5nZSA9IGQzLmV4dGVudChyZXNpZHVhbERhdGEsZCA9PiBkLngpXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IGIxICogeCArIGIwfSkpXG5cblxuUGxvdC5wbG90KHtcbiAgbWFya3M6IFtcbiAgICBQbG90LnJ1bGVYKHJlc2lkdWFsRGF0YSwge3g6IFwieFwiLFxuICAgICAgeTE6IFwieVwiLFxuICAgICAgeTI6IFwieWhhdFwiLFxuICAgICAgc3Ryb2tlOiBcInNpZ25cIiwgXG4gICAgICBzdHJva2VPcGFjaXR5OiAwLjc1LFxuICAgICAgc3Ryb2tlV2lkdGg6IGQgPT4gMSArIGQuYWJzUmVzIC8gMTIsXG4gICAgICAgdGl0bGU6IGQgPT4gYHg9JHtkLngudG9GaXhlZCgxKX1cbnk9JHtkLnkudG9GaXhlZCgxKX1cbsW3PSR7ZC55aGF0LnRvRml4ZWQoMSl9XG5yZXM9JHtkLnJlc2lkdWFsLnRvRml4ZWQoMSl9XG5yZXPCsj0keyhkLnJlc2lkdWFsKioyKS50b0ZpeGVkKDEpfWBcbiAgICB9KSxcblxuICAgIFBsb3QubGluZShsaW5lRGF0YSwgeyB4OiBcInhcIiwgeTogXCJ5XCIgfSksXG5cbiAgICBQbG90LmRvdChkYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiwgcjogMyB9KVxuICBdLFxuICB4OiB7IGRvbWFpbjogeFJhbmdlIH0sXG4gIHk6IHsgZG9tYWluOiBbMCwgMTgwXSwgbGFiZWw6IFwieVwiIH0sXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMGFkaicpIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../..";
-window._ojs.paths.runtimeToRoot = "../../..";
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
 window._ojs.paths.docToRoot = "";
 window._ojs.selfContained = false;
 window._ojs.runtime.interpretFromScriptTags();
@@ -727,6 +826,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Regression.html" class="pagination-link" aria-label="Linear models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Linear models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

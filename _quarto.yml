@@ -1,18 +1,18 @@
 project:
   type: book
   output-dir: docs
-  
-book:
-  title: "Introduction to Linear Regression in R"
-  chapters:
-   - index.qmd
-   - LinearModels.qmd
-   - Fitting.qmd
-   - Diagnostics.qmd
-   - MultipleLinearRegression.qmd
-   
-format: html
 engine: knitr
 
-
-
+book:
+  title: Introduction to Linear Regression in R
+  chapters:
+  - index.qmd
+  - LinearModels.qmd
+  - Fitting.qmd
+  - Diagnostics.qmd
+  - MultipleLinearRegression.qmd
+format:
+  live-html:
+    toc: true
+css: include/webex.css
+include-after-body: include/webex.js

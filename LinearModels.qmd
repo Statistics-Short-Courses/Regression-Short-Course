@@ -1,5 +1,8 @@
 ---
-format: live-html
+format: 
+  live-html:
+    toc: true
+
 execute:
   echo: true
   warning: false
@@ -7,9 +10,6 @@ execute:
 editor: 
   markdown: 
     wrap: 72
-webr:
-  packages:
-    -webexercises
 embed-resources: true
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
@@ -81,7 +81,6 @@ if (identical(.result, 50000+(5000*10))) {
 }
 ```
 
-
 Evaluating our linear equation across the range of X, gives us a straigth line with y-intercept \$50k and slope of \$5k/year.
 
 ```{r}
@@ -91,7 +90,7 @@ ggplot(cbind('Years employed'=x, "Predicted salary($k)"= E_Y), aes(`Years employ
 ```
 
 ## Random error
-But what is $\hat{Y}$? it is the predicted salary based on the 'average' rate of pay rise each year. The actual pay rise varies from individual to individual, year to year, based on factors we don't have information about (e.g. job performance, time-off, good luck).
+But what is $E Y$? it is the predicted salary based on the 'average' rate of pay rise each year. The actual pay rise varies from individual to individual, year to year, based on factors we don't have information about (e.g. job performance, time-off, good luck).
 
 Thankfully, we have data on the *actual* salary of these employees too. Lets have a look:
 
@@ -113,7 +112,7 @@ ggplot(cbind('Years'=x, "Salary($k)"= y), aes(Years, `Salary($k)`))+
 ```
 We can see that our predictions were not always (in fact, never exactly) correct, however our simple linear equation does fairly well at characterising the general relationship between the length of employment and (actual) salary. 
 
-
+::: {.webex-check .webex-box}
 #### Your turn 
 
 A second company also has a job available. Base salary on start is higher here at \$70,000, but payrises are less  - you are told that on average employees working for the company for 5 years have \$20,000 higher salary than when they started. 
@@ -123,7 +122,20 @@ $$
 Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 $$
 
-What are the coefficients $\beta_0$ and $beta_1 in this case?
+What are the coefficients $\beta_0$ and $beta_1$ in this case?
 
- 
 
+```{r}
+#| echo: false
+#| results: 'asis'
+library(webexercises)
+beta0_quiz <- fitb(answer= 70000, num=TRUE)
+beta1_quiz <- fitb(answer=4000, num=TRUE)
+
+
+# When using `{r} ...` language-bracketed inline code, functions like `mqc()` and `torf()` need to be enclosed by `I()`. This tells knitr to treat the output as markdown, thereby avoiding any character escaping of HTML code these functions generate.
+```
+
+$\beta_0 =$`{r} I(beta0_quiz)`
+$\beta_0 =$`{r} I(beta1_quiz)`
+::::

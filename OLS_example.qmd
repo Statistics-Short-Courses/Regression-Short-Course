@@ -4,7 +4,11 @@ engine: knitr
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
+<<<<<<< HEAD
 # Ordinary Least squares: fitting a linear model to data with lm()
+=======
+# Ordinary Least squares: fitting a model to data
+>>>>>>> 6d957c1061ec5efa750daf0eb570efb5765a5cae
 *This is a demonstration of quarto-live, running via web assembly from html.*
 
 ## 1. Generate some data

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Working with linear models – Introduction to Linear Regression in R</title>
+<title>1  Working with linear models – Introduction to Linear Regression in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29169,7 +29169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearModels.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Working with linear models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearModels.html"><span class="chapter-number">1</span>  <span class="chapter-title">Working with linear models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -29189,7 +29189,7 @@ window.Quarto = {
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class title="Search"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -29203,25 +29203,25 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearModels.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Working with linear models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Working with linear models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Fitting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fitting a linear model to data with lm()</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Fitting a linear model to data with lm()</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Diagnostics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Checking model fit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Checking model fit</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./MultipleLinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
     </ul>
@@ -29248,7 +29248,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Working with linear models</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>  <span class="chapter-title">Working with linear models</span></h1>
 </div>
 
 
@@ -29298,7 +29298,7 @@ E[Y]= \$50,000 + \$5,000\cdot X_i.
 <p>and look at a plot of this data</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">'Years employed'</span><span class="ot">=</span>x, <span class="st">"Predicted salary($k)"</span><span class="ot">=</span> E_Y), <span class="fu">aes</span>(<span class="st">`</span><span class="at">Years employed</span><span class="st">`</span>, <span class="st">`</span><span class="at">Predicted salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">&#39;Years employed&#39;</span><span class="ot">=</span>x, <span class="st">&quot;Predicted salary($k)&quot;</span><span class="ot">=</span> E_Y), <span class="fu">aes</span>(<span class="st">`</span><span class="at">Years employed</span><span class="st">`</span>, <span class="st">`</span><span class="at">Predicted salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -29331,7 +29331,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4
 </div>
 <p>Evaluating our linear equation across the range of X, gives us a straigth line with y-intercept $50k and slope of $5k/year.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">'Years employed'</span><span class="ot">=</span>x, <span class="st">"Predicted salary($k)"</span><span class="ot">=</span> E_Y), <span class="fu">aes</span>(<span class="st">`</span><span class="at">Years employed</span><span class="st">`</span>, <span class="st">`</span><span class="at">Predicted salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">&#39;Years employed&#39;</span><span class="ot">=</span>x, <span class="st">&quot;Predicted salary($k)&quot;</span><span class="ot">=</span> E_Y), <span class="fu">aes</span>(<span class="st">`</span><span class="at">Years employed</span><span class="st">`</span>, <span class="st">`</span><span class="at">Predicted salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept=</span> <span class="dv">50</span>, <span class="at">slope=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -29346,7 +29346,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4
 </section>
 <section id="random-error" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="random-error"><span class="header-section-number">1.2</span> Random error</h2>
-<p>But what is <span class="math inline">\(\hat{Y}\)</span>? it is the predicted salary based on the ‘average’ rate of pay rise each year. The actual pay rise varies from individual to individual, year to year, based on factors we don’t have information about (e.g.&nbsp;job performance, time-off, good luck).</p>
+<p>But what is <span class="math inline">\(\hat{Y}\)</span>? it is the predicted salary based on the ‘average’ rate of pay rise each year. The actual pay rise varies from individual to individual, year to year, based on factors we don’t have information about (e.g. job performance, time-off, good luck).</p>
 <p>Thankfully, we have data on the <em>actual</em> salary of these employees too. Lets have a look:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> (<span class="dv">50</span> <span class="sc">+</span> <span class="dv">5</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">4</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">1</span>)</span>
@@ -29356,7 +29356,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">'Years'</span><span class="ot">=</span>x, <span class="st">"Salary($k)"</span><span class="ot">=</span> y), <span class="fu">aes</span>(Years, <span class="st">`</span><span class="at">Salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">&#39;Years&#39;</span><span class="ot">=</span>x, <span class="st">&quot;Salary($k)&quot;</span><span class="ot">=</span> y), <span class="fu">aes</span>(Years, <span class="st">`</span><span class="at">Salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -29368,7 +29368,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4
 </div>
 <p>Overlaying our linear model from before,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">'Years'</span><span class="ot">=</span>x, <span class="st">"Salary($k)"</span><span class="ot">=</span> y), <span class="fu">aes</span>(Years, <span class="st">`</span><span class="at">Salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(<span class="st">&#39;Years&#39;</span><span class="ot">=</span>x, <span class="st">&quot;Salary($k)&quot;</span><span class="ot">=</span> y), <span class="fu">aes</span>(Years, <span class="st">`</span><span class="at">Salary($k)</span><span class="st">`</span>))<span class="sc">+</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept=</span> <span class="dv">50</span>, <span class="at">slope=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -29847,7 +29847,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Fitting.html" class="pagination-link" aria-label="Fitting a linear model to data with lm()">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fitting a linear model to data with lm()</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">Fitting a linear model to data with lm()</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

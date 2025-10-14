@@ -42,11 +42,11 @@
   {
     "objectID": "Fitting.html",
     "href": "Fitting.html",
-    "title": "2  Fitting a linear model to data with lm()",
+    "title": "2  Fitting a linear model to data",
     "section": "",
-    "text": "2.1 Estimating parameters",
+    "text": "2.1 Estimating parameters\nin the previous section, you were given a linear model - we knew the values of \\(beta_0\\), \\(beta_1\\) and even \\(sigma\\). However, in most contexts we don’t know the true relationship between \\(X\\) and \\(Y\\) in advance. Instead, we are given data and try to infer the values of \\(\\beta\\), \\(\\sigma\\) based on this.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
     ]
   },
   {
@@ -72,21 +72,21 @@
   {
     "objectID": "Fitting.html#estimating-parameters",
     "href": "Fitting.html#estimating-parameters",
-    "title": "2  Fitting a linear model to data with lm()",
+    "title": "2  Fitting a linear model to data",
     "section": "",
     "text": "Estimating \\(\\beta\\)\nWhich line fits the data best (how low can the RMSE go)?\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\sigma\\)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
     ]
   },
   {
     "objectID": "Fitting.html#fitting-a-model-using-least-squares---lm",
     "href": "Fitting.html#fitting-a-model-using-least-squares---lm",
-    "title": "2  Fitting a linear model to data with lm()",
+    "title": "2  Fitting a linear model to data",
     "section": "2.2 Fitting a model using least squares - lm()",
     "text": "2.2 Fitting a model using least squares - lm()",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
     ]
   },
   {
@@ -102,21 +102,21 @@
   {
     "objectID": "Fitting.html#inference-for-simple-linear-regression",
     "href": "Fitting.html#inference-for-simple-linear-regression",
-    "title": "2  Fitting a linear model to data with lm()",
+    "title": "2  Fitting a linear model to data",
     "section": "2.4 Inference for simple linear regression",
     "text": "2.4 Inference for simple linear regression",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
     ]
   },
   {
     "objectID": "Fitting.html#interpreting-summary-output",
     "href": "Fitting.html#interpreting-summary-output",
-    "title": "2  Fitting a linear model to data with lm()",
+    "title": "2  Fitting a linear model to data",
     "section": "2.3 Interpreting summary() output",
     "text": "2.3 Interpreting summary() output",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data with lm()</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
     ]
   }
 ]

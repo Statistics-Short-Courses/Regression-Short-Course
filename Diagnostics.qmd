@@ -4,5 +4,5 @@ engine: knitr
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-# Checking model fit
+# Checking model assumptions
 

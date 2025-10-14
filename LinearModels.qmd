@@ -7,6 +7,7 @@ execute:
   echo: true
   warning: false
   message: false
+
 editor: 
   markdown: 
     wrap: 72
@@ -117,7 +118,7 @@ beta1_quiz <- fitb(answer=4000, num=TRUE)
 ```
 
 $\beta_0 =$`{r} I(beta0_quiz)`
-$\beta_0 =$`{r} I(beta1_quiz)`
+$\beta_1 =$`{r} I(beta1_quiz)`
 
 2. complete the r function that predicts Y from an input X value for this linear model
 ```{webr}

@@ -6,7 +6,8 @@ engine: knitr
 
 # Fitting a linear model to data with lm()
 
-## 1. Generate some data
+## Estimating parameters
+
 
 ```{webr}
 #| include: false
@@ -14,16 +15,19 @@ library(ggplot2)
 ```
 
 ```{webr}
+#| include: false
 x <- rnorm(50,180, 50)
 y <- 0.5*x-10 + rnorm(50,0,15)
 ```
 
 ```{webr}
+#| include: false
 #| define: data
 data <- data.frame(x=x,y=y)
 ```
-## 2. Which line fits the data best?
-### (how low can the RMSE go?)
+### Estimating $\beta$
+
+Which line fits the data best (how low can the RMSE go)?
 
 ```{ojs}
 //| panel: sidebar
@@ -83,9 +87,16 @@ res²=${(d.residual**2).toFixed(1)}`
 })
 ```
 
+### Estimating $\sigma$
 
-## 3. The OLS estimate 
+
+## Fitting a model using least squares - lm()
 ```{webr}
 lm(y~x,data) |> summary()
 ```
+
+## Interpreting summary() output
+
+## Inference for simple linear regression 
+
 

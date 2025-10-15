@@ -19,5 +19,7 @@ format:
     toc-expand: 2
     toc-title: Contents
     number-depth: 2
-css: include/webex.css
+css: 
+ - include/webex.css
+ - customCallouts.scss
 include-after-body: include/webex.js

@@ -6,3 +6,18 @@ engine: knitr
 
 # Checking model assumptions
 
+## Assumptions of the linear model
+
+### Independence of observations
+### Linear relationship
+### Constant Variance
+### Normally distributed error
+
+
+## Using residuals to check assumptions
+
+## Common assumption violations
+### Non-independence of observations
+### Non-linear relationships
+### Non-constant Variance
+### Non-normality of error

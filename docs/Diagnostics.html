@@ -126,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Fitting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fitting a linear model to data with lm()</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fitting a linear model to data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -141,13 +141,39 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./RegressionCase.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Case Study: (?)</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#assumptions-of-the-linear-model" id="toc-assumptions-of-the-linear-model" class="nav-link active" data-scroll-target="#assumptions-of-the-linear-model"><span class="header-section-number">3.1</span> Assumptions of the linear model</a>
+  <ul class="collapse">
+  <li><a href="#independence-of-observations" id="toc-independence-of-observations" class="nav-link" data-scroll-target="#independence-of-observations">Independence of observations</a></li>
+  <li><a href="#linear-relationship" id="toc-linear-relationship" class="nav-link" data-scroll-target="#linear-relationship">Linear relationship</a></li>
+  <li><a href="#constant-variance" id="toc-constant-variance" class="nav-link" data-scroll-target="#constant-variance">Constant Variance</a></li>
+  <li><a href="#normally-distributed-error" id="toc-normally-distributed-error" class="nav-link" data-scroll-target="#normally-distributed-error">Normally distributed error</a></li>
+  </ul></li>
+  <li><a href="#using-residuals-to-check-assumptions" id="toc-using-residuals-to-check-assumptions" class="nav-link" data-scroll-target="#using-residuals-to-check-assumptions"><span class="header-section-number">3.2</span> Using residuals to check assumptions</a></li>
+  <li><a href="#common-assumption-violations" id="toc-common-assumption-violations" class="nav-link" data-scroll-target="#common-assumption-violations"><span class="header-section-number">3.3</span> Common assumption violations</a>
+  <ul class="collapse">
+  <li><a href="#non-independence-of-observations" id="toc-non-independence-of-observations" class="nav-link" data-scroll-target="#non-independence-of-observations">Non-independence of observations</a></li>
+  <li><a href="#non-linear-relationships" id="toc-non-linear-relationships" class="nav-link" data-scroll-target="#non-linear-relationships">Non-linear relationships</a></li>
+  <li><a href="#non-constant-variance" id="toc-non-constant-variance" class="nav-link" data-scroll-target="#non-constant-variance">Non-constant Variance</a></li>
+  <li><a href="#non-normality-of-error" id="toc-non-normality-of-error" class="nav-link" data-scroll-target="#non-normality-of-error">Non-normality of error</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -171,6 +197,37 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="assumptions-of-the-linear-model" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="assumptions-of-the-linear-model"><span class="header-section-number">3.1</span> Assumptions of the linear model</h2>
+<section id="independence-of-observations" class="level3">
+<h3 class="anchored" data-anchor-id="independence-of-observations">Independence of observations</h3>
+</section>
+<section id="linear-relationship" class="level3">
+<h3 class="anchored" data-anchor-id="linear-relationship">Linear relationship</h3>
+</section>
+<section id="constant-variance" class="level3">
+<h3 class="anchored" data-anchor-id="constant-variance">Constant Variance</h3>
+</section>
+<section id="normally-distributed-error" class="level3">
+<h3 class="anchored" data-anchor-id="normally-distributed-error">Normally distributed error</h3>
+</section>
+</section>
+<section id="using-residuals-to-check-assumptions" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="using-residuals-to-check-assumptions"><span class="header-section-number">3.2</span> Using residuals to check assumptions</h2>
+</section>
+<section id="common-assumption-violations" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="common-assumption-violations"><span class="header-section-number">3.3</span> Common assumption violations</h2>
+<section id="non-independence-of-observations" class="level3">
+<h3 class="anchored" data-anchor-id="non-independence-of-observations">Non-independence of observations</h3>
+</section>
+<section id="non-linear-relationships" class="level3">
+<h3 class="anchored" data-anchor-id="non-linear-relationships">Non-linear relationships</h3>
+</section>
+<section id="non-constant-variance" class="level3">
+<h3 class="anchored" data-anchor-id="non-constant-variance">Non-constant Variance</h3>
+</section>
+<section id="non-normality-of-error" class="level3">
+<h3 class="anchored" data-anchor-id="non-normality-of-error">Non-normality of error</h3>
 
 
 <script type="ojs-module-contents">
@@ -187,6 +244,8 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -825,8 +884,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Fitting.html" class="pagination-link" aria-label="Fitting a linear model to data with lm()">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fitting a linear model to data with lm()</span></span>
+      <a href="./Fitting.html" class="pagination-link" aria-label="Fitting a linear model to data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fitting a linear model to data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

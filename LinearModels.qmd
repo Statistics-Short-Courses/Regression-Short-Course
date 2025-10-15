@@ -123,6 +123,7 @@ $\beta_1 =$`{r} I(beta1_quiz)`
 2. complete the r function that predicts Y from an input X value for this linear model
 ```{webr}
 #| exercise: r_function
+#| envir: linear_predictor_function
 linear_prediction <- function(X){__ + (__*__)}
 ```
 
@@ -136,13 +137,15 @@ if (identical(.result, 50000+(5000*10))) {
 }
 ```
 use your function to predict Y for the following collection of X
-```{r}
-#| export: X_new
+```{webr}
+#| edit: false
 X_new <- c(9,4,5,2,6)
 ```
 
 ```{webr}
 #| exercise: r_function_call
+#| envir: linear_predictor_function
+
 
 
 ```
@@ -150,7 +153,7 @@ X_new <- c(9,4,5,2,6)
 ```{webr}
 #| exercise: r_function_call
 #| check: true
-if (identical(.result, 50000+(5000*X_new)) {
+if (identical(.result, 50000+(5000*X_new))) {
   list(correct = TRUE, message = "Nice work!")
 } else {
   list(correct = FALSE, message = "That's incorrect, sorry.")

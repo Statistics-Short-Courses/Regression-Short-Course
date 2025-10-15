@@ -6,10 +6,10 @@ engine: knitr
 
 # Fitting a linear model to data
 
-in the previous section, you were given a linear model - we knew the values of $beta_0$, $beta_1$ and even $sigma$. However, in most contexts we don't know the true relationship between $X$ and $Y$ in advance. Instead, we are given *data* and try to *infer* the values of $\beta$, $\sigma$ based on this. 
+in the previous section, you were given a linear model - we knew the values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most contexts we don't know the true relationship between $X$ and $Y$ in advance. Instead, we are given *data* and try to *infer* the values of $\beta$, $\sigma$ based on this. 
 
 ## Estimating parameters
-
+### residuals
 
 ```{webr}
 #| include: false

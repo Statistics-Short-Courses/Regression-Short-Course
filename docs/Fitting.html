@@ -204,18 +204,25 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./RegressionCase.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Case Study: (?)</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
   <li><a href="#estimating-parameters" id="toc-estimating-parameters" class="nav-link active" data-scroll-target="#estimating-parameters"><span class="header-section-number">2.1</span> Estimating parameters</a>
   <ul class="collapse">
+  <li><a href="#residuals" id="toc-residuals" class="nav-link" data-scroll-target="#residuals">residuals</a></li>
   <li><a href="#estimating-beta" id="toc-estimating-beta" class="nav-link" data-scroll-target="#estimating-beta">Estimating <span class="math inline">\(\beta\)</span></a></li>
   <li><a href="#estimating-sigma" id="toc-estimating-sigma" class="nav-link" data-scroll-target="#estimating-sigma">Estimating <span class="math inline">\(\sigma\)</span></a></li>
   </ul></li>
@@ -247,9 +254,11 @@ window.Quarto = {
 </header>
 
 
-<p>in the previous section, you were given a linear model - we knew the values of <span class="math inline">\(beta_0\)</span>, <span class="math inline">\(beta_1\)</span> and even <span class="math inline">\(sigma\)</span>. However, in most contexts we don’t know the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in advance. Instead, we are given <em>data</em> and try to <em>infer</em> the values of <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\sigma\)</span> based on this.</p>
+<p>in the previous section, you were given a linear model - we knew the values of <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and even <span class="math inline">\(\sigma\)</span>. However, in most contexts we don’t know the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in advance. Instead, we are given <em>data</em> and try to <em>infer</em> the values of <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\sigma\)</span> based on this.</p>
 <section id="estimating-parameters" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="estimating-parameters"><span class="header-section-number">2.1</span> Estimating parameters</h2>
+<section id="residuals" class="level3">
+<h3 class="anchored" data-anchor-id="residuals">residuals</h3>
 <div class="cell">
 <div>
 <div id="webr-1" class="exercise-cell">
@@ -280,6 +289,7 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlY2hvIjpmYWxzZSwiZWRpdCI6ZmFsc2UsImV2YWwiOnRy
 </script>
 </div>
 </div>
+</section>
 <section id="estimating-beta" class="level3">
 <h3 class="anchored" data-anchor-id="estimating-beta">Estimating <span class="math inline">\(\beta\)</span></h3>
 <p>Which line fits the data best (how low can the RMSE go)?</p>

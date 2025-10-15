@@ -8,12 +8,20 @@ engine: knitr
 
 ## Adding extra predictors
 
-## adding extra $\beta s$
+### categorical predictors
 
 ## fitting a multiple regression model
 
-## Interpreting output
+### Interpreting output
 
-## diagnostics for multiple regression
+### diagnostics for multiple regression
 
-### multicollinearity
+#### multicollinearity
+
+## creating new predictors
+
+### interactions
+
+### polynomials
+
+### other transformation

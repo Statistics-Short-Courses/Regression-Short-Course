@@ -73,35 +73,6 @@ ul.task-list li input[type="checkbox"] {
 <script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="customCallouts.scss">
@@ -156,7 +127,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Fitting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fitting a linear model to data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple linear regression (fitting a model to data)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -187,13 +158,20 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#adding-extra-predictors" id="toc-adding-extra-predictors" class="nav-link active" data-scroll-target="#adding-extra-predictors"><span class="header-section-number">4.1</span> Adding extra predictors</a></li>
-  <li><a href="#adding-extra-beta-s" id="toc-adding-extra-beta-s" class="nav-link" data-scroll-target="#adding-extra-beta-s"><span class="header-section-number">4.2</span> adding extra <span class="math inline">\(\beta s\)</span></a></li>
-  <li><a href="#fitting-a-multiple-regression-model" id="toc-fitting-a-multiple-regression-model" class="nav-link" data-scroll-target="#fitting-a-multiple-regression-model"><span class="header-section-number">4.3</span> fitting a multiple regression model</a></li>
-  <li><a href="#interpreting-output" id="toc-interpreting-output" class="nav-link" data-scroll-target="#interpreting-output"><span class="header-section-number">4.4</span> Interpreting output</a></li>
-  <li><a href="#diagnostics-for-multiple-regression" id="toc-diagnostics-for-multiple-regression" class="nav-link" data-scroll-target="#diagnostics-for-multiple-regression"><span class="header-section-number">4.5</span> diagnostics for multiple regression</a>
+  <li><a href="#adding-extra-predictors" id="toc-adding-extra-predictors" class="nav-link active" data-scroll-target="#adding-extra-predictors"><span class="header-section-number">4.1</span> Adding extra predictors</a>
   <ul class="collapse">
-  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity">multicollinearity</a></li>
+  <li><a href="#categorical-predictors" id="toc-categorical-predictors" class="nav-link" data-scroll-target="#categorical-predictors">categorical predictors</a></li>
+  </ul></li>
+  <li><a href="#fitting-a-multiple-regression-model" id="toc-fitting-a-multiple-regression-model" class="nav-link" data-scroll-target="#fitting-a-multiple-regression-model"><span class="header-section-number">4.2</span> fitting a multiple regression model</a>
+  <ul class="collapse">
+  <li><a href="#interpreting-output" id="toc-interpreting-output" class="nav-link" data-scroll-target="#interpreting-output">Interpreting output</a></li>
+  <li><a href="#diagnostics-for-multiple-regression" id="toc-diagnostics-for-multiple-regression" class="nav-link" data-scroll-target="#diagnostics-for-multiple-regression">diagnostics for multiple regression</a></li>
+  </ul></li>
+  <li><a href="#creating-new-predictors" id="toc-creating-new-predictors" class="nav-link" data-scroll-target="#creating-new-predictors"><span class="header-section-number">4.3</span> creating new predictors</a>
+  <ul class="collapse">
+  <li><a href="#interactions" id="toc-interactions" class="nav-link" data-scroll-target="#interactions">interactions</a></li>
+  <li><a href="#polynomials" id="toc-polynomials" class="nav-link" data-scroll-target="#polynomials">polynomials</a></li>
+  <li><a href="#other-transformation" id="toc-other-transformation" class="nav-link" data-scroll-target="#other-transformation">other transformation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -222,20 +200,32 @@ window.Quarto = {
 
 <section id="adding-extra-predictors" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="adding-extra-predictors"><span class="header-section-number">4.1</span> Adding extra predictors</h2>
+<section id="categorical-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-predictors">categorical predictors</h3>
 </section>
-<section id="adding-extra-beta-s" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="adding-extra-beta-s"><span class="header-section-number">4.2</span> adding extra <span class="math inline">\(\beta s\)</span></h2>
 </section>
-<section id="fitting-a-multiple-regression-model" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="fitting-a-multiple-regression-model"><span class="header-section-number">4.3</span> fitting a multiple regression model</h2>
+<section id="fitting-a-multiple-regression-model" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="fitting-a-multiple-regression-model"><span class="header-section-number">4.2</span> fitting a multiple regression model</h2>
+<section id="interpreting-output" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-output">Interpreting output</h3>
 </section>
-<section id="interpreting-output" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="interpreting-output"><span class="header-section-number">4.4</span> Interpreting output</h2>
+<section id="diagnostics-for-multiple-regression" class="level3">
+<h3 class="anchored" data-anchor-id="diagnostics-for-multiple-regression">diagnostics for multiple regression</h3>
+<section id="multicollinearity" class="level4">
+<h4 class="anchored" data-anchor-id="multicollinearity">multicollinearity</h4>
 </section>
-<section id="diagnostics-for-multiple-regression" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="diagnostics-for-multiple-regression"><span class="header-section-number">4.5</span> diagnostics for multiple regression</h2>
-<section id="multicollinearity" class="level3">
-<h3 class="anchored" data-anchor-id="multicollinearity">multicollinearity</h3>
+</section>
+</section>
+<section id="creating-new-predictors" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="creating-new-predictors"><span class="header-section-number">4.3</span> creating new predictors</h2>
+<section id="interactions" class="level3">
+<h3 class="anchored" data-anchor-id="interactions">interactions</h3>
+</section>
+<section id="polynomials" class="level3">
+<h3 class="anchored" data-anchor-id="polynomials">polynomials</h3>
+</section>
+<section id="other-transformation" class="level3">
+<h3 class="anchored" data-anchor-id="other-transformation">other transformation</h3>
 
 
 <script type="ojs-module-contents">

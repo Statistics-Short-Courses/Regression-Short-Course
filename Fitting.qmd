@@ -4,12 +4,17 @@ engine: knitr
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-# Fitting a linear model to data
+## Simple linear regression (fitting a model to data)
 
-in the previous section, you were given a linear model - we knew the values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most contexts we don't know the true relationship between $X$ and $Y$ in advance. Instead, we are given *data* and try to *infer* the values of $\beta$, $\sigma$ based on this. 
+in the previous section, you were given a linear model - we knew the
+values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
+contexts we don't know the true relationship between $X$ and $Y$ in
+advance. Instead, we are given *data* and try to *infer* the values of
+$\beta$, $\sigma$ based on this.
 
-## Estimating parameters
-### residuals
+### Estimating parameters
+
+#### residuals
 
 ```{webr}
 #| include: false
@@ -27,7 +32,8 @@ y <- 0.5*x-10 + rnorm(50,0,15)
 #| define: data
 data <- data.frame(x=x,y=y)
 ```
-### Estimating $\beta$
+
+#### Estimating $\beta$
 
 Which line fits the data best (how low can the RMSE go)?
 
@@ -89,16 +95,23 @@ res²=${(d.residual**2).toFixed(1)}`
 })
 ```
 
-### Estimating $\sigma$
+#### Estimating $\sigma$
 
+#### Fitting a model using least squares - lm()
 
-## Fitting a model using least squares - lm()
 ```{webr}
-lm(y~x,data) |> summary()
+lm(y\~x,data) \|\> summary()
 ```
 
-## Interpreting summary() output
+### Checking assumptions
 
-## Inference for simple linear regression 
+### Common assumption violations
+#### Non-independence of observations
+#### Non-linear relationships
+#### Non-constant Variance
+#### Non-normality of error
 
+## inference in simple linear regression
+### overall usefulness
+### parameter estimates
 

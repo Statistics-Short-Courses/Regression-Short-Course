@@ -13,17 +13,23 @@ editor:
     wrap: 72
     
 embed-resources: true
-custom-callout:    
-  example:
-    icon-symbol: "📝"
-    color: "blue"
 
-
+custom-numbered-blocks:
+  classes:
+    Assumption: default
+    Example: default
+    
 filters:
-  - custom-callout
+- custom-numbered-blocks
 ---
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| include: false
+library(ggplot2)
+```
+
 
 # An introduction to linear statistical models
 
@@ -35,15 +41,21 @@ filters:
 -   $f(X)$ is a deterministic function and $\varepsilon$ is a 'random
     error' term
 
+::: Assumption 
+Y only depends on X
+:::
+
 ## A simple linear model
 
 ### Linear prediction
 
--   Assume that $f(X)$ is a linear function
+-   We choose $f(X)$ to be a linear function
 
     -   $$
         f(X)= \beta_0 + \beta_1\cdot X
         $$
+
+
 
 -   putting aside the error term for now, the approximate value - lets
     call it the 'expected value' of Y, $E[Y]$, for now - can be
@@ -56,34 +68,168 @@ filters:
 -   or alternatively as a line with y-intercept $\beta_0$ and slope
     $\beta_1$:
 
-    -   (interactive plot with control over beta)
+
+```{ojs}
+//| panel: sidebar
+//| echo: false
+
+viewof b1 = Inputs.range([-2, 2], {step: 0.1, label: "slope"})
+viewof b0 = Inputs.range([-10, 10], {step: 1, label: "intercept"})
+
+tex.block`Y = ${b1}X + ${b0}`
+```
+
+```{ojs}
+//| panel: fill
+//| echo: false
+
+xRange = [-10,10]
+lineData = xRange.map(x => ({x, y: (b1 * x) + b0}))
+
+Plot.plot({
+  x:{domain: [-10,10], label: "X", grid: true},
+  y:{domain: [-10,10], label: "Y", grid: true},
+  marks: [
+    Plot.line(lineData, { x: "x", y: "y" })]
+})
+```
 
 -   That is, $\beta_0$ tells us what Y looks like when $X=0$, and
     $\beta_1$ tells us how much Y changes when X increases by 1.
-
-::: example
--   given model verbally
--   Exercises:
-  -   specify beta
-  -   calculate (predict) E\[Y\] given X
-  -   (more advanced R task?) complete the R function that takes a vector
-      of Xs and outputs Ys (then call that function)
+    
+::: Assumption 
+Y and X have a linear relationship
 :::
 
-### random variation
+::: Example
+#### Salary growth over time
 
--   Data rarely lie perfectly on a line (variance)
-    -   Add error term ( \varepsilon ):\
-        $$y = \beta_0 + \beta_1 x + \varepsilon$$
--   Assume
-    -   $$\varepsilon \sim \mathcal{N}(0, \sigma^2)$$
-    
-::: example
--   Same model as above - given standard deviation 
+You've been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. 
+We know that, on average, the starting salary at this company is \$50,000 and salaries increase by \$5000 each year someone stays employed there. 
+
+Using this information, we can construct a simple linear model of salary from employment time. Given an employment time of $X=x$ years, we can represent a employee's expected salary ($E[Y]$) mathematically as
+
+$$
+E[Y]= \$50,000 + \$5,000\cdot x.
+$$
+
+When we have been working at this company for 10 years (i.e. $X=10$), we therefore expect a salary of $E[Y]=\$50,000 + \$5,000\cdot 10= \$100,000$
+:::
+
+::: {.webex-check .webex-box}
+#### Your turn 
+
+A second company also has a job available. Base salary on start is higher here at \$70,000 on average, but payrises are less  - you are told that on average employees working for the company for 5 years have \$20,000 higher salary than when they started. 
+You want to use a simple linear model to calculate your expected salary ($E[Y]$) at company 2 after $X$ years of employment. 
+
+$$
+E[Y] = \beta_0 + \beta_1 X
+$$
+
+1. What are the coefficients $\beta_0$ and $beta_1$ in this case?
+
+
+```{r}
+#| echo: false
+#| results: 'asis'
+library(webexercises)
+beta0_quiz <- fitb(answer= 70000, num=TRUE)
+beta1_quiz <- fitb(answer=4000, num=TRUE)
+
+
+# When using `{r} ...` language-bracketed inline code, functions like `mqc()` and `torf()` need to be enclosed by `I()`. This tells knitr to treat the output as markdown, thereby avoiding any character escaping of HTML code these functions generate.
+```
+
+$\beta_0 =$`{r} I(beta0_quiz)`
+$\beta_1 =$`{r} I(beta1_quiz)`
+
+Using R, calculate the expected salary after working for this company for 10 years
+
+```{webr}
+#| exercise: example_2
+
+```
+
+```{webr}
+#| exercise: example_2
+#| check: true
+if (identical(.result, 70000+(4000*10))) {
+  list(correct = TRUE, message = "Nice work!")
+} else {
+  list(correct = FALSE, message = "That's incorrect, sorry.")
+}
+```
+2. complete the r function that predicts Y from an input X value for this linear model
+```{webr}
+#| exercise: r_function
+#| envir: linear_predictor_function
+linear_prediction <- function(X){__ + (__*__)}
+```
+
+```{webr}
+#| exercise: example_2
+#| check: true
+if (identical(.result, 50000+(5000*10))) {
+  list(correct = TRUE, message = "Nice work!")
+} else {
+  list(correct = FALSE, message = "That's incorrect, sorry.")
+}
+```
+use your function to predict Y for the following collection of Xs
+```{webr}
+#| edit: false
+X <- c(9,4,5,2,6)
+```
+
+```{webr}
+#| exercise: r_function_call
+#| envir: linear_predictor_function
+
+
+
+```
+
+```{webr}
+#| exercise: r_function_call
+#| check: true
+if (identical(.result, 50000+(5000*X))) {
+  list(correct = TRUE, message = "Nice work!")
+} else {
+  list(correct = FALSE, message = "That's incorrect, sorry.")
+}
+```
+
+::::
+
+
+### Random Errors
+
+-   Data rarely lie perfectly on a line 
+    -   Add 'error' term: $\varepsilon$
+-   on average, we expect our linear predictor to be correct. 
+
+::: Assumption 
+The mean of $\varepsilon$, $\mu=0$
+:::
+
+-   however, we also expect there to be variance around the linear predictor. 
+
+::: Assumption 
+Variance of Y around the linear predictor according constant value $Var(\varepsilon)=\sigma^2$
+:::
+
+
+
+::: Assumption 
+The error is normally distributed (with mean $\mu=0$ and variance $\sigma^2$ .
+$$\varepsilon \sim \mathcal{N}(0, \sigma^2)$$
+:::
+
+::: Example
+-   Same model as above - given standard deviation
 -   Example Y values
     -   Illustrate error with normal overay
 -   Excersises:
-    - which variance is larger?
-    - (hard) probability of finding E[Y]+2sd observation
-
+    -   which variance is larger?
+    -   (hard) probability of finding E\[Y\]+2sd observation
 :::

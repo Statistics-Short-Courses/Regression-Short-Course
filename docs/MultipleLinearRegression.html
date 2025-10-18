@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Multiple Linear Regression – Introduction to Linear Regression in R</title>
+<title>3&nbsp; Multiple Linear Regression – Introduction to Linear Regression in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./RegressionCase.html" rel="next">
-<link href="./Diagnostics.html" rel="prev">
+<link href="./FittingSLR.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MultipleLinearRegression.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MultipleLinearRegression.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -126,26 +126,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Fitting.html" class="sidebar-item-text sidebar-link">
+  <a href="./FittingSLR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple Linear Regression: fitting a model to data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Diagnostics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Checking model assumptions</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./MultipleLinearRegression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RegressionCase.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Case Study: (?)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Case Study: (?)</span></span></a>
   </div>
 </li>
     </ul>
@@ -161,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></h1>
 </div>
 
 
@@ -178,34 +172,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="adding-extra-predictors" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="adding-extra-predictors"><span class="header-section-number">4.1</span> Adding extra predictors</h2>
-<section id="categorical-predictors" class="level3">
-<h3 class="anchored" data-anchor-id="categorical-predictors">categorical predictors</h3>
+<section id="continuous-predictors" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="continuous-predictors"><span class="header-section-number">3.1</span> Continuous predictors</h2>
+<section id="multi-collinearity" class="level3">
+<h3 class="anchored" data-anchor-id="multi-collinearity">Multi-collinearity</h3>
 </section>
 </section>
-<section id="fitting-a-multiple-regression-model" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="fitting-a-multiple-regression-model"><span class="header-section-number">4.2</span> fitting a multiple regression model</h2>
-<section id="interpreting-output" class="level3">
-<h3 class="anchored" data-anchor-id="interpreting-output">Interpreting output</h3>
+<section id="categorical-predictors" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="categorical-predictors"><span class="header-section-number">3.2</span> Categorical predictors</h2>
 </section>
-<section id="diagnostics-for-multiple-regression" class="level3">
-<h3 class="anchored" data-anchor-id="diagnostics-for-multiple-regression">diagnostics for multiple regression</h3>
-<section id="multicollinearity" class="level4">
-<h4 class="anchored" data-anchor-id="multicollinearity">multicollinearity</h4>
-</section>
-</section>
-</section>
-<section id="creating-new-predictors" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="creating-new-predictors"><span class="header-section-number">4.3</span> creating new predictors</h2>
-<section id="interactions" class="level3">
-<h3 class="anchored" data-anchor-id="interactions">interactions</h3>
-</section>
+<section id="multiplying-predictors" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="multiplying-predictors"><span class="header-section-number">3.3</span> Multiplying predictors</h2>
 <section id="polynomials" class="level3">
-<h3 class="anchored" data-anchor-id="polynomials">polynomials</h3>
+<h3 class="anchored" data-anchor-id="polynomials">Polynomials</h3>
 </section>
-<section id="other-transformation" class="level3">
-<h3 class="anchored" data-anchor-id="other-transformation">other transformation</h3>
+<section id="interactions" class="level3">
+<h3 class="anchored" data-anchor-id="interactions">Interactions</h3>
+</section>
+<section id="transformation" class="level3">
+<h3 class="anchored" data-anchor-id="transformation">Transformation</h3>
 
 
 <script type="ojs-module-contents">
@@ -862,13 +847,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Diagnostics.html" class="pagination-link" aria-label="Checking model assumptions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Checking model assumptions</span></span>
+      <a href="./FittingSLR.html" class="pagination-link" aria-label="Simple Linear Regression: fitting a model to data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple Linear Regression: fitting a model to data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./RegressionCase.html" class="pagination-link" aria-label="Case Study: (?)">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Case Study: (?)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Case Study: (?)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

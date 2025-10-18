@@ -107,7 +107,9 @@ lm(y~x,linearData)
 ### Normality of error
 
 ## Inference for Simple Linear Regression
-### Overall fit
-### Parameter estimates
+### Inference about $\sigma$
+### Inference about $\beta_1$
 
 ## Interpreting \`summary()\` output
+
+## Using the model for prediction

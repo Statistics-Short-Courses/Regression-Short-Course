@@ -30,8 +30,8 @@
     ]
   },
   {
-    "objectID": "Fitting.html",
-    "href": "Fitting.html",
+    "objectID": "FittingSLR.html",
+    "href": "FittingSLR.html",
     "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "",
     "text": "2.1 Estimating parameters\nin the previous section, you were given a linear model - we knew the values of \\(\\beta_0\\), \\(\\beta_1\\) and even \\(\\sigma\\). However, in most contexts we don’t know the true relationship between \\(X\\) and \\(Y\\) in advance. Instead, we are given data and try to infer the values of \\(\\beta\\), \\(\\sigma\\) based on this.",
@@ -40,18 +40,18 @@
     ]
   },
   {
-    "objectID": "Fitting.html#estimating-parameters",
-    "href": "Fitting.html#estimating-parameters",
+    "objectID": "FittingSLR.html#estimating-parameters",
+    "href": "FittingSLR.html#estimating-parameters",
     "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "",
-    "text": "Residuals\n\n\nEstimating \\(\\beta\\)\nWhich line fits the data best (how low can the RMSE go)?\n\nx = Array.from({length: 50}, d3.randomNormal(180, 50))\nnoise = Array.from({length: 50}, d3.randomNormal(0, 15))\ny = x.map((xi, i) =&gt; 0.5 * xi - 10 + noise[i])\n\nlinearData = x.map((xi, i) =&gt; ({ x: xi, y: y[i] }))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof b0adj = Inputs.range([-50, 50], {step: 1, label: html`${tex`\\beta_0`}: Intercept (adjustment)`})\nviewof b1 = Inputs.range([-2, 2], {step: 0.01, label:  html`${tex`\\beta_1`}: Slope`})\n\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = linearData.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(linearData, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFitting a model using least squares - lm()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\sigma\\)",
+    "text": "Residuals\n\n\nEstimating \\(\\beta\\)\nWhich line fits the data best (how low can the RMSE go)?\n\nx = Array.from({length: 50}, d3.randomNormal(180, 50))\nnoise = Array.from({length: 50}, d3.randomNormal(0, 15))\ny = x.map((xi, i) =&gt; 0.5 * xi - 10 + noise[i])\n\nlinearData = x.map((xi, i) =&gt; ({ x: xi, y: y[i] }))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof b0adj = Inputs.range([-50, 50], {step: 1, label: html`${tex`\\beta_0`}: Intercept (adjustment)`})\nviewof b1 = Inputs.range([-2, 2], {step: 0.01, label:  html`${tex`\\beta_1`}: Slope`})\n\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = linearData.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(linearData, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFitting a model using least squares - lm()\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\sigma\\)",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]
   },
   {
-    "objectID": "Fitting.html#checking-assumptions",
-    "href": "Fitting.html#checking-assumptions",
+    "objectID": "FittingSLR.html#checking-assumptions",
+    "href": "FittingSLR.html#checking-assumptions",
     "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "2.2 Checking assumptions",
     "text": "2.2 Checking assumptions\n\nIndependence of observations\n\n\nLinear relationships\n\n\nConstant Variance\n\n\nNormality of error",
@@ -60,8 +60,8 @@
     ]
   },
   {
-    "objectID": "Fitting.html#inference-for-simple-linear-regression",
-    "href": "Fitting.html#inference-for-simple-linear-regression",
+    "objectID": "FittingSLR.html#inference-for-simple-linear-regression",
+    "href": "FittingSLR.html#inference-for-simple-linear-regression",
     "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "2.3 Inference for Simple Linear Regression",
     "text": "2.3 Inference for Simple Linear Regression\n\nOverall fit\n\n\nParameter estimates",
@@ -70,8 +70,8 @@
     ]
   },
   {
-    "objectID": "Fitting.html#interpreting-summary-output",
-    "href": "Fitting.html#interpreting-summary-output",
+    "objectID": "FittingSLR.html#interpreting-summary-output",
+    "href": "FittingSLR.html#interpreting-summary-output",
     "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "2.4 Interpreting `summary()` output",
     "text": "2.4 Interpreting `summary()` output",
@@ -80,83 +80,43 @@
     ]
   },
   {
-    "objectID": "Diagnostics.html",
-    "href": "Diagnostics.html",
-    "title": "3  Checking model assumptions",
-    "section": "",
-    "text": "3.1 Assumptions of the linear model",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Checking model assumptions</span>"
-    ]
-  },
-  {
-    "objectID": "Diagnostics.html#assumptions-of-the-linear-model",
-    "href": "Diagnostics.html#assumptions-of-the-linear-model",
-    "title": "3  Checking model assumptions",
-    "section": "",
-    "text": "Independence of observations\n\n\nLinear relationship\n\n\nConstant Variance\n\n\nNormally distributed error",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Checking model assumptions</span>"
-    ]
-  },
-  {
-    "objectID": "Diagnostics.html#using-residuals-to-check-assumptions",
-    "href": "Diagnostics.html#using-residuals-to-check-assumptions",
-    "title": "3  Checking model assumptions",
-    "section": "3.2 Using residuals to check assumptions",
-    "text": "3.2 Using residuals to check assumptions",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Checking model assumptions</span>"
-    ]
-  },
-  {
-    "objectID": "Diagnostics.html#common-assumption-violations",
-    "href": "Diagnostics.html#common-assumption-violations",
-    "title": "3  Checking model assumptions",
-    "section": "3.3 Common assumption violations",
-    "text": "3.3 Common assumption violations\n\nNon-independence of observations\n\n\nNon-linear relationships\n\n\nNon-constant Variance\n\n\nNon-normality of error",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Checking model assumptions</span>"
-    ]
-  },
-  {
     "objectID": "MultipleLinearRegression.html",
     "href": "MultipleLinearRegression.html",
-    "title": "4  Multiple Linear Regression",
+    "title": "3  Multiple Linear Regression",
     "section": "",
-    "text": "4.1 Adding extra predictors",
+    "text": "3.1 Continuous predictors",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "MultipleLinearRegression.html#adding-extra-predictors",
-    "href": "MultipleLinearRegression.html#adding-extra-predictors",
-    "title": "4  Multiple Linear Regression",
+    "objectID": "MultipleLinearRegression.html#continuous-predictors",
+    "href": "MultipleLinearRegression.html#continuous-predictors",
+    "title": "3  Multiple Linear Regression",
     "section": "",
-    "text": "categorical predictors",
+    "text": "Multi-collinearity",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "MultipleLinearRegression.html#fitting-a-multiple-regression-model",
-    "href": "MultipleLinearRegression.html#fitting-a-multiple-regression-model",
-    "title": "4  Multiple Linear Regression",
-    "section": "4.2 fitting a multiple regression model",
-    "text": "4.2 fitting a multiple regression model\n\nInterpreting output\n\n\ndiagnostics for multiple regression\n\nmulticollinearity",
+    "objectID": "MultipleLinearRegression.html#categorical-predictors",
+    "href": "MultipleLinearRegression.html#categorical-predictors",
+    "title": "3  Multiple Linear Regression",
+    "section": "3.2 Categorical predictors",
+    "text": "3.2 Categorical predictors",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "MultipleLinearRegression.html#creating-new-predictors",
-    "href": "MultipleLinearRegression.html#creating-new-predictors",
-    "title": "4  Multiple Linear Regression",
-    "section": "4.3 creating new predictors",
-    "text": "4.3 creating new predictors\n\ninteractions\n\n\npolynomials\n\n\nother transformation",
+    "objectID": "MultipleLinearRegression.html#multiplying-predictors",
+    "href": "MultipleLinearRegression.html#multiplying-predictors",
+    "title": "3  Multiple Linear Regression",
+    "section": "3.3 Multiplying predictors",
+    "text": "3.3 Multiplying predictors\n\nPolynomials\n\n\nInteractions\n\n\nTransformation",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
     ]
   }
 ]

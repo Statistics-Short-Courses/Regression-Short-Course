@@ -8,8 +8,7 @@ book:
   chapters:
   - index.qmd
   - LinearModels.qmd
-  - Fitting.qmd
-  - Diagnostics.qmd
+  - FittingSLR.qmd
   - MultipleLinearRegression.qmd
   - RegressionCase.qmd
 format:

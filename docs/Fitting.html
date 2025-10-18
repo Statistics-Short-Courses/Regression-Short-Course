@@ -293,27 +293,12 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlY2hvIjpmYWxzZSwiZWRpdCI6ZmFsc2UsImV2YWwiOnRy
 <section id="estimating-beta" class="level4">
 <h4 class="anchored" data-anchor-id="estimating-beta">Estimating <span class="math inline">\(\beta\)</span></h4>
 <p>Which line fits the data best (how low can the RMSE go)?</p>
-<div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
-<div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="44" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 43;"><span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"slope"</span>})</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>viewof b0adj <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">20</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"intercept adustment"</span>})</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>b0 <span class="op">=</span> (<span class="dv">90</span> <span class="op">-</span> b1 <span class="op">*</span> <span class="dv">180</span>) <span class="op">+</span> b0adj</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>residualData <span class="op">=</span> data<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> {</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> yhat <span class="op">=</span> b1 <span class="op">*</span> d<span class="op">.</span><span class="at">x</span> <span class="op">+</span> b0<span class="op">;</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> res  <span class="op">=</span> d<span class="op">.</span><span class="at">y</span> <span class="op">-</span> yhat<span class="op">;</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>d<span class="op">,</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    yhat<span class="op">,</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="dt">residual</span><span class="op">:</span> res<span class="op">,</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sign</span><span class="op">:</span> res <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"positive"</span> <span class="op">:</span> <span class="st">"negative"</span><span class="op">,</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="dt">absRes</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span>(res)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>RMSR <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(d3<span class="op">.</span><span class="fu">sum</span>(residualData<span class="op">,</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">residual</span> <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> residualData<span class="op">.</span><span class="at">length</span>)</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`y = </span><span class="sc">${</span>b1<span class="sc">}</span><span class="vs">x + </span><span class="sc">${</span>b0<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="43" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 42;"><span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">50</span>}<span class="op">,</span> d3<span class="op">.</span><span class="fu">randomNormal</span>(<span class="dv">180</span><span class="op">,</span> <span class="dv">50</span>))</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>noise <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">50</span>}<span class="op">,</span> d3<span class="op">.</span><span class="fu">randomNormal</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">15</span>))</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x<span class="op">.</span><span class="fu">map</span>((xi<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="fl">0.5</span> <span class="op">*</span> xi <span class="op">-</span> <span class="dv">10</span> <span class="op">+</span> noise[i])</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> x<span class="op">.</span><span class="fu">map</span>((xi<span class="op">,</span> i) <span class="kw">=&gt;</span> ({ <span class="dt">x</span><span class="op">:</span> xi<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> y[i] }))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -342,57 +327,28 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlY2hvIjpmYWxzZSwiZWRpdCI6ZmFsc2UsImV2YWwiOnRy
 </div>
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-5" data-nodetype="declaration">
-
 </div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-6" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="64" data-source-offset="-508"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 63;"><span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`</span><span class="sc">\s</span><span class="vs">qrt{</span><span class="sc">\f</span><span class="vs">rac{1}{n}</span><span class="sc">\s</span><span class="vs">um_{i}r_i^{2}} = </span><span class="sc">${</span>RMSR<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-7" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-</div>
-<div class="panel-fill panel-grid g-col-24 g-col-lg-17 pt-3 pt-lg-0">
-<div class="g-col-24">
-<div class="cell panel-fill">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="71" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 70;"><span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>xRange <span class="op">=</span> d3<span class="op">.</span><span class="fu">extent</span>(residualData<span class="op">,</span>d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">x</span>)</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>lineData <span class="op">=</span> xRange<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({x<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> b1 <span class="op">*</span> x <span class="op">+</span> b0}))</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>(residualData<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y1</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y2</span><span class="op">:</span> <span class="st">"yhat"</span><span class="op">,</span></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"sign"</span><span class="op">,</span> </span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>      <span class="dt">strokeOpacity</span><span class="op">:</span> <span class="fl">0.75</span><span class="op">,</span></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>      <span class="dt">strokeWidth</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="dv">1</span> <span class="op">+</span> d<span class="op">.</span><span class="at">absRes</span> <span class="op">/</span> <span class="dv">12</span><span class="op">,</span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>       <span class="dt">title</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`x=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">x</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="vs">y=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">y</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="vs">ŷ=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">yhat</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="vs">res=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">residual</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="vs">res²=</span><span class="sc">${</span>(d<span class="op">.</span><span class="at">residual</span><span class="op">**</span><span class="dv">2</span>)<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">`</span></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    })<span class="op">,</span></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(lineData<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span> })<span class="op">,</span></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(data<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">3</span> })</span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> xRange }<span class="op">,</span></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">180</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"y"</span> }<span class="op">,</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
+<div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="55" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 54;"><span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"slope"</span>})</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>viewof b0adj <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">20</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"intercept adustment"</span>})</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>b0 <span class="op">=</span> (<span class="dv">90</span> <span class="op">-</span> b1 <span class="op">*</span> <span class="dv">180</span>) <span class="op">+</span> b0adj</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>residualData <span class="op">=</span> data<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> {</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> yhat <span class="op">=</span> b1 <span class="op">*</span> d<span class="op">.</span><span class="at">x</span> <span class="op">+</span> b0<span class="op">;</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> res  <span class="op">=</span> d<span class="op">.</span><span class="at">y</span> <span class="op">-</span> yhat<span class="op">;</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>d<span class="op">,</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    yhat<span class="op">,</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="dt">residual</span><span class="op">:</span> res<span class="op">,</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sign</span><span class="op">:</span> res <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"positive"</span> <span class="op">:</span> <span class="st">"negative"</span><span class="op">,</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="dt">absRes</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span>(res)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>RMSR <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(d3<span class="op">.</span><span class="fu">sum</span>(residualData<span class="op">,</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">residual</span> <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> residualData<span class="op">.</span><span class="at">length</span>)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`y = </span><span class="sc">${</span>b1<span class="sc">}</span><span class="vs">x + </span><span class="sc">${</span>b0<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
@@ -409,7 +365,86 @@ eyJhdHRyIjp7ImRlZmluZSI6ImRhdGEiLCJlY2hvIjpmYWxzZSwiZWRpdCI6ZmFsc2UsImV2YWwiOnRy
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-2-3" data-nodetype="expression">
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="75" data-source-offset="-508"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 74;"><span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`</span><span class="sc">\s</span><span class="vs">qrt{</span><span class="sc">\f</span><span class="vs">rac{1}{n}</span><span class="sc">\s</span><span class="vs">um_{i}r_i^{2}} = </span><span class="sc">${</span>RMSR<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-7" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="panel-fill panel-grid g-col-24 g-col-lg-17 pt-3 pt-lg-0">
+<div class="g-col-24">
+<div class="cell panel-fill">
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="82" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 81;"><span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>xRange <span class="op">=</span> d3<span class="op">.</span><span class="fu">extent</span>(residualData<span class="op">,</span>d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">x</span>)</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>lineData <span class="op">=</span> xRange<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({x<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> b1 <span class="op">*</span> x <span class="op">+</span> b0}))</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>(residualData<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y1</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y2</span><span class="op">:</span> <span class="st">"yhat"</span><span class="op">,</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"sign"</span><span class="op">,</span> </span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>      <span class="dt">strokeOpacity</span><span class="op">:</span> <span class="fl">0.75</span><span class="op">,</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>      <span class="dt">strokeWidth</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="dv">1</span> <span class="op">+</span> d<span class="op">.</span><span class="at">absRes</span> <span class="op">/</span> <span class="dv">12</span><span class="op">,</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>       <span class="dt">title</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`x=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">x</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="vs">y=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">y</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="vs">ŷ=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">yhat</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="vs">res=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">residual</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="vs">res²=</span><span class="sc">${</span>(d<span class="op">.</span><span class="at">residual</span><span class="op">**</span><span class="dv">2</span>)<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>    })<span class="op">,</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(lineData<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span> })<span class="op">,</span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(data<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">3</span> })</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> xRange }<span class="op">,</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">180</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"y"</span> }<span class="op">,</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-3" data-nodetype="expression">
 
 </div>
 </div>
@@ -691,7 +726,7 @@ window.onload = function() {
 
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ilxudmlld29mIGIxID0gSW5wdXRzLnJhbmdlKFstMiwgMl0sIHtzdGVwOiAwLjEsIGxhYmVsOiBcInNsb3BlXCJ9KVxudmlld29mIGIwYWRqID0gSW5wdXRzLnJhbmdlKFstMjAsIDIwXSwge3N0ZXA6IDEsIGxhYmVsOiBcImludGVyY2VwdCBhZHVzdG1lbnRcIn0pXG5iMCA9ICg5MCAtIGIxICogMTgwKSArIGIwYWRqXG5cbnJlc2lkdWFsRGF0YSA9IGRhdGEubWFwKGQgPT4ge1xuICBjb25zdCB5aGF0ID0gYjEgKiBkLnggKyBiMDtcbiAgY29uc3QgcmVzICA9IGQueSAtIHloYXQ7XG4gIHJldHVybiB7XG4gICAgLi4uZCxcbiAgICB5aGF0LFxuICAgIHJlc2lkdWFsOiByZXMsXG4gICAgc2lnbjogcmVzID49IDAgPyBcInBvc2l0aXZlXCIgOiBcIm5lZ2F0aXZlXCIsXG4gICAgYWJzUmVzOiBNYXRoLmFicyhyZXMpXG4gIH07XG59KVxuXG5STVNSID0gTWF0aC5zcXJ0KGQzLnN1bShyZXNpZHVhbERhdGEsIGQgPT4gZC5yZXNpZHVhbCAqKiAyKSAvIHJlc2lkdWFsRGF0YS5sZW5ndGgpXG5cbnRleC5ibG9ja2B5ID0gJHtiMX14ICsgJHtiMH1gXG5cbnRleC5ibG9ja2BcXHNxcnR7XFxmcmFjezF9e259XFxzdW1fe2l9cl9pXnsyfX0gPSAke1JNU1IudG9GaXhlZCgyKX1gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcbnhSYW5nZSA9IGQzLmV4dGVudChyZXNpZHVhbERhdGEsZCA9PiBkLngpXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IGIxICogeCArIGIwfSkpXG5cblBsb3QucGxvdCh7XG4gIG1hcmtzOiBbXG4gICAgUGxvdC5ydWxlWChyZXNpZHVhbERhdGEsIHt4OiBcInhcIixcbiAgICAgIHkxOiBcInlcIixcbiAgICAgIHkyOiBcInloYXRcIixcbiAgICAgIHN0cm9rZTogXCJzaWduXCIsIFxuICAgICAgc3Ryb2tlT3BhY2l0eTogMC43NSxcbiAgICAgIHN0cm9rZVdpZHRoOiBkID0+IDEgKyBkLmFic1JlcyAvIDEyLFxuICAgICAgIHRpdGxlOiBkID0+IGB4PSR7ZC54LnRvRml4ZWQoMSl9XG55PSR7ZC55LnRvRml4ZWQoMSl9XG7Ftz0ke2QueWhhdC50b0ZpeGVkKDEpfVxucmVzPSR7ZC5yZXNpZHVhbC50b0ZpeGVkKDEpfVxucmVzwrI9JHsoZC5yZXNpZHVhbCoqMikudG9GaXhlZCgxKX1gXG4gICAgfSksXG5cbiAgICBQbG90LmxpbmUobGluZURhdGEsIHsgeDogXCJ4XCIsIHk6IFwieVwiIH0pLFxuXG4gICAgUGxvdC5kb3QoZGF0YSwgeyB4OiBcInhcIiwgeTogXCJ5XCIsIHI6IDMgfSlcbiAgXSxcbiAgeDogeyBkb21haW46IHhSYW5nZSB9LFxuICB5OiB7IGRvbWFpbjogWzAsIDE4MF0sIGxhYmVsOiBcInlcIiB9LFxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjBhZGonKSJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxueCA9IEFycmF5LmZyb20oe2xlbmd0aDogNTB9LCBkMy5yYW5kb21Ob3JtYWwoMTgwLCA1MCkpXG5ub2lzZSA9IEFycmF5LmZyb20oe2xlbmd0aDogNTB9LCBkMy5yYW5kb21Ob3JtYWwoMCwgMTUpKVxueSA9IHgubWFwKCh4aSwgaSkgPT4gMC41ICogeGkgLSAxMCArIG5vaXNlW2ldKVxuXG5kYXRhID0geC5tYXAoKHhpLCBpKSA9PiAoeyB4OiB4aSwgeTogeVtpXSB9KSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ilxudmlld29mIGIxID0gSW5wdXRzLnJhbmdlKFstMiwgMl0sIHtzdGVwOiAwLjEsIGxhYmVsOiBcInNsb3BlXCJ9KVxudmlld29mIGIwYWRqID0gSW5wdXRzLnJhbmdlKFstMjAsIDIwXSwge3N0ZXA6IDEsIGxhYmVsOiBcImludGVyY2VwdCBhZHVzdG1lbnRcIn0pXG5iMCA9ICg5MCAtIGIxICogMTgwKSArIGIwYWRqXG5cbnJlc2lkdWFsRGF0YSA9IGRhdGEubWFwKGQgPT4ge1xuICBjb25zdCB5aGF0ID0gYjEgKiBkLnggKyBiMDtcbiAgY29uc3QgcmVzICA9IGQueSAtIHloYXQ7XG4gIHJldHVybiB7XG4gICAgLi4uZCxcbiAgICB5aGF0LFxuICAgIHJlc2lkdWFsOiByZXMsXG4gICAgc2lnbjogcmVzID49IDAgPyBcInBvc2l0aXZlXCIgOiBcIm5lZ2F0aXZlXCIsXG4gICAgYWJzUmVzOiBNYXRoLmFicyhyZXMpXG4gIH07XG59KVxuXG5STVNSID0gTWF0aC5zcXJ0KGQzLnN1bShyZXNpZHVhbERhdGEsIGQgPT4gZC5yZXNpZHVhbCAqKiAyKSAvIHJlc2lkdWFsRGF0YS5sZW5ndGgpXG5cbnRleC5ibG9ja2B5ID0gJHtiMX14ICsgJHtiMH1gXG5cbnRleC5ibG9ja2BcXHNxcnR7XFxmcmFjezF9e259XFxzdW1fe2l9cl9pXnsyfX0gPSAke1JNU1IudG9GaXhlZCgyKX1gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcbnhSYW5nZSA9IGQzLmV4dGVudChyZXNpZHVhbERhdGEsZCA9PiBkLngpXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IGIxICogeCArIGIwfSkpXG5cblBsb3QucGxvdCh7XG4gIG1hcmtzOiBbXG4gICAgUGxvdC5ydWxlWChyZXNpZHVhbERhdGEsIHt4OiBcInhcIixcbiAgICAgIHkxOiBcInlcIixcbiAgICAgIHkyOiBcInloYXRcIixcbiAgICAgIHN0cm9rZTogXCJzaWduXCIsIFxuICAgICAgc3Ryb2tlT3BhY2l0eTogMC43NSxcbiAgICAgIHN0cm9rZVdpZHRoOiBkID0+IDEgKyBkLmFic1JlcyAvIDEyLFxuICAgICAgIHRpdGxlOiBkID0+IGB4PSR7ZC54LnRvRml4ZWQoMSl9XG55PSR7ZC55LnRvRml4ZWQoMSl9XG7Ftz0ke2QueWhhdC50b0ZpeGVkKDEpfVxucmVzPSR7ZC5yZXNpZHVhbC50b0ZpeGVkKDEpfVxucmVzwrI9JHsoZC5yZXNpZHVhbCoqMikudG9GaXhlZCgxKX1gXG4gICAgfSksXG5cbiAgICBQbG90LmxpbmUobGluZURhdGEsIHsgeDogXCJ4XCIsIHk6IFwieVwiIH0pLFxuXG4gICAgUGxvdC5kb3QoZGF0YSwgeyB4OiBcInhcIiwgeTogXCJ5XCIsIHI6IDMgfSlcbiAgXSxcbiAgeDogeyBkb21haW46IHhSYW5nZSB9LFxuICB5OiB7IGRvbWFpbjogWzAsIDE4MF0sIGxhYmVsOiBcInlcIiB9LFxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjBhZGonKSJ9XX0=
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }

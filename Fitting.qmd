@@ -16,26 +16,20 @@ $\beta$, $\sigma$ based on this.
 
 #### residuals
 
-```{webr}
-#| include: false
-library(ggplot2)
-```
-
-```{webr}
-#| include: false
-x <- rnorm(50,180, 50)
-y <- 0.5*x-10 + rnorm(50,0,15)
-```
-
-```{webr}
-#| include: false
-#| define: data
-data <- data.frame(x=x,y=y)
-```
-
 #### Estimating $\beta$
 
 Which line fits the data best (how low can the RMSE go)?
+
+```{ojs}
+//| echo: false
+
+x = Array.from({length: 50}, d3.randomNormal(180, 50))
+noise = Array.from({length: 50}, d3.randomNormal(0, 15))
+y = x.map((xi, i) => 0.5 * xi - 10 + noise[i])
+
+data = x.map((xi, i) => ({ x: xi, y: y[i] }))
+```
+
 
 ```{ojs}
 //| panel: sidebar

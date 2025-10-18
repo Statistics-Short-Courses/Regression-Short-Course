@@ -6,22 +6,16 @@ engine: knitr
 
 # Multiple Linear Regression
 
-## Adding extra predictors
+## Continuous predictors
 
-### categorical predictors
+### Multi-collinearity
 
-## fitting a multiple regression model
+## Categorical predictors
 
-### Interpreting output
+## Multiplying predictors
 
-### diagnostics for multiple regression
+### Polynomials
 
-#### multicollinearity
+### Interactions
 
-## creating new predictors
-
-### interactions
-
-### polynomials
-
-### other transformation
+### Transformation

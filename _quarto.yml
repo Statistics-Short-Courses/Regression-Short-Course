@@ -15,7 +15,8 @@ book:
 format:
   live-html:
     toc: true
-    toc-depth: 3
+    number-sections: true
+    toc-depth: 1
     toc-expand: 2
     toc-title: Contents
     number-depth: 2

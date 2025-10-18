@@ -24,7 +24,7 @@
     "href": "LinearModels.html#a-simple-linear-model",
     "title": "1  An introduction to linear statistical models",
     "section": "",
-    "text": "Linear prediction\n\nWe choose \\(f(X)\\) to be a linear function\n\n\\[\nf(X)= \\beta_0 + \\beta_1\\cdot X\n\\]\n\nputting aside the error term for now, the approximate value - lets call it the ‘expected value’ of Y, \\(E[Y]\\), for now - can be represented by a linear equation,\n\n\\[\nE[Y]= \\beta_0 + \\beta_1\\cdot X\n\\]\n\nor alternatively as a line with y-intercept \\(\\beta_0\\) and slope \\(\\beta_1\\):\n\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0 = Inputs.range([-10, 10], {step: 1, label: \"intercept\"})\n\ntex.block`Y = ${b1}X + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nxRange = [-10,10]\nlineData = xRange.map(x =&gt; ({x, y: (b1 * x) + b0}))\n\nPlot.plot({\n  x:{domain: [-10,10], label: \"X\", grid: true},\n  y:{domain: [-10,10], label: \"Y\", grid: true},\n  marks: [\n    Plot.line(lineData, { x: \"x\", y: \"y\" })]\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThat is, \\(\\beta_0\\) tells us what Y looks like when \\(X=0\\), and \\(\\beta_1\\) tells us how much Y changes when X increases by 1.\n\n\nAssumption 2Y and X have a linear relationship\n\n\n\nExample 1: Salary growth over timeYou’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. We know that, on average, the starting salary at this company is $50,000 and salaries increase by $5000 each year someone stays employed there.\nUsing this information, we can construct a simple linear model of salary from employment time. Given an employment time of \\(x\\) years, we can represent a employee’s expected salary (\\(E[Y]\\)) mathematically as\n\\[\nE[Y]= \\$50,000 + \\$5,000\\cdot x.\n\\]\nWhen we have been working at this company for 10 years (i.e. \\(X=10\\)), we therefore expect a salary of \\(E[Y]=\\$50,000 + \\$5,000\\cdot 10= \\$100,000\\)\n\n\n\nYour turn\nA second company also has a job available. Base salary on start is higher here at $70,000 on average, but payrises are less - you are told that on average employees working for the company for 5 years have $20,000 higher salary than when they started. You want to use a simple linear model to calculate your expected salary (\\(E[Y]\\)) at company 2 after \\(X\\) years of employment.\n\\[\nE[Y] = \\beta_0 + \\beta_1 X\n\\]\n\nWhat are the coefficients \\(\\beta_0\\) and \\(beta_1\\) in this case?\n\n\\(\\beta_0 =\\) \\(\\beta_1 =\\)\nUsing R, calculate the expected salary after working for this company for 10 years\n\n\n\n\n\n\n\n\n\n\n\n\ncomplete the r function that predicts Y from an input X value for this linear model\n\n\n\n\n\n\n\n\n\n\n\n\nuse your function to predict Y for the following collection of Xs\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRandom Errors\n\nData rarely lie perfectly on a line\n\nAdd ‘error’ term: \\(\\varepsilon\\)\n\non average, we expect our linear predictor to be correct.\n\n\nAssumption 3The mean of \\(\\varepsilon\\), \\(\\mu=0\\)\n\n\n\nhowever, we also expect there to be variance around the linear predictor.\n\n\nAssumption 4Variance of Y around the linear predictor according constant value \\(Var(\\varepsilon)=\\sigma^2\\)\n\n\n\nAssumption 5The error is normally distributed (with mean \\(\\mu=0\\) and variance \\(\\sigma^2\\) . \\[\\varepsilon \\sim \\mathcal{N}(0, \\sigma^2)\\]\n\n\n\nExample 2\n\nSame model as above - given standard deviation\nExample Y values\n\nIllustrate error with normal overay\n\nExcersises:\n\nwhich variance is larger?\n(hard) probability of finding E[Y]+2sd observation",
+    "text": "Linear prediction\n\nWe choose \\(f(X)\\) to be a linear function\n\n\\[\nf(X)= \\beta_0 + \\beta_1\\cdot X\n\\]\n\nputting aside the error term for now, the approximate value - lets call it the ‘expected value’ of Y, \\(E[Y]\\), for now - can be represented by a linear equation,\n\n\\[\nE[Y]= \\beta_0 + \\beta_1\\cdot X\n\\]\n\nor alternatively as a line with y-intercept \\(\\beta_0\\) and slope \\(\\beta_1\\):\n\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0 = Inputs.range([-10, 10], {step: 1, label: \"intercept\"})\n\ntex.block`Y = ${b1}X + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nxRange = [-10,10]\nlineData = xRange.map(x =&gt; ({x, y: (b1 * x) + b0}))\n\nPlot.plot({\n  x:{domain: [-10,10], label: \"X\", grid: true},\n  y:{domain: [-10,10], label: \"Y\", grid: true},\n  marks: [\n    Plot.line(lineData, { x: \"x\", y: \"y\" })]\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThat is, \\(\\beta_0\\) tells us what Y looks like when \\(X=0\\), and \\(\\beta_1\\) tells us how much Y changes when X increases by 1.\n\n\nAssumption 2Y and X have a linear relationship\n\n\n\nExample 1: Salary growth over timeYou’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. We know that, on average, the starting salary at this company is $50,000 and salaries increase by $5000 each year someone stays employed there.\nUsing this information, we can construct a simple linear model of salary from employment time. Given an employment time of \\(X=x\\) years, we can represent a employee’s expected salary (\\(E[Y]\\)) mathematically as\n\\[\nE[Y]= \\$50,000 + \\$5,000\\cdot x.\n\\]\nWhen we have been working at this company for 10 years (i.e. \\(X=10\\)), we therefore expect a salary of \\(E[Y]=\\$50,000 + \\$5,000\\cdot 10= \\$100,000\\)\n\n\n\nYour turn\nA second company also has a job available. Base salary on start is higher here at $70,000 on average, but payrises are less - you are told that on average employees working for the company for 5 years have $20,000 higher salary than when they started. You want to use a simple linear model to calculate your expected salary (\\(E[Y]\\)) at company 2 after \\(X\\) years of employment.\n\\[\nE[Y] = \\beta_0 + \\beta_1 X\n\\]\n\nWhat are the coefficients \\(\\beta_0\\) and \\(beta_1\\) in this case?\n\n\\(\\beta_0 =\\) \\(\\beta_1 =\\)\nUsing R, calculate the expected salary after working for this company for 10 years\n\n\n\n\n\n\n\n\n\n\n\n\ncomplete the r function that predicts Y from an input X value for this linear model\n\n\n\n\n\n\n\n\n\n\n\n\nuse your function to predict Y for the following collection of Xs\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRandom Errors\n\nData rarely lie perfectly on a line\n\nAdd ‘error’ term: \\(\\varepsilon\\)\n\non average, we expect our linear predictor to be correct.\n\n\nAssumption 3The mean of \\(\\varepsilon\\), \\(\\mu=0\\)\n\n\n\nhowever, we also expect there to be variance around the linear predictor.\n\n\nAssumption 4Variance of Y around the linear predictor according constant value \\(Var(\\varepsilon)=\\sigma^2\\)\n\n\n\nAssumption 5The error is normally distributed (with mean \\(\\mu=0\\) and variance \\(\\sigma^2\\) . \\[\\varepsilon \\sim \\mathcal{N}(0, \\sigma^2)\\]\n\n\n\nExample 2\n\nSame model as above - given standard deviation\nExample Y values\n\nIllustrate error with normal overay\n\nExcersises:\n\nwhich variance is larger?\n(hard) probability of finding E[Y]+2sd observation",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>An introduction to linear statistical models</span>"
     ]
@@ -32,51 +32,51 @@
   {
     "objectID": "Fitting.html",
     "href": "Fitting.html",
-    "title": "2  Simple linear regression (fitting a model to data)",
+    "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "",
-    "text": "Estimating parameters\nin the previous section, you were given a linear model - we knew the values of \\(\\beta_0\\), \\(\\beta_1\\) and even \\(\\sigma\\). However, in most contexts we don’t know the true relationship between \\(X\\) and \\(Y\\) in advance. Instead, we are given data and try to infer the values of \\(\\beta\\), \\(\\sigma\\) based on this.",
+    "text": "2.1 Estimating parameters\nin the previous section, you were given a linear model - we knew the values of \\(\\beta_0\\), \\(\\beta_1\\) and even \\(\\sigma\\). However, in most contexts we don’t know the true relationship between \\(X\\) and \\(Y\\) in advance. Instead, we are given data and try to infer the values of \\(\\beta\\), \\(\\sigma\\) based on this.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple linear regression (fitting a model to data)</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]
   },
   {
     "objectID": "Fitting.html#estimating-parameters",
     "href": "Fitting.html#estimating-parameters",
-    "title": "2  Fitting a linear model to data",
+    "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "",
-    "text": "residuals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\beta\\)\nWhich line fits the data best (how low can the RMSE go)?\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\sigma\\)",
+    "text": "Residuals\n\n\nEstimating \\(\\beta\\)\nWhich line fits the data best (how low can the RMSE go)?\n\nx = Array.from({length: 50}, d3.randomNormal(180, 50))\nnoise = Array.from({length: 50}, d3.randomNormal(0, 15))\ny = x.map((xi, i) =&gt; 0.5 * xi - 10 + noise[i])\n\nlinearData = x.map((xi, i) =&gt; ({ x: xi, y: y[i] }))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof b0adj = Inputs.range([-50, 50], {step: 1, label: html`${tex`\\beta_0`}: Intercept (adjustment)`})\nviewof b1 = Inputs.range([-2, 2], {step: 0.01, label:  html`${tex`\\beta_1`}: Slope`})\n\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = linearData.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(linearData, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFitting a model using least squares - lm()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\sigma\\)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]
   },
   {
-    "objectID": "Fitting.html#fitting-a-model-using-least-squares---lm",
-    "href": "Fitting.html#fitting-a-model-using-least-squares---lm",
-    "title": "2  Fitting a linear model to data",
-    "section": "2.2 Fitting a model using least squares - lm()",
-    "text": "2.2 Fitting a model using least squares - lm()",
+    "objectID": "Fitting.html#checking-assumptions",
+    "href": "Fitting.html#checking-assumptions",
+    "title": "2  Simple Linear Regression: fitting a model to data",
+    "section": "2.2 Checking assumptions",
+    "text": "2.2 Checking assumptions\n\nIndependence of observations\n\n\nLinear relationships\n\n\nConstant Variance\n\n\nNormality of error",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
-    ]
-  },
-  {
-    "objectID": "Fitting.html#interpreting-summary-output",
-    "href": "Fitting.html#interpreting-summary-output",
-    "title": "2  Fitting a linear model to data",
-    "section": "2.3 Interpreting summary() output",
-    "text": "2.3 Interpreting summary() output",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]
   },
   {
     "objectID": "Fitting.html#inference-for-simple-linear-regression",
     "href": "Fitting.html#inference-for-simple-linear-regression",
-    "title": "2  Fitting a linear model to data",
-    "section": "2.4 Inference for simple linear regression",
-    "text": "2.4 Inference for simple linear regression",
+    "title": "2  Simple Linear Regression: fitting a model to data",
+    "section": "2.3 Inference for Simple Linear Regression",
+    "text": "2.3 Inference for Simple Linear Regression\n\nOverall fit\n\n\nParameter estimates",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Fitting a linear model to data</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
+    ]
+  },
+  {
+    "objectID": "Fitting.html#interpreting-summary-output",
+    "href": "Fitting.html#interpreting-summary-output",
+    "title": "2  Simple Linear Regression: fitting a model to data",
+    "section": "2.4 Interpreting `summary()` output",
+    "text": "2.4 Interpreting `summary()` output",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]
   },
   {
@@ -130,11 +130,11 @@
     ]
   },
   {
-    "objectID": "MultipleLinearRegression.html#adding-extra-beta-s",
-    "href": "MultipleLinearRegression.html#adding-extra-beta-s",
+    "objectID": "MultipleLinearRegression.html#adding-extra-predictors",
+    "href": "MultipleLinearRegression.html#adding-extra-predictors",
     "title": "4  Multiple Linear Regression",
-    "section": "4.2 adding extra \\(\\beta s\\)",
-    "text": "4.2 adding extra \\(\\beta s\\)",
+    "section": "",
+    "text": "categorical predictors",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
     ]
@@ -145,66 +145,6 @@
     "title": "4  Multiple Linear Regression",
     "section": "4.2 fitting a multiple regression model",
     "text": "4.2 fitting a multiple regression model\n\nInterpreting output\n\n\ndiagnostics for multiple regression\n\nmulticollinearity",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
-    ]
-  },
-  {
-    "objectID": "MultipleLinearRegression.html#interpreting-output",
-    "href": "MultipleLinearRegression.html#interpreting-output",
-    "title": "4  Multiple Linear Regression",
-    "section": "4.4 Interpreting output",
-    "text": "4.4 Interpreting output",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
-    ]
-  },
-  {
-    "objectID": "MultipleLinearRegression.html#diagnostics-for-multiple-regression",
-    "href": "MultipleLinearRegression.html#diagnostics-for-multiple-regression",
-    "title": "4  Multiple Linear Regression",
-    "section": "4.5 diagnostics for multiple regression",
-    "text": "4.5 diagnostics for multiple regression\n\nmulticollinearity",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
-    ]
-  },
-  {
-    "objectID": "LinearModels.html#simple-linear-regression-fitting-a-model-to-data",
-    "href": "LinearModels.html#simple-linear-regression-fitting-a-model-to-data",
-    "title": "1  An introduction to linear statistical models",
-    "section": "1.2 Simple linear regression (fitting a model to data)",
-    "text": "1.2 Simple linear regression (fitting a model to data)\nin the previous section, you were given a linear model - we knew the values of \\(\\beta_0\\), \\(\\beta_1\\) and even \\(\\sigma\\). However, in most contexts we don’t know the true relationship between \\(X\\) and \\(Y\\) in advance. Instead, we are given data and try to infer the values of \\(\\beta\\), \\(\\sigma\\) based on this.\n\nEstimating parameters\n\nresiduals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\beta\\)\nWhich line fits the data best (how low can the RMSE go)?\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0adj = Inputs.range([-20, 20], {step: 1, label: \"intercept adustment\"})\nb0 = (90 - b1 * 180) + b0adj\n\nresidualData = data.map(d =&gt; {\n  const yhat = b1 * d.x + b0;\n  const res  = d.y - yhat;\n  return {\n    ...d,\n    yhat,\n    residual: res,\n    sign: res &gt;= 0 ? \"positive\" : \"negative\",\n    absRes: Math.abs(res)\n  };\n})\n\nRMSR = Math.sqrt(d3.sum(residualData, d =&gt; d.residual ** 2) / residualData.length)\n\ntex.block`y = ${b1}x + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntex.block`\\sqrt{\\frac{1}{n}\\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`\n\n\n\n\n\n\n\n\n\n\n\nxRange = d3.extent(residualData,d =&gt; d.x)\nlineData = xRange.map(x =&gt; ({x, y: b1 * x + b0}))\n\nPlot.plot({\n  marks: [\n    Plot.ruleX(residualData, {x: \"x\",\n      y1: \"y\",\n      y2: \"yhat\",\n      stroke: \"sign\", \n      strokeOpacity: 0.75,\n      strokeWidth: d =&gt; 1 + d.absRes / 12,\n       title: d =&gt; `x=${d.x.toFixed(1)}\ny=${d.y.toFixed(1)}\nŷ=${d.yhat.toFixed(1)}\nres=${d.residual.toFixed(1)}\nres²=${(d.residual**2).toFixed(1)}`\n    }),\n\n    Plot.line(lineData, { x: \"x\", y: \"y\" }),\n\n    Plot.dot(data, { x: \"x\", y: \"y\", r: 3 })\n  ],\n  x: { domain: xRange },\n  y: { domain: [0, 180], label: \"y\" },\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimating \\(\\sigma\\)\n\n\nFitting a model using least squares - lm()\n\n\n\n\n\n\n\n\n\n\n\nChecking assumptions\n\n\nCommon assumption violations\n\nNon-independence of observations\n\n\nNon-linear relationships\n\n\nNon-constant Variance\n\n\nNon-normality of error",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>An introduction to linear statistical models</span>"
-    ]
-  },
-  {
-    "objectID": "LinearModels.html#inference-in-simple-linear-regression",
-    "href": "LinearModels.html#inference-in-simple-linear-regression",
-    "title": "1  An introduction to linear statistical models",
-    "section": "1.3 inference in simple linear regression",
-    "text": "1.3 inference in simple linear regression\n\noverall usefulness\n\n\nparameter estimates",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>An introduction to linear statistical models</span>"
-    ]
-  },
-  {
-    "objectID": "Fitting.html#inference-in-simple-linear-regression",
-    "href": "Fitting.html#inference-in-simple-linear-regression",
-    "title": "2  Simple linear regression (fitting a model to data)",
-    "section": "2.1 inference in simple linear regression",
-    "text": "2.1 inference in simple linear regression\n\noverall usefulness\n\n\nparameter estimates",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple linear regression (fitting a model to data)</span>"
-    ]
-  },
-  {
-    "objectID": "MultipleLinearRegression.html#adding-extra-predictors",
-    "href": "MultipleLinearRegression.html#adding-extra-predictors",
-    "title": "4  Multiple Linear Regression",
-    "section": "",
-    "text": "categorical predictors",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
     ]

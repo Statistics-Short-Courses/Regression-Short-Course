@@ -14,7 +14,7 @@
     "href": "LinearModels.html",
     "title": "1  An introduction to linear statistical models",
     "section": "",
-    "text": "1.1 A simple linear model",
+    "text": "1.1 A simple linear model\nHere \\(\\varepsilon\\) represents the random variation in \\(Y\\) that is not explained by \\(X\\).\n-This means that \\(Y\\) is not perfectly determined by \\(X\\): even if we know the values of X, the outcome Y can still vary due to random noise.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>An introduction to linear statistical models</span>"
     ]
@@ -24,7 +24,7 @@
     "href": "LinearModels.html#a-simple-linear-model",
     "title": "1  An introduction to linear statistical models",
     "section": "",
-    "text": "Linear prediction\n\nWe choose \\(f(X)\\) to be a linear function\n\n\\[\nf(X)= \\beta_0 + \\beta_1\\cdot X\n\\]\n\nputting aside the error term for now, the approximate value - lets call it the ‘expected value’ of Y, \\(E[Y]\\), for now - can be represented by a linear equation,\n\n\\[\nE[Y]= \\beta_0 + \\beta_1\\cdot X\n\\]\n\nor alternatively as a line with y-intercept \\(\\beta_0\\) and slope \\(\\beta_1\\):\n\n\n\nviewof b1 = Inputs.range([-2, 2], {step: 0.1, label: \"slope\"})\nviewof b0 = Inputs.range([-10, 10], {step: 1, label: \"intercept\"})\n\ntex.block`Y = ${b1}X + ${b0}`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nxRange = [-10,10]\nlineData = xRange.map(x =&gt; ({x, y: (b1 * x) + b0}))\n\nPlot.plot({\n  x:{domain: [-10,10], label: \"X\", grid: true},\n  y:{domain: [-10,10], label: \"Y\", grid: true},\n  marks: [\n    Plot.line(lineData, { x: \"x\", y: \"y\" })]\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThat is, \\(\\beta_0\\) tells us what Y looks like when \\(X=0\\), and \\(\\beta_1\\) tells us how much Y changes when X increases by 1.\n\n\nAssumption 2Y and X have a linear relationship\n\n\n\nExample 1: Salary growth over timeYou’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. We know that, on average, the starting salary at this company is $50,000 and salaries increase by $5000 each year someone stays employed there.\nUsing this information, we can construct a simple linear model of salary from employment time. Given an employment time of \\(X=x\\) years, we can represent a employee’s expected salary (\\(E[Y]\\)) mathematically as\n\\[\nE[Y]= \\$50,000 + \\$5,000\\cdot x.\n\\]\nWhen we have been working at this company for 10 years (i.e. \\(X=10\\)), we therefore expect a salary of \\(E[Y]=\\$50,000 + \\$5,000\\cdot 10= \\$100,000\\)\n\n\n\nYour turn\nA second company also has a job available. Base salary on start is higher here at $70,000 on average, but payrises are less - you are told that on average employees working for the company for 5 years have $20,000 higher salary than when they started. You want to use a simple linear model to calculate your expected salary (\\(E[Y]\\)) at company 2 after \\(X\\) years of employment.\n\\[\nE[Y] = \\beta_0 + \\beta_1 X\n\\]\n\nWhat are the coefficients \\(\\beta_0\\) and \\(beta_1\\) in this case?\n\n\\(\\beta_0 =\\) \\(\\beta_1 =\\)\nUsing R, calculate the expected salary after working for this company for 10 years\n\n\n\n\n\n\n\n\n\n\n\n\ncomplete the r function that predicts Y from an input X value for this linear model\n\n\n\n\n\n\n\n\n\n\n\n\nuse your function to predict Y for the following collection of Xs\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRandom Errors\n\nData rarely lie perfectly on a line\n\nAdd ‘error’ term: \\(\\varepsilon\\)\n\non average, we expect our linear predictor to be correct.\n\n\nAssumption 3The mean of \\(\\varepsilon\\), \\(\\mu=0\\)\n\n\n\nhowever, we also expect there to be variance around the linear predictor.\n\n\nAssumption 4Variance of Y around the linear predictor according constant value \\(Var(\\varepsilon)=\\sigma^2\\)\n\n\n\nAssumption 5The error is normally distributed (with mean \\(\\mu=0\\) and variance \\(\\sigma^2\\) . \\[\\varepsilon \\sim \\mathcal{N}(0, \\sigma^2)\\]\n\n\n\nExample 2\n\nSame model as above - given standard deviation\nExample Y values\n\nIllustrate error with normal overay\n\nExcersises:\n\nwhich variance is larger?\n(hard) probability of finding E[Y]+2sd observation",
+    "text": "Linear prediction\n\nWe now choose \\(f(X)\\) to be a linear function:\n\n\\[\nf(X)= \\beta_0 + \\beta_1\\cdot X\n\\]\n\nPutting aside the random error term for the moment, we can think of the expected value of \\(Y\\), denoted \\(E[Y]\\), as being given by this linear relationship:\n\n\\[\nE[Y]= \\beta_0 + \\beta_1\\cdot X\n\\tag{1.2}\\]\n\nIn other words, we are representing the expected value of \\(Y\\) as a straight line with y-intercept \\(\\beta_0\\) and slope \\(\\beta_1\\):\nHere, \\(\\beta_0\\) represents the value of \\(Y\\) when \\(X=0\\), and \\(\\beta_1\\) represents the change in Y for a one-unit increase in X.\n\n\nAssumption 2Y and X have a linear relationship\n\n\n\nExample 1: Salary growth over timeYou’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. We know that, on average, the starting salary at this company is $50,000, and salaries increase by $5000 per year of employment.\nUsing this information, we can construct a simple linear predictor of salary from employment time. Given an employment time of \\(X=x\\) years, we can represent a employee’s expected salary (\\(E[Y]\\)) as\n\\[\nE[Y]= \\$50,000 + \\$5,000\\cdot x.\n\\]\nAfter 10 years of working at this company (i.e. \\(X=10\\)), we would expect a salary of \\[E[Y]=\\$50,000 + \\$5,000\\times10= \\$100,000\\]\n\n\n\nYour turn\nA second company also has a job available. The starting salary is higher here - $70,000 on average - but payrises are smaller. You are told that, on average, employees working for the company for 5 years earn $20,000 more per year than when they started.\nYou want to use a simple linear prediction to calculate your expected salary (\\(E[Y]\\)) after \\(X\\) years of employment.\n\\[\nE[Y] = \\beta_0 + \\beta_1 X\n\\]\n\nWhat are the coefficients \\(\\beta_0\\) and \\(beta_1\\) in this case?\n\n\\(\\beta_0 =\\) \\(\\beta_1 =\\)\nUsing R, calculate the expected salary after working for this company for 10 years\n\n\n\n\n\n\n\n\n\n\n\n\nComplete the r function that predicts \\(Y\\) from an input \\(X\\) for this linear model (alternatively - give function e.g. ‘this function predicts salary at company 2 with an input X years work’)\n\n\n\n\n\n\n\n\n\n\n\n\nUse this function to predict \\(Y\\) for the following values of \\(X\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nToDoadd plot comparing two (companies) linear salary growth?\n\n\n\n\n\nRandom Errors\n\nIn practice, data rarely fall perfectly on a straight line. Even if the underlying relationship between \\(X\\) and \\(Y\\) is approximately linear, individual observations tend to vary around that line.\nAs mentioned in Section 1.x, to account for this variation we add an error term, \\(\\varepsilon\\), to our model\n\n\\[\nY=\\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\nMean Zero\n\nThe error term represents the *difference between the actual value of \\(Y\\) and the value predicted by the linear predictor, \\(E[Y]\\).\nOn average, we expect these error terms to balance out:\n\n\nAssumption 3The mean of the error term is zero:\n\\[\nE[\\varepsilon]=\\mu=0\n\\]\ni.e. The linear predictor gives the correct value of \\(Y\\) on average\n\n\n\n\nConstant variance\n\nWhile correct on average, we expect there to be some spread of data around the line (this is why we have the error term). The amount of spread is measured by the variance of the errors.\nWe assume that this variance is constant - like \\(mu=0\\), it is the same for all values of \\(X\\) however we dont specify which particular value it takes:\n\n\nAssumption 4The variance of the error term is constant for all values of X: \\[Var(\\varepsilon)=\\sigma^2\\]\n\n\n\n\nNormal distribution\nWhile the assumptions of mean 0 and constant variance describe the center and spread of the errors, they don’t fully specify the shape of their distribution. To model this more completely, we often assume that the errors follow a Normal distribution. This choice conveniently packages those assumptions — zero mean and constant variance — into a single, well-behaved model that is mathematically tractable and aligns with many real-world data patterns.\n\nAssumption 5The error is normally distributed (with mean \\(\\mu=0\\) and variance \\(\\sigma^2\\) . \\[\\varepsilon \\sim \\mathcal{N}(0, \\sigma^2)\\]\n\n\n\nTechnical-Point 1The Central Limit Theorem is a fundamental result of probability theory that provides some extra motivation for this assumption. According to this theorem, sums or averages of many small, independent random effects tend to follow a Normal distribution. Thus, assuming normally distributed errors is both a practical simplification and a reasonable approximation in many situations.\n\n\n\nExample 2\n\nSame model as above - given standard deviation\nExample Y values\n\nIllustrate error with normal overay\n\nExcersises:\n\nwhich variance is larger?\n(hard) probability of finding E[Y]+2sd observation",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>An introduction to linear statistical models</span>"
     ]
@@ -64,7 +64,7 @@
     "href": "FittingSLR.html#inference-for-simple-linear-regression",
     "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "2.3 Inference for Simple Linear Regression",
-    "text": "2.3 Inference for Simple Linear Regression\n\nOverall fit\n\n\nParameter estimates",
+    "text": "2.3 Inference for Simple Linear Regression\n\nInference about \\(\\sigma\\)\n\n\nInference about \\(\\beta_1\\)",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]
@@ -82,41 +82,51 @@
   {
     "objectID": "MultipleLinearRegression.html",
     "href": "MultipleLinearRegression.html",
-    "title": "3  Multiple Linear Regression",
+    "title": "3  Multiple Linear Regression: Building more complex models",
     "section": "",
     "text": "3.1 Continuous predictors",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression: Building more complex models</span>"
     ]
   },
   {
     "objectID": "MultipleLinearRegression.html#continuous-predictors",
     "href": "MultipleLinearRegression.html#continuous-predictors",
-    "title": "3  Multiple Linear Regression",
+    "title": "3  Multiple Linear Regression: Building more complex models",
     "section": "",
     "text": "Multi-collinearity",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression: Building more complex models</span>"
     ]
   },
   {
     "objectID": "MultipleLinearRegression.html#categorical-predictors",
     "href": "MultipleLinearRegression.html#categorical-predictors",
-    "title": "3  Multiple Linear Regression",
+    "title": "3  Multiple Linear Regression: Building more complex models",
     "section": "3.2 Categorical predictors",
     "text": "3.2 Categorical predictors",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression: Building more complex models</span>"
     ]
   },
   {
     "objectID": "MultipleLinearRegression.html#multiplying-predictors",
     "href": "MultipleLinearRegression.html#multiplying-predictors",
-    "title": "3  Multiple Linear Regression",
+    "title": "3  Multiple Linear Regression: Building more complex models",
     "section": "3.3 Multiplying predictors",
     "text": "3.3 Multiplying predictors\n\nPolynomials\n\n\nInteractions\n\n\nTransformation",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Multiple Linear Regression: Building more complex models</span>"
+    ]
+  },
+  {
+    "objectID": "FittingSLR.html#using-the-model-for-prediction",
+    "href": "FittingSLR.html#using-the-model-for-prediction",
+    "title": "2  Simple Linear Regression: fitting a model to data",
+    "section": "2.5 Using the model for prediction",
+    "text": "2.5 Using the model for prediction",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]
   }
 ]

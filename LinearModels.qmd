@@ -33,16 +33,29 @@ library(ggplot2)
 
 # An introduction to linear statistical models
 
--   Statistical modelling involves characteristing the relationship
-    between predictors (X) and outcomes (Y).
-    -   $$
-        Y=f(X)+\varepsilon
-        $$
--   $f(X)$ is a deterministic function and $\varepsilon$ is a 'random
-    error' term
+-   A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call them $X$ and $Y$.
+-   In this context, we designate one variable, $Y$ as the *outcome* or *dependent variable*, and attempt to construct a *model* describing how it depends on the other variable(s), $X$, which we call *predictors* or *independent variables*. 
+-   We can express the idea that $Y$ depends on $X$ mathematically as
+$$
+Y=f(X)
+$$
+-   That is, $Y$ is some function of $X$ (we have not yet specified what kind of function). Given values of $X$, we can use this function to *predict* or *explain* corresponding values of $Y$.
+
+- This is similar to *deterministic models* you may know from physics - for example 
+ $$E=MC^2$$,
+ where $E$ (the outcome), depends on $M$ (a predictor) through the function $f(M)=MC^2$). 
+ 
+- In statistical modelling we take another step and assume that $Y$ is not a purely determinsitic function of $X$, but that it varies somewhat randomly around such a relationship. We capture this by introducing a *random error term *, $\varepsilon$:
+$$
+Y=f(X)+\varepsilon
+$$
+
+Here $\varepsilon$ represents the random variation in $Y$ that is not explained by $X$. 
+
+-This means that $Y$ is not a perfectly determined by of $X$: even if we know the values of X, the outcome Y can still vary due to random noise. 
 
 ::: Assumption 
-Y only depends on X
+$Y$ depends only on a deterministic function of $X$ and a random noise component
 :::
 
 ## A simple linear model

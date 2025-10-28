@@ -232,10 +232,44 @@ $$Var(\varepsilon)=\sigma^2$$
 
 While the assumptions of mean 0 and constant variance describe the center and spread of the errors, they don’t fully specify the shape of their distribution. To model this more completely, we often assume that the errors follow a Normal distribution. This choice conveniently packages those assumptions — zero mean and constant variance — into a single, well-behaved model that is mathematically tractable and aligns with many real-world data patterns.
 
-::: Assumption 
+::: Assumption
 The error is normally distributed (with mean $\mu=0$ and variance $\sigma^2$ .
 $$\varepsilon \sim \mathcal{N}(0, \sigma^2)$$
 :::
+
+```{ojs}
+//| echo: false
+//| fig-cap: "Interactive normal distribution with adjustable standard deviation."
+viewof sigma = Inputs.range([0.2, 5], {
+  value: 1,
+  step: 0.1,
+  label: html`${tex`\sigma`}: Standard deviation`
+})
+
+normalDensity = d3.range(-4 * sigma, 4 * sigma, sigma / 50).map(x => ({
+  x,
+  density: (1 / (Math.sqrt(2 * Math.PI) * sigma)) * Math.exp(-(x ** 2) / (2 * sigma ** 2))
+}))
+
+tex.block`f(\varepsilon) = \frac{1}{\sqrt{2\pi}\,${sigma.toFixed(1)}}\exp\left(-\frac{\varepsilon^{2}}{2(${sigma.toFixed(1)})^{2}}\right)`
+
+Plot.plot({
+  height: 280,
+  marginLeft: 48,
+  marginBottom: 40,
+  y: { label: "Density" },
+  x: { label: html`Error value (${tex`\varepsilon`})` },
+  marks: [
+    Plot.areaY(normalDensity, {
+      x: "x",
+      y: "density",
+      fillOpacity: 0.2,
+      stroke: "#2a5599",
+      fill: "#2a5599"
+    })
+  ]
+})
+```
 
 ::: Technical-Point
 The Central Limit Theorem is a fundamental result of probability theory that provides some extra motivation for this assumption. According to this theorem, sums or averages of many small, independent random effects tend to follow a Normal distribution. Thus, assuming normally distributed errors is both a practical simplification and a reasonable approximation in many situations.

@@ -341,34 +341,6 @@ tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Nor
 //| panel: fill
 //| echo: false
 //| width: 700
-//| fig.cap: "The probability density of observations ($Y$) under a simple linear model."
- xValues = d3.range(-10,10.001, 0.3)
-
- densityGrid = xValues.flatMap(x => {
-  const mu = b0_2 + b1_2 * x;
-  return xValues.map(y => ({
-    x, y,
-    density: normalDensity(y, mu, sigma_2)   
-  }));
-});
-
-Plot.plot({
-  x: {domain: [-10, 10], label: "X", grid: true},
-  y: {domain: [-10, 10], label: "Y", grid: true},
-  color: {label: "Density",
-    type: "sequential",
-    scheme: "Blues"},
-  marks: [
-    Plot.raster(densityGrid, {x: "x", y: "y", fill: "density", interpolate: "nearest"})
-  ]
-});
-
-```
-
-```{ojs}
-//| panel: fill
-//| echo: false
-//| width: 700
 //| fig-cap: "Cross-sections of the simple linear model showing Normal error curves at selected X values."
 
 xSampleValues = d3.range(-8, 8.1, 2)
@@ -385,17 +357,10 @@ densityCurveData = xSampleValues.flatMap(xVal => {
     return {x: xVal + width, y, group: xVal};
   });
 
-  const leftSide = ySectionValues.slice().reverse().map(y => {
-    const density = normalDensity(y, mu, sigma_2);
-    const width = (density / peakDensity) * widthScale;
-    return {x: xVal - width, y, group: xVal};
-  });
-
-  const closedPath = [...rightSide, ...leftSide, rightSide[0]];
-  return closedPath.map((point, index) => ({...point, order: index}));
+  return rightSide
 });
 
-crossSectionTrendLine = xValues.map(x => ({
+crossSectionTrendLine = xSampleValues.map(x => ({
   x,
   y: b0_2 + b1_2 * x
 }))

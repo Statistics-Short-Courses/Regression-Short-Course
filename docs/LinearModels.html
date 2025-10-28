@@ -29097,15 +29097,15 @@ initializeRuntime();
 --color1: #FF9580;
 --color2: #FFBF80;
 }
+.Example {
+--color1: #c0c0c0;
+--color2: #808080;
+}
 .Technical-Point {
 --color1: #c0c0c0;
 --color2: #808080;
 }
 .ToDo {
---color1: #c0c0c0;
---color2: #808080;
-}
-.Example {
 --color1: #c0c0c0;
 --color2: #808080;
 }
@@ -29874,47 +29874,136 @@ Y=\beta_0+\beta_1X+\varepsilon, \quad{\varepsilon \sim N(0,\sigma^2)}
 </div>
 <div class="panel-fill panel-grid g-col-24 g-col-lg-17 pt-3 pt-lg-0">
 <div class="g-col-24">
-<div class="cell panel-fill" width="700" data-fig.cap="The probability density of observations ($Y$) under a simple linear model.">
-<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="345" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 344;"><span id="cb6-345"><a href="#cb6-345" aria-hidden="true" tabindex="-1"></a>xValues <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="fl">10.001</span><span class="op">,</span> <span class="fl">0.3</span>)</span>
-<span id="cb6-346"><a href="#cb6-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a> densityGrid <span class="op">=</span> xValues<span class="op">.</span><span class="fu">flatMap</span>(x <span class="kw">=&gt;</span> {</span>
-<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> mu <span class="op">=</span> b0_2 <span class="op">+</span> b1_2 <span class="op">*</span> x<span class="op">;</span></span>
-<span id="cb6-349"><a href="#cb6-349" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> xValues<span class="op">.</span><span class="fu">map</span>(y <span class="kw">=&gt;</span> ({</span>
-<span id="cb6-350"><a href="#cb6-350" aria-hidden="true" tabindex="-1"></a>    x<span class="op">,</span> y<span class="op">,</span></span>
-<span id="cb6-351"><a href="#cb6-351" aria-hidden="true" tabindex="-1"></a>    <span class="dt">density</span><span class="op">:</span> <span class="fu">normalDensity</span>(y<span class="op">,</span> mu<span class="op">,</span> sigma_2)   </span>
-<span id="cb6-352"><a href="#cb6-352" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
-<span id="cb6-353"><a href="#cb6-353" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb6-354"><a href="#cb6-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-355"><a href="#cb6-355" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb6-356"><a href="#cb6-356" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"X"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb6-357"><a href="#cb6-357" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Y"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb6-358"><a href="#cb6-358" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span><span class="op">,</span></span>
-<span id="cb6-359"><a href="#cb6-359" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">"sequential"</span><span class="op">,</span></span>
-<span id="cb6-360"><a href="#cb6-360" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Blues"</span>}<span class="op">,</span></span>
-<span id="cb6-361"><a href="#cb6-361" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb6-362"><a href="#cb6-362" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">raster</span>(densityGrid<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"density"</span><span class="op">,</span> <span class="dt">interpolate</span><span class="op">:</span> <span class="st">"nearest"</span>})</span>
-<span id="cb6-363"><a href="#cb6-363" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb6-364"><a href="#cb6-364" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell panel-fill" width="700">
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="346" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 345;"><span id="cb6-346"><a href="#cb6-346" aria-hidden="true" tabindex="-1"></a>xSampleValues <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">8</span><span class="op">,</span> <span class="fl">8.1</span><span class="op">,</span> <span class="dv">2</span>)</span>
+<span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a>ySectionValues <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="fl">10.001</span><span class="op">,</span> <span class="fl">0.1</span>)</span>
+<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a>widthScale <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(<span class="fl">1.8</span><span class="op">,</span> sigma_2 <span class="op">*</span> <span class="fl">0.9</span>)</span>
+<span id="cb6-349"><a href="#cb6-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-350"><a href="#cb6-350" aria-hidden="true" tabindex="-1"></a>densityCurveData <span class="op">=</span> xSampleValues<span class="op">.</span><span class="fu">flatMap</span>(xVal <span class="kw">=&gt;</span> {</span>
+<span id="cb6-351"><a href="#cb6-351" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> mu <span class="op">=</span> b0_2 <span class="op">+</span> b1_2 <span class="op">*</span> xVal<span class="op">;</span></span>
+<span id="cb6-352"><a href="#cb6-352" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> peakDensity <span class="op">=</span> <span class="fu">normalDensity</span>(mu<span class="op">,</span> mu<span class="op">,</span> sigma_2)<span class="op">;</span></span>
+<span id="cb6-353"><a href="#cb6-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-354"><a href="#cb6-354" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rightSide <span class="op">=</span> ySectionValues<span class="op">.</span><span class="fu">map</span>(y <span class="kw">=&gt;</span> {</span>
+<span id="cb6-355"><a href="#cb6-355" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> density <span class="op">=</span> <span class="fu">normalDensity</span>(y<span class="op">,</span> mu<span class="op">,</span> sigma_2)<span class="op">;</span></span>
+<span id="cb6-356"><a href="#cb6-356" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> width <span class="op">=</span> (density <span class="op">/</span> peakDensity) <span class="op">*</span> widthScale<span class="op">;</span></span>
+<span id="cb6-357"><a href="#cb6-357" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">x</span><span class="op">:</span> xVal <span class="op">+</span> width<span class="op">,</span> y<span class="op">,</span> <span class="dt">group</span><span class="op">:</span> xVal}<span class="op">;</span></span>
+<span id="cb6-358"><a href="#cb6-358" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-359"><a href="#cb6-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-360"><a href="#cb6-360" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> rightSide</span>
+<span id="cb6-361"><a href="#cb6-361" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-362"><a href="#cb6-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-363"><a href="#cb6-363" aria-hidden="true" tabindex="-1"></a>crossSectionTrendLine <span class="op">=</span> xSampleValues<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({</span>
+<span id="cb6-364"><a href="#cb6-364" aria-hidden="true" tabindex="-1"></a>  x<span class="op">,</span></span>
+<span id="cb6-365"><a href="#cb6-365" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> b0_2 <span class="op">+</span> b1_2 <span class="op">*</span> x</span>
+<span id="cb6-366"><a href="#cb6-366" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb6-367"><a href="#cb6-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-368"><a href="#cb6-368" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb6-369"><a href="#cb6-369" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"X"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb6-370"><a href="#cb6-370" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Y"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb6-371"><a href="#cb6-371" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb6-372"><a href="#cb6-372" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(densityCurveData<span class="op">,</span> {</span>
+<span id="cb6-373"><a href="#cb6-373" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
+<span id="cb6-374"><a href="#cb6-374" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span></span>
+<span id="cb6-375"><a href="#cb6-375" aria-hidden="true" tabindex="-1"></a>      <span class="dt">z</span><span class="op">:</span> <span class="st">"group"</span><span class="op">,</span></span>
+<span id="cb6-376"><a href="#cb6-376" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#2a5599"</span><span class="op">,</span></span>
+<span id="cb6-377"><a href="#cb6-377" aria-hidden="true" tabindex="-1"></a>      <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">1.5</span><span class="op">,</span></span>
+<span id="cb6-378"><a href="#cb6-378" aria-hidden="true" tabindex="-1"></a>      <span class="dt">curve</span><span class="op">:</span> <span class="st">"basis"</span></span>
+<span id="cb6-379"><a href="#cb6-379" aria-hidden="true" tabindex="-1"></a>    })<span class="op">,</span></span>
+<span id="cb6-380"><a href="#cb6-380" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(crossSectionTrendLine<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">2</span>})</span>
+<span id="cb6-381"><a href="#cb6-381" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb6-382"><a href="#cb6-382" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-ojs-cell-6" class="cell panel-fill quarto-float quarto-figure quarto-figure-center anchored" width="700">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ojs-cell-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display">
-<div>
+<div id="fig-ojs-cell-6-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ojs-cell-6-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div id="ojs-cell-6-1" data-nodetype="declaration">
 
 </div>
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ojs-cell-6-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a)
+</figcaption>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-display">
-<div>
+<div id="fig-ojs-cell-6-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ojs-cell-6-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div id="ojs-cell-6-2" data-nodetype="declaration">
 
 </div>
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ojs-cell-6-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-6-3" data-nodetype="expression">
+<div id="fig-ojs-cell-6-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ojs-cell-6-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="ojs-cell-6-3" data-nodetype="declaration">
 
 </div>
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ojs-cell-6-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-ojs-cell-6-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ojs-cell-6-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="ojs-cell-6-4" data-nodetype="declaration">
+
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ojs-cell-6-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-ojs-cell-6-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ojs-cell-6-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="ojs-cell-6-5" data-nodetype="declaration">
+
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ojs-cell-6-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(e)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-ojs-cell-6-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ojs-cell-6-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="ojs-cell-6-6" data-nodetype="expression">
+
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ojs-cell-6-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(f)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ojs-cell-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: Cross-sections of the simple linear model showing Normal error curves at selected X values.
+</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -30166,7 +30255,7 @@ window.onload = function() {
 
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwID0gSW5wdXRzLnJhbmdlKFstMTAsIDEwXSwge3N0ZXA6IDEsIGxhYmVsOiBcIkludGVyY2VwdCAozrLigoApXCJ9KVxudGV4LmJsb2NrYEVbWV0gPSAke2IxfVggKyAke2IwfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InhSYW5nZSA9IFstMTAsMTBdXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IChiMSAqIHgpICsgYjB9KSlcblBsb3QucGxvdCh7XG4gIHg6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGxpbmVEYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiB9KV1cbn0pXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBtdSA9IElucHV0cy5yYW5nZShbLTUsIDVdLCB7XG4gIHZhbHVlOiAwLFxuICBzdGVwOiAwLjEsXG4gIGxhYmVsOiBgTWVhbiAozrwpOmBcbn0pXG5cbnZpZXdvZiBzaWdtYSA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge1xuICB2YWx1ZTogMSxcbiAgc3RlcDogMC4xLFxuICBsYWJlbDogJ1N0YW5kYXJkIGRldmlhdGlvbiAoz4MpOidcbn0pXG5cblNRUlQyUEk9TWF0aC5zcXJ0KDIgKiBNYXRoLlBJKVxuXG5ub3JtYWxEZW5zaXR5ID0gKHgsIG1lYW4sIHNkKSA9PlxuICAoMSAvIChzZCAqIFNRUlQyUEkpKSAqIE1hdGguZXhwKC0wLjUgKiAoKHggLSBtZWFuKSAvIHNkKSAqKiAyKTtcbiAgXG5kZW5zaXR5R3JpZF8xID0gZDMucmFuZ2UoKC00ICogc2lnbWEpK211LCBtdSsoNCAqIHNpZ21hKSwgc2lnbWEgLyA1MCkubWFwKHggPT4gKHtcbiAgeCxcbiAgZGVuc2l0eTogbm9ybWFsRGVuc2l0eSh4LG11LHNpZ21hKVxufSkpO1xuXG50ZXguYmxvY2tgXFx2YXJlcHNpbG9uIFxcc2ltIFxcdGV4dHtOb3JtYWx9KCR7bXV9LCAke3NpZ21hfV4yKWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuUGxvdC5wbG90KHtcbiAgaGVpZ2h0OiAyODAsXG4gIG1hcmdpbkxlZnQ6IDQ4LFxuICBtYXJnaW5Cb3R0b206IDQwLFxuICB5OiB7IGxhYmVsOiBcIkRlbnNpdHlcIiB9LFxuICB4OiB7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IFwizrVcIiB9LFxuICBtYXJrczogW1xuICAgIFBsb3QuYXJlYVkoZGVuc2l0eUdyaWRfMSwge1xuICAgICAgeDogXCJ4XCIsXG4gICAgICB5OiBcImRlbnNpdHlcIixcbiAgICAgIGZpbGxPcGFjaXR5OiAwLjIsXG4gICAgICBzdHJva2U6IFwiIzJhNTU5OVwiLFxuICAgICAgZmlsbDogXCIjMmE1NTk5XCJcbiAgICB9KVxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG52aWV3b2YgYjFfMiA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwXzIgPSBJbnB1dHMucmFuZ2UoWy0xMCwgMTBdLCB7c3RlcDogMSwgbGFiZWw6IFwiSW50ZXJjZXB0ICjOsuKCgClcIn0pXG52aWV3b2Ygc2lnbWFfMiA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge3N0ZXA6IDAuMSwgdmFsdWU6IDEsIGxhYmVsOiBcIlN0ZC4gZGV2aWF0aW9uICjPgylcIn0pXG5cbnRleC5ibG9ja2BZID0gJHtiMF8yfSArICR7YjFfMn1YICsgXFx2YXJlcHNpbG9uLCBcXHF1YWQgXFx2YXJlcHNpbG9uIFxcc2ltIFxcdGV4dHtOb3JtYWx9KDAsICR7c2lnbWFfMn1eMilgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIgeFZhbHVlcyA9IGQzLnJhbmdlKC0xMCwxMC4wMDEsIDAuMylcblxuIGRlbnNpdHlHcmlkID0geFZhbHVlcy5mbGF0TWFwKHggPT4ge1xuICBjb25zdCBtdSA9IGIwXzIgKyBiMV8yICogeDtcbiAgcmV0dXJuIHhWYWx1ZXMubWFwKHkgPT4gKHtcbiAgICB4LCB5LFxuICAgIGRlbnNpdHk6IG5vcm1hbERlbnNpdHkoeSwgbXUsIHNpZ21hXzIpICAgXG4gIH0pKTtcbn0pO1xuXG5QbG90LnBsb3Qoe1xuICB4OiB7ZG9tYWluOiBbLTEwLCAxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6IHtkb21haW46IFstMTAsIDEwXSwgbGFiZWw6IFwiWVwiLCBncmlkOiB0cnVlfSxcbiAgY29sb3I6IHtsYWJlbDogXCJEZW5zaXR5XCIsXG4gICAgdHlwZTogXCJzZXF1ZW50aWFsXCIsXG4gICAgc2NoZW1lOiBcIkJsdWVzXCJ9LFxuICBtYXJrczogW1xuICAgIFBsb3QucmFzdGVyKGRlbnNpdHlHcmlkLCB7eDogXCJ4XCIsIHk6IFwieVwiLCBmaWxsOiBcImRlbnNpdHlcIiwgaW50ZXJwb2xhdGU6IFwibmVhcmVzdFwifSlcbiAgXVxufSk7XG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjAnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbXUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2lnbWEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjFfMicpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMF8yJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3NpZ21hXzInKSJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwID0gSW5wdXRzLnJhbmdlKFstMTAsIDEwXSwge3N0ZXA6IDEsIGxhYmVsOiBcIkludGVyY2VwdCAozrLigoApXCJ9KVxudGV4LmJsb2NrYEVbWV0gPSAke2IxfVggKyAke2IwfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InhSYW5nZSA9IFstMTAsMTBdXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IChiMSAqIHgpICsgYjB9KSlcblBsb3QucGxvdCh7XG4gIHg6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGxpbmVEYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiB9KV1cbn0pXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBtdSA9IElucHV0cy5yYW5nZShbLTUsIDVdLCB7XG4gIHZhbHVlOiAwLFxuICBzdGVwOiAwLjEsXG4gIGxhYmVsOiBgTWVhbiAozrwpOmBcbn0pXG5cbnZpZXdvZiBzaWdtYSA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge1xuICB2YWx1ZTogMSxcbiAgc3RlcDogMC4xLFxuICBsYWJlbDogJ1N0YW5kYXJkIGRldmlhdGlvbiAoz4MpOidcbn0pXG5cblNRUlQyUEk9TWF0aC5zcXJ0KDIgKiBNYXRoLlBJKVxuXG5ub3JtYWxEZW5zaXR5ID0gKHgsIG1lYW4sIHNkKSA9PlxuICAoMSAvIChzZCAqIFNRUlQyUEkpKSAqIE1hdGguZXhwKC0wLjUgKiAoKHggLSBtZWFuKSAvIHNkKSAqKiAyKTtcbiAgXG5kZW5zaXR5R3JpZF8xID0gZDMucmFuZ2UoKC00ICogc2lnbWEpK211LCBtdSsoNCAqIHNpZ21hKSwgc2lnbWEgLyA1MCkubWFwKHggPT4gKHtcbiAgeCxcbiAgZGVuc2l0eTogbm9ybWFsRGVuc2l0eSh4LG11LHNpZ21hKVxufSkpO1xuXG50ZXguYmxvY2tgXFx2YXJlcHNpbG9uIFxcc2ltIFxcdGV4dHtOb3JtYWx9KCR7bXV9LCAke3NpZ21hfV4yKWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuUGxvdC5wbG90KHtcbiAgaGVpZ2h0OiAyODAsXG4gIG1hcmdpbkxlZnQ6IDQ4LFxuICBtYXJnaW5Cb3R0b206IDQwLFxuICB5OiB7IGxhYmVsOiBcIkRlbnNpdHlcIiB9LFxuICB4OiB7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IFwizrVcIiB9LFxuICBtYXJrczogW1xuICAgIFBsb3QuYXJlYVkoZGVuc2l0eUdyaWRfMSwge1xuICAgICAgeDogXCJ4XCIsXG4gICAgICB5OiBcImRlbnNpdHlcIixcbiAgICAgIGZpbGxPcGFjaXR5OiAwLjIsXG4gICAgICBzdHJva2U6IFwiIzJhNTU5OVwiLFxuICAgICAgZmlsbDogXCIjMmE1NTk5XCJcbiAgICB9KVxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG52aWV3b2YgYjFfMiA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwXzIgPSBJbnB1dHMucmFuZ2UoWy0xMCwgMTBdLCB7c3RlcDogMSwgbGFiZWw6IFwiSW50ZXJjZXB0ICjOsuKCgClcIn0pXG52aWV3b2Ygc2lnbWFfMiA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge3N0ZXA6IDAuMSwgdmFsdWU6IDEsIGxhYmVsOiBcIlN0ZC4gZGV2aWF0aW9uICjPgylcIn0pXG5cbnRleC5ibG9ja2BZID0gJHtiMF8yfSArICR7YjFfMn1YICsgXFx2YXJlcHNpbG9uLCBcXHF1YWQgXFx2YXJlcHNpbG9uIFxcc2ltIFxcdGV4dHtOb3JtYWx9KDAsICR7c2lnbWFfMn1eMilgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcbnhTYW1wbGVWYWx1ZXMgPSBkMy5yYW5nZSgtOCwgOC4xLCAyKVxueVNlY3Rpb25WYWx1ZXMgPSBkMy5yYW5nZSgtMTAsIDEwLjAwMSwgMC4xKVxud2lkdGhTY2FsZSA9IE1hdGgubWluKDEuOCwgc2lnbWFfMiAqIDAuOSlcblxuZGVuc2l0eUN1cnZlRGF0YSA9IHhTYW1wbGVWYWx1ZXMuZmxhdE1hcCh4VmFsID0+IHtcbiAgY29uc3QgbXUgPSBiMF8yICsgYjFfMiAqIHhWYWw7XG4gIGNvbnN0IHBlYWtEZW5zaXR5ID0gbm9ybWFsRGVuc2l0eShtdSwgbXUsIHNpZ21hXzIpO1xuXG4gIGNvbnN0IHJpZ2h0U2lkZSA9IHlTZWN0aW9uVmFsdWVzLm1hcCh5ID0+IHtcbiAgICBjb25zdCBkZW5zaXR5ID0gbm9ybWFsRGVuc2l0eSh5LCBtdSwgc2lnbWFfMik7XG4gICAgY29uc3Qgd2lkdGggPSAoZGVuc2l0eSAvIHBlYWtEZW5zaXR5KSAqIHdpZHRoU2NhbGU7XG4gICAgcmV0dXJuIHt4OiB4VmFsICsgd2lkdGgsIHksIGdyb3VwOiB4VmFsfTtcbiAgfSk7XG5cbiAgcmV0dXJuIHJpZ2h0U2lkZVxufSk7XG5cbmNyb3NzU2VjdGlvblRyZW5kTGluZSA9IHhTYW1wbGVWYWx1ZXMubWFwKHggPT4gKHtcbiAgeCxcbiAgeTogYjBfMiArIGIxXzIgKiB4XG59KSlcblxuUGxvdC5wbG90KHtcbiAgeDoge2RvbWFpbjogWy0xMCwgMTBdLCBsYWJlbDogXCJYXCIsIGdyaWQ6IHRydWV9LFxuICB5OiB7ZG9tYWluOiBbLTEwLCAxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGRlbnNpdHlDdXJ2ZURhdGEsIHtcbiAgICAgIHg6IFwieFwiLFxuICAgICAgeTogXCJ5XCIsXG4gICAgICB6OiBcImdyb3VwXCIsXG4gICAgICBzdHJva2U6IFwiIzJhNTU5OVwiLFxuICAgICAgc3Ryb2tlV2lkdGg6IDEuNSxcbiAgICAgIGN1cnZlOiBcImJhc2lzXCJcbiAgICB9KSxcbiAgICBQbG90LmxpbmUoY3Jvc3NTZWN0aW9uVHJlbmRMaW5lLCB7eDogXCJ4XCIsIHk6IFwieVwiLCBzdHJva2U6IFwiYmxhY2tcIiwgc3Ryb2tlV2lkdGg6IDJ9KVxuICBdXG59KTtcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdtdScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzaWdtYScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMV8yJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IwXzInKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2lnbWFfMicpIn1dfQ==
 </script>
 <script type="module">
 window._ojs.runtime.setLocalResolver({});

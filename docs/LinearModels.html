@@ -29093,19 +29093,19 @@ initializeRuntime();
 
 </script>
 <style>
-.ToDo {
---color1: #c0c0c0;
---color2: #808080;
-}
-.Example {
---color1: #c0c0c0;
---color2: #808080;
-}
 .Assumption {
 --color1: #FF9580;
 --color2: #FFBF80;
 }
 .Technical-Point {
+--color1: #c0c0c0;
+--color2: #808080;
+}
+.ToDo {
+--color1: #c0c0c0;
+--color2: #808080;
+}
+.Example {
 --color1: #c0c0c0;
 --color2: #808080;
 }
@@ -29734,15 +29734,17 @@ E[\varepsilon]=\mu=0
 <span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">'Standard deviation (σ):'</span></span>
 <span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a>normalDensity <span class="op">=</span> (x<span class="op">,</span> mean<span class="op">,</span> sd) <span class="kw">=&gt;</span></span>
-<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="op">/</span> (sd <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>))) <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ((x <span class="op">-</span> mean) <span class="op">/</span> sd) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>densityGrid_1 <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>((<span class="op">-</span><span class="dv">4</span> <span class="op">*</span> sigma)<span class="op">+</span>mu<span class="op">,</span> mu<span class="op">+</span>(<span class="dv">4</span> <span class="op">*</span> sigma)<span class="op">,</span> sigma <span class="op">/</span> <span class="dv">50</span>)<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({</span>
-<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a>  x<span class="op">,</span></span>
-<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a>  <span class="dt">density</span><span class="op">:</span> <span class="fu">normalDensity</span>(x<span class="op">,</span>mu<span class="op">,</span>sigma)</span>
-<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a>}))<span class="op">;</span></span>
-<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`</span><span class="sc">\v</span><span class="vs">arepsilon </span><span class="sc">\s</span><span class="vs">im </span><span class="sc">\t</span><span class="vs">ext{Normal}(</span><span class="sc">${</span>mu<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>sigma<span class="sc">}</span><span class="vs">^2)`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a>SQRT2PI<span class="op">=</span><span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>)</span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a>normalDensity <span class="op">=</span> (x<span class="op">,</span> mean<span class="op">,</span> sd) <span class="kw">=&gt;</span></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="op">/</span> (sd <span class="op">*</span> SQRT2PI)) <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ((x <span class="op">-</span> mean) <span class="op">/</span> sd) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a>densityGrid_1 <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>((<span class="op">-</span><span class="dv">4</span> <span class="op">*</span> sigma)<span class="op">+</span>mu<span class="op">,</span> mu<span class="op">+</span>(<span class="dv">4</span> <span class="op">*</span> sigma)<span class="op">,</span> sigma <span class="op">/</span> <span class="dv">50</span>)<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({</span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a>  x<span class="op">,</span></span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a>  <span class="dt">density</span><span class="op">:</span> <span class="fu">normalDensity</span>(x<span class="op">,</span>mu<span class="op">,</span>sigma)</span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>}))<span class="op">;</span></span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`</span><span class="sc">\v</span><span class="vs">arepsilon </span><span class="sc">\s</span><span class="vs">im </span><span class="sc">\t</span><span class="vs">ext{Normal}(</span><span class="sc">${</span>mu<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>sigma<span class="sc">}</span><span class="vs">^2)`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-1" data-nodetype="declaration">
@@ -29773,7 +29775,14 @@ E[\varepsilon]=\mu=0
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-3-5" data-nodetype="expression">
+<div id="ojs-cell-3-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-6" data-nodetype="expression">
 
 </div>
 </div>
@@ -29782,22 +29791,22 @@ E[\varepsilon]=\mu=0
 <div class="panel-fill panel-grid g-col-24 g-col-lg-17 pt-3 pt-lg-0">
 <div class="g-col-24">
 <div class="cell panel-fill">
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="293" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 292;"><span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb4-294"><a href="#cb4-294" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">280</span><span class="op">,</span></span>
-<span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">48</span><span class="op">,</span></span>
-<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span></span>
-<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span> }<span class="op">,</span></span>
-<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"ε"</span> }<span class="op">,</span></span>
-<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">areaY</span>(densityGrid_1<span class="op">,</span> {</span>
-<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
-<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"density"</span><span class="op">,</span></span>
-<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.2</span><span class="op">,</span></span>
-<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#2a5599"</span><span class="op">,</span></span>
-<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">"#2a5599"</span></span>
-<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="295" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 294;"><span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">280</span><span class="op">,</span></span>
+<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">48</span><span class="op">,</span></span>
+<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span></span>
+<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span> }<span class="op">,</span></span>
+<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"ε"</span> }<span class="op">,</span></span>
+<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">areaY</span>(densityGrid_1<span class="op">,</span> {</span>
+<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
+<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"density"</span><span class="op">,</span></span>
+<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.2</span><span class="op">,</span></span>
+<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#2a5599"</span><span class="op">,</span></span>
+<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">"#2a5599"</span></span>
+<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb4-310"><a href="#cb4-310" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-ojs-cell-4" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ojs-cell-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -29829,11 +29838,11 @@ Y=\beta_0+\beta_1X+\varepsilon, \quad{\varepsilon \sim N(0,\sigma^2)}
 <p>This ‘simple linear model’ is the starting place for conducting linear regression - in which whe ‘fit’ (i.e.&nbsp;estimate the values of <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\sigma^2\)</span>) from data.</p>
 <div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
 <div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
-<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="331" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 330;"><span id="cb5-331"><a href="#cb5-331" aria-hidden="true" tabindex="-1"></a>viewof b1_2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope (β₁)"</span>})</span>
-<span id="cb5-332"><a href="#cb5-332" aria-hidden="true" tabindex="-1"></a>viewof b0_2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept (β₀)"</span>})</span>
-<span id="cb5-333"><a href="#cb5-333" aria-hidden="true" tabindex="-1"></a>viewof sigma2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="fl">0.2</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Std. deviation (σ)"</span>})</span>
-<span id="cb5-334"><a href="#cb5-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-335"><a href="#cb5-335" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`Y = {b0_2} + </span><span class="sc">${</span>b1_2<span class="sc">}</span><span class="vs">X + </span><span class="sc">\v</span><span class="vs">arepsilon, </span><span class="sc">\q</span><span class="vs">uad </span><span class="sc">\v</span><span class="vs">arepsilon </span><span class="sc">\s</span><span class="vs">im </span><span class="sc">\t</span><span class="vs">ext{Normal}($ 0, </span><span class="sc">${</span>sigma2<span class="sc">}</span><span class="vs">^2)`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="333" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 332;"><span id="cb5-333"><a href="#cb5-333" aria-hidden="true" tabindex="-1"></a>viewof b1_2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope (β₁)"</span>})</span>
+<span id="cb5-334"><a href="#cb5-334" aria-hidden="true" tabindex="-1"></a>viewof b0_2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept (β₀)"</span>})</span>
+<span id="cb5-335"><a href="#cb5-335" aria-hidden="true" tabindex="-1"></a>viewof sigma_2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="fl">0.2</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Std. deviation (σ)"</span>})</span>
+<span id="cb5-336"><a href="#cb5-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-337"><a href="#cb5-337" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`Y = </span><span class="sc">${</span>b0_2<span class="sc">}</span><span class="vs"> + </span><span class="sc">${</span>b1_2<span class="sc">}</span><span class="vs">X + </span><span class="sc">\v</span><span class="vs">arepsilon, </span><span class="sc">\q</span><span class="vs">uad </span><span class="sc">\v</span><span class="vs">arepsilon </span><span class="sc">\s</span><span class="vs">im </span><span class="sc">\t</span><span class="vs">ext{Normal}(0, </span><span class="sc">${</span>sigma_2<span class="sc">}</span><span class="vs">^2)`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-5-1" data-nodetype="declaration">
@@ -29865,31 +29874,27 @@ Y=\beta_0+\beta_1X+\varepsilon, \quad{\varepsilon \sim N(0,\sigma^2)}
 </div>
 <div class="panel-fill panel-grid g-col-24 g-col-lg-17 pt-3 pt-lg-0">
 <div class="g-col-24">
-<div class="cell panel-fill" width="700">
-<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="342" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 341;"><span id="cb6-342"><a href="#cb6-342" aria-hidden="true" tabindex="-1"></a>xValues <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">101</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="op">-</span><span class="dv">10</span> <span class="op">+</span> i <span class="op">*</span> <span class="fl">0.2</span>)<span class="op">;</span></span>
-<span id="cb6-343"><a href="#cb6-343" aria-hidden="true" tabindex="-1"></a> yValues <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">101</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="op">-</span><span class="dv">10</span> <span class="op">+</span> i <span class="op">*</span> <span class="fl">0.2</span>)<span class="op">;</span></span>
-<span id="cb6-344"><a href="#cb6-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-345"><a href="#cb6-345" aria-hidden="true" tabindex="-1"></a> normalDensity2 <span class="op">=</span> (y<span class="op">,</span> mean<span class="op">,</span> sd) <span class="kw">=&gt;</span></span>
-<span id="cb6-346"><a href="#cb6-346" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="op">/</span> (sd <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>))) <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ((y <span class="op">-</span> mean) <span class="op">/</span> sd) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a> densityGrid <span class="op">=</span> xValues<span class="op">.</span><span class="fu">flatMap</span>(x <span class="kw">=&gt;</span> {</span>
-<span id="cb6-349"><a href="#cb6-349" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> mu <span class="op">=</span> b0_2 <span class="op">+</span> b1_2 <span class="op">*</span> x<span class="op">;</span></span>
-<span id="cb6-350"><a href="#cb6-350" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> yValues<span class="op">.</span><span class="fu">map</span>(y <span class="kw">=&gt;</span> ({</span>
-<span id="cb6-351"><a href="#cb6-351" aria-hidden="true" tabindex="-1"></a>    x<span class="op">,</span> y<span class="op">,</span></span>
-<span id="cb6-352"><a href="#cb6-352" aria-hidden="true" tabindex="-1"></a>    <span class="dt">density</span><span class="op">:</span> <span class="fu">normalDensity2</span>(y<span class="op">,</span> mu<span class="op">,</span> sigma2)   <span class="co">// &lt;- use sigma (not sigma2)</span></span>
-<span id="cb6-353"><a href="#cb6-353" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
-<span id="cb6-354"><a href="#cb6-354" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb6-355"><a href="#cb6-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-356"><a href="#cb6-356" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb6-357"><a href="#cb6-357" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"X"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb6-358"><a href="#cb6-358" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Y"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb6-359"><a href="#cb6-359" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span><span class="op">,</span></span>
-<span id="cb6-360"><a href="#cb6-360" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">"sequential"</span><span class="op">,</span></span>
-<span id="cb6-361"><a href="#cb6-361" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Blues"</span>}<span class="op">,</span></span>
-<span id="cb6-362"><a href="#cb6-362" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb6-363"><a href="#cb6-363" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">raster</span>(densityGrid<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"density"</span><span class="op">,</span> <span class="dt">interpolate</span><span class="op">:</span> <span class="st">"nearest"</span>})</span>
-<span id="cb6-364"><a href="#cb6-364" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb6-365"><a href="#cb6-365" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell panel-fill" width="700" data-fig.cap="The probability density of observations ($Y$) under a simple linear model.">
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="345" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 344;"><span id="cb6-345"><a href="#cb6-345" aria-hidden="true" tabindex="-1"></a>xValues <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="fl">10.001</span><span class="op">,</span> <span class="fl">0.3</span>)</span>
+<span id="cb6-346"><a href="#cb6-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a> densityGrid <span class="op">=</span> xValues<span class="op">.</span><span class="fu">flatMap</span>(x <span class="kw">=&gt;</span> {</span>
+<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> mu <span class="op">=</span> b0_2 <span class="op">+</span> b1_2 <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb6-349"><a href="#cb6-349" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> xValues<span class="op">.</span><span class="fu">map</span>(y <span class="kw">=&gt;</span> ({</span>
+<span id="cb6-350"><a href="#cb6-350" aria-hidden="true" tabindex="-1"></a>    x<span class="op">,</span> y<span class="op">,</span></span>
+<span id="cb6-351"><a href="#cb6-351" aria-hidden="true" tabindex="-1"></a>    <span class="dt">density</span><span class="op">:</span> <span class="fu">normalDensity</span>(y<span class="op">,</span> mu<span class="op">,</span> sigma_2)   </span>
+<span id="cb6-352"><a href="#cb6-352" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
+<span id="cb6-353"><a href="#cb6-353" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-354"><a href="#cb6-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-355"><a href="#cb6-355" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb6-356"><a href="#cb6-356" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"X"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb6-357"><a href="#cb6-357" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Y"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb6-358"><a href="#cb6-358" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span><span class="op">,</span></span>
+<span id="cb6-359"><a href="#cb6-359" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">"sequential"</span><span class="op">,</span></span>
+<span id="cb6-360"><a href="#cb6-360" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Blues"</span>}<span class="op">,</span></span>
+<span id="cb6-361"><a href="#cb6-361" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb6-362"><a href="#cb6-362" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">raster</span>(densityGrid<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"density"</span><span class="op">,</span> <span class="dt">interpolate</span><span class="op">:</span> <span class="st">"nearest"</span>})</span>
+<span id="cb6-363"><a href="#cb6-363" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb6-364"><a href="#cb6-364" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-6-1" data-nodetype="declaration">
@@ -29906,21 +29911,7 @@ Y=\beta_0+\beta_1X+\varepsilon, \quad{\varepsilon \sim N(0,\sigma^2)}
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-6-3" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-6-4" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-6-5" data-nodetype="expression">
+<div id="ojs-cell-6-3" data-nodetype="expression">
 
 </div>
 </div>
@@ -30175,7 +30166,7 @@ window.onload = function() {
 
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwID0gSW5wdXRzLnJhbmdlKFstMTAsIDEwXSwge3N0ZXA6IDEsIGxhYmVsOiBcIkludGVyY2VwdCAozrLigoApXCJ9KVxudGV4LmJsb2NrYEVbWV0gPSAke2IxfVggKyAke2IwfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InhSYW5nZSA9IFstMTAsMTBdXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IChiMSAqIHgpICsgYjB9KSlcblBsb3QucGxvdCh7XG4gIHg6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGxpbmVEYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiB9KV1cbn0pXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBtdSA9IElucHV0cy5yYW5nZShbLTUsIDVdLCB7XG4gIHZhbHVlOiAwLFxuICBzdGVwOiAwLjEsXG4gIGxhYmVsOiBgTWVhbiAozrwpOmBcbn0pXG5cbnZpZXdvZiBzaWdtYSA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge1xuICB2YWx1ZTogMSxcbiAgc3RlcDogMC4xLFxuICBsYWJlbDogJ1N0YW5kYXJkIGRldmlhdGlvbiAoz4MpOidcbn0pXG5cbm5vcm1hbERlbnNpdHkgPSAoeCwgbWVhbiwgc2QpID0+XG4gICgxIC8gKHNkICogTWF0aC5zcXJ0KDIgKiBNYXRoLlBJKSkpICogTWF0aC5leHAoLTAuNSAqICgoeCAtIG1lYW4pIC8gc2QpICoqIDIpO1xuICBcbmRlbnNpdHlHcmlkXzEgPSBkMy5yYW5nZSgoLTQgKiBzaWdtYSkrbXUsIG11Kyg0ICogc2lnbWEpLCBzaWdtYSAvIDUwKS5tYXAoeCA9PiAoe1xuICB4LFxuICBkZW5zaXR5OiBub3JtYWxEZW5zaXR5KHgsbXUsc2lnbWEpXG59KSk7XG5cbnRleC5ibG9ja2BcXHZhcmVwc2lsb24gXFxzaW0gXFx0ZXh0e05vcm1hbH0oJHttdX0sICR7c2lnbWF9XjIpYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG5QbG90LnBsb3Qoe1xuICBoZWlnaHQ6IDI4MCxcbiAgbWFyZ2luTGVmdDogNDgsXG4gIG1hcmdpbkJvdHRvbTogNDAsXG4gIHk6IHsgbGFiZWw6IFwiRGVuc2l0eVwiIH0sXG4gIHg6IHtkb21haW46IFstMTAsMTBdLCBsYWJlbDogXCLOtVwiIH0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5hcmVhWShkZW5zaXR5R3JpZF8xLCB7XG4gICAgICB4OiBcInhcIixcbiAgICAgIHk6IFwiZGVuc2l0eVwiLFxuICAgICAgZmlsbE9wYWNpdHk6IDAuMixcbiAgICAgIHN0cm9rZTogXCIjMmE1NTk5XCIsXG4gICAgICBmaWxsOiBcIiMyYTU1OTlcIlxuICAgIH0pXG4gIF1cbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTUiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcbnZpZXdvZiBiMV8yID0gSW5wdXRzLnJhbmdlKFstMiwgMl0sIHtzdGVwOiAwLjEsIGxhYmVsOiBcIlNsb3BlICjOsuKCgSlcIn0pXG52aWV3b2YgYjBfMiA9IElucHV0cy5yYW5nZShbLTEwLCAxMF0sIHtzdGVwOiAxLCBsYWJlbDogXCJJbnRlcmNlcHQgKM6y4oKAKVwifSlcbnZpZXdvZiBzaWdtYTIgPSBJbnB1dHMucmFuZ2UoWzAuMiwgNV0sIHtzdGVwOiAwLjEsIHZhbHVlOiAxLCBsYWJlbDogXCJTdGQuIGRldmlhdGlvbiAoz4MpXCJ9KVxuXG50ZXguYmxvY2tgWSA9IHtiMF8yfSArICR7YjFfMn1YICsgXFx2YXJlcHNpbG9uLCBcXHF1YWQgXFx2YXJlcHNpbG9uIFxcc2ltIFxcdGV4dHtOb3JtYWx9KCQgMCwgJHtzaWdtYTJ9XjIpYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC02IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiIHhWYWx1ZXMgPSBBcnJheS5mcm9tKHtsZW5ndGg6IDEwMX0sIChfLCBpKSA9PiAtMTAgKyBpICogMC4yKTtcbiB5VmFsdWVzID0gQXJyYXkuZnJvbSh7bGVuZ3RoOiAxMDF9LCAoXywgaSkgPT4gLTEwICsgaSAqIDAuMik7XG5cbiBub3JtYWxEZW5zaXR5MiA9ICh5LCBtZWFuLCBzZCkgPT5cbiAgKDEgLyAoc2QgKiBNYXRoLnNxcnQoMiAqIE1hdGguUEkpKSkgKiBNYXRoLmV4cCgtMC41ICogKCh5IC0gbWVhbikgLyBzZCkgKiogMik7XG5cbiBkZW5zaXR5R3JpZCA9IHhWYWx1ZXMuZmxhdE1hcCh4ID0+IHtcbiAgY29uc3QgbXUgPSBiMF8yICsgYjFfMiAqIHg7XG4gIHJldHVybiB5VmFsdWVzLm1hcCh5ID0+ICh7XG4gICAgeCwgeSxcbiAgICBkZW5zaXR5OiBub3JtYWxEZW5zaXR5Mih5LCBtdSwgc2lnbWEyKSAgIC8vIDwtIHVzZSBzaWdtYSAobm90IHNpZ21hMilcbiAgfSkpO1xufSk7XG5cblBsb3QucGxvdCh7XG4gIHg6IHtkb21haW46IFstMTAsIDEwXSwgbGFiZWw6IFwiWFwiLCBncmlkOiB0cnVlfSxcbiAgeToge2RvbWFpbjogWy0xMCwgMTBdLCBsYWJlbDogXCJZXCIsIGdyaWQ6IHRydWV9LFxuICBjb2xvcjoge2xhYmVsOiBcIkRlbnNpdHlcIixcbiAgICB0eXBlOiBcInNlcXVlbnRpYWxcIixcbiAgICBzY2hlbWU6IFwiQmx1ZXNcIn0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5yYXN0ZXIoZGVuc2l0eUdyaWQsIHt4OiBcInhcIiwgeTogXCJ5XCIsIGZpbGw6IFwiZGVuc2l0eVwiLCBpbnRlcnBvbGF0ZTogXCJuZWFyZXN0XCJ9KVxuICBdXG59KTtcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdtdScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzaWdtYScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMV8yJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IwXzInKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2lnbWEyJykifV19
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwID0gSW5wdXRzLnJhbmdlKFstMTAsIDEwXSwge3N0ZXA6IDEsIGxhYmVsOiBcIkludGVyY2VwdCAozrLigoApXCJ9KVxudGV4LmJsb2NrYEVbWV0gPSAke2IxfVggKyAke2IwfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InhSYW5nZSA9IFstMTAsMTBdXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IChiMSAqIHgpICsgYjB9KSlcblBsb3QucGxvdCh7XG4gIHg6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGxpbmVEYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiB9KV1cbn0pXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBtdSA9IElucHV0cy5yYW5nZShbLTUsIDVdLCB7XG4gIHZhbHVlOiAwLFxuICBzdGVwOiAwLjEsXG4gIGxhYmVsOiBgTWVhbiAozrwpOmBcbn0pXG5cbnZpZXdvZiBzaWdtYSA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge1xuICB2YWx1ZTogMSxcbiAgc3RlcDogMC4xLFxuICBsYWJlbDogJ1N0YW5kYXJkIGRldmlhdGlvbiAoz4MpOidcbn0pXG5cblNRUlQyUEk9TWF0aC5zcXJ0KDIgKiBNYXRoLlBJKVxuXG5ub3JtYWxEZW5zaXR5ID0gKHgsIG1lYW4sIHNkKSA9PlxuICAoMSAvIChzZCAqIFNRUlQyUEkpKSAqIE1hdGguZXhwKC0wLjUgKiAoKHggLSBtZWFuKSAvIHNkKSAqKiAyKTtcbiAgXG5kZW5zaXR5R3JpZF8xID0gZDMucmFuZ2UoKC00ICogc2lnbWEpK211LCBtdSsoNCAqIHNpZ21hKSwgc2lnbWEgLyA1MCkubWFwKHggPT4gKHtcbiAgeCxcbiAgZGVuc2l0eTogbm9ybWFsRGVuc2l0eSh4LG11LHNpZ21hKVxufSkpO1xuXG50ZXguYmxvY2tgXFx2YXJlcHNpbG9uIFxcc2ltIFxcdGV4dHtOb3JtYWx9KCR7bXV9LCAke3NpZ21hfV4yKWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuUGxvdC5wbG90KHtcbiAgaGVpZ2h0OiAyODAsXG4gIG1hcmdpbkxlZnQ6IDQ4LFxuICBtYXJnaW5Cb3R0b206IDQwLFxuICB5OiB7IGxhYmVsOiBcIkRlbnNpdHlcIiB9LFxuICB4OiB7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IFwizrVcIiB9LFxuICBtYXJrczogW1xuICAgIFBsb3QuYXJlYVkoZGVuc2l0eUdyaWRfMSwge1xuICAgICAgeDogXCJ4XCIsXG4gICAgICB5OiBcImRlbnNpdHlcIixcbiAgICAgIGZpbGxPcGFjaXR5OiAwLjIsXG4gICAgICBzdHJva2U6IFwiIzJhNTU5OVwiLFxuICAgICAgZmlsbDogXCIjMmE1NTk5XCJcbiAgICB9KVxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG52aWV3b2YgYjFfMiA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwXzIgPSBJbnB1dHMucmFuZ2UoWy0xMCwgMTBdLCB7c3RlcDogMSwgbGFiZWw6IFwiSW50ZXJjZXB0ICjOsuKCgClcIn0pXG52aWV3b2Ygc2lnbWFfMiA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge3N0ZXA6IDAuMSwgdmFsdWU6IDEsIGxhYmVsOiBcIlN0ZC4gZGV2aWF0aW9uICjPgylcIn0pXG5cbnRleC5ibG9ja2BZID0gJHtiMF8yfSArICR7YjFfMn1YICsgXFx2YXJlcHNpbG9uLCBcXHF1YWQgXFx2YXJlcHNpbG9uIFxcc2ltIFxcdGV4dHtOb3JtYWx9KDAsICR7c2lnbWFfMn1eMilgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIgeFZhbHVlcyA9IGQzLnJhbmdlKC0xMCwxMC4wMDEsIDAuMylcblxuIGRlbnNpdHlHcmlkID0geFZhbHVlcy5mbGF0TWFwKHggPT4ge1xuICBjb25zdCBtdSA9IGIwXzIgKyBiMV8yICogeDtcbiAgcmV0dXJuIHhWYWx1ZXMubWFwKHkgPT4gKHtcbiAgICB4LCB5LFxuICAgIGRlbnNpdHk6IG5vcm1hbERlbnNpdHkoeSwgbXUsIHNpZ21hXzIpICAgXG4gIH0pKTtcbn0pO1xuXG5QbG90LnBsb3Qoe1xuICB4OiB7ZG9tYWluOiBbLTEwLCAxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6IHtkb21haW46IFstMTAsIDEwXSwgbGFiZWw6IFwiWVwiLCBncmlkOiB0cnVlfSxcbiAgY29sb3I6IHtsYWJlbDogXCJEZW5zaXR5XCIsXG4gICAgdHlwZTogXCJzZXF1ZW50aWFsXCIsXG4gICAgc2NoZW1lOiBcIkJsdWVzXCJ9LFxuICBtYXJrczogW1xuICAgIFBsb3QucmFzdGVyKGRlbnNpdHlHcmlkLCB7eDogXCJ4XCIsIHk6IFwieVwiLCBmaWxsOiBcImRlbnNpdHlcIiwgaW50ZXJwb2xhdGU6IFwibmVhcmVzdFwifSlcbiAgXVxufSk7XG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjAnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbXUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2lnbWEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjFfMicpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdiMF8yJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3NpZ21hXzInKSJ9XX0=
 </script>
 <script type="module">
 window._ojs.runtime.setLocalResolver({});

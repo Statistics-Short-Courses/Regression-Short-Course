@@ -17,7 +17,7 @@ embed-resources: true
 custom-numbered-blocks:
   classes:
     Assumption:
-      colors: [a08080, 500000]
+      colors: [FF9580, FFBF80]
       collapse: false
     Example: 
       collapse: false
@@ -57,7 +57,7 @@ $$ {#eq-statistical-model}
 
 Here $\varepsilon$ represents the random variation in $Y$ that is not explained by $X$. 
 
--This means that $Y$ is not perfectly determined by $X$: even if we know the values of X, the outcome Y can still vary due to random noise. 
+- This means that $Y$ is not perfectly determined by $X$: even if we know the values of X, the outcome Y can still vary due to random noise. 
 
 ::: Assumption 
 $Y$ depends only on a deterministic function of $X$ and a random noise component
@@ -92,6 +92,7 @@ tex.block`E[Y] = ${b1}X + ${b0}`
 ```{ojs}
 //| panel: fill
 //| echo: false
+//| fig-cap: "Plot of the linear function E[Y] = β₀+ β₁X"
 xRange = [-10,10]
 lineData = xRange.map(x => ({x, y: (b1 * x) + b0}))
 Plot.plot({
@@ -261,19 +262,35 @@ $$\varepsilon \sim \mathcal{N}(0, \sigma^2)$$
 
 ```{ojs}
 //| echo: false
-//| fig-cap: "Interactive normal distribution with adjustable standard deviation."
+//| panel: sidebar
+viewof mu = Inputs.range([-5, 5], {
+  value: 0,
+  step: 0.1,
+  label: `Mean (μ):`
+})
+
 viewof sigma = Inputs.range([0.2, 5], {
   value: 1,
   step: 0.1,
-  label: html`${tex`\sigma`}: Standard deviation`
+  label: 'Standard deviation (σ):'
 })
 
-normalDensity = d3.range(-4 * sigma, 4 * sigma, sigma / 50).map(x => ({
+normalDensity = (x, mean, sd) =>
+  (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - mean) / sd) ** 2);
+  
+densityGrid_1 = d3.range((-4 * sigma)+mu, mu+(4 * sigma), sigma / 50).map(x => ({
   x,
-  density: (1 / (Math.sqrt(2 * Math.PI) * sigma)) * Math.exp(-(x ** 2) / (2 * sigma ** 2))
-}))
+  density: normalDensity(x,mu,sigma)
+}));
 
-tex.block`f(\varepsilon) = \frac{1}{\sqrt{2\pi}\,${sigma.toFixed(1)}}\exp\left(-\frac{\varepsilon^{2}}{2(${sigma.toFixed(1)})^{2}}\right)`
+tex.block`\varepsilon \sim \text{Normal}(${mu}, ${sigma}^2)`
+```
+
+
+```{ojs}
+//| echo: false
+//| panel: fill
+//| fig-cap: "Normal distribution with adjustable mean and standard deviation."
 
 Plot.plot({
   height: 280,
@@ -282,7 +299,7 @@ Plot.plot({
   y: { label: "Density" },
   x: {domain: [-10,10], label: "ε" },
   marks: [
-    Plot.areaY(normalDensity, {
+    Plot.areaY(densityGrid_1, {
       x: "x",
       y: "density",
       fillOpacity: 0.2,
@@ -315,7 +332,7 @@ viewof b1_2 = Inputs.range([-2, 2], {step: 0.1, label: "Slope (β₁)"})
 viewof b0_2 = Inputs.range([-10, 10], {step: 1, label: "Intercept (β₀)"})
 viewof sigma2 = Inputs.range([0.2, 5], {step: 0.1, value: 1, label: "Std. deviation (σ)"})
 
-tex.block`Y = {b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Normal}($ 0, ${sigma2}^2)`
+tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Normal}($ 0, ${sigma2}^2)`
 ```
 
 ```{ojs}
@@ -325,14 +342,11 @@ tex.block`Y = {b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Norm
  xValues = Array.from({length: 101}, (_, i) => -10 + i * 0.2);
  yValues = Array.from({length: 101}, (_, i) => -10 + i * 0.2);
 
- normalDensity2 = (y, mean, sd) =>
-  (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((y - mean) / sd) ** 2);
-
  densityGrid = xValues.flatMap(x => {
   const mu = b0_2 + b1_2 * x;
   return yValues.map(y => ({
     x, y,
-    density: normalDensity2(y, mu, sigma2)   // <- use sigma (not sigma2)
+    density: normalDensity(y, mu, sigma2)   // <- use sigma (not sigma2)
   }));
 });
 

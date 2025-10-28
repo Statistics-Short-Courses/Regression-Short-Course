@@ -335,6 +335,11 @@ viewof b0_2 = Inputs.range([-10, 10], {step: 1, label: "Intercept (β₀)"})
 viewof sigma_2 = Inputs.range([0.2, 5], {step: 0.1, value: 1, label: "Std. deviation (σ)"})
 viewof showHeatmapLayer = Inputs.toggle({label: "Show heatmap", value: true})
 viewof showCrossSectionLayer = Inputs.toggle({label: "Show cross-section curves", value: true})
+viewof crossSectionCount = Inputs.range([2, 12], {
+  step: 1,
+  value: 7,
+  label: "Number of cross-sections"
+})
 
 tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Normal}(0, ${sigma_2}^2)`
 ```
@@ -346,7 +351,7 @@ tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Nor
 //| fig-cap: "Layers illustrating the simple linear model: toggle the heatmap of normal errors and the cross-sectional curves."
 
 const xValues = d3.range(-10, 10.001, 0.3);
-const xSampleValues = d3.range(-8, 8.1, 2);
+const xSectionDomain = [-8, 8];
 const ySectionValues = d3.range(-10, 10.001, 0.1);
 
 const computeHeatmapGrid = () =>
@@ -361,28 +366,24 @@ const computeHeatmapGrid = () =>
 
 const computeCrossSectionGeometry = () => {
   const widthScale = Math.min(1.8, sigma_2 * 0.9);
+  const count = Math.max(2, Math.round(crossSectionCount));
+  const step =
+    count === 1
+      ? 0
+      : (xSectionDomain[1] - xSectionDomain[0]) / (count - 1);
+  const xSampleValues = Array.from({length: count}, (_, i) =>
+    xSectionDomain[0] + i * step
+  );
 
   const curves = xSampleValues.flatMap(xVal => {
     const mu = b0_2 + b1_2 * xVal;
     const peakDensity = normalDensity(mu, mu, sigma_2);
 
-    const rightSide = ySectionValues.map(y => {
+    return ySectionValues.map((y, index) => {
       const density = normalDensity(y, mu, sigma_2);
       const width = (density / peakDensity) * widthScale;
-      return {x: xVal + width, y, group: xVal};
+      return {x: xVal + width, y, group: xVal, order: index};
     });
-
-    const leftSide = ySectionValues
-      .slice()
-      .reverse()
-      .map(y => {
-        const density = normalDensity(y, mu, sigma_2);
-        const width = (density / peakDensity) * widthScale;
-        return {x: xVal - width, y, group: xVal};
-      });
-
-    const closedPath = [...rightSide, ...leftSide, rightSide[0]];
-    return closedPath.map((point, index) => ({...point, order: index}));
   });
 
   const trend = xValues.map(x => ({

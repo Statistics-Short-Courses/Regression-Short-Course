@@ -332,7 +332,9 @@ This 'simple linear model' is the starting place for conducting linear regressio
 
 viewof b1_2 = Inputs.range([-2, 2], {step: 0.1, label: "Slope (β₁)"})
 viewof b0_2 = Inputs.range([-10, 10], {step: 1, label: "Intercept (β₀)"})
-viewof sigma_2 = Inputs.range([0.2, 5], {step: 0.1, value: 1, label: "Std. deviation (σ)"})
+viewof sigma_2 = Inputs.range([0.2, 5], {step: 0.1, value: 2.5, label: "Std. deviation (σ)"})
+
+viewof n_cs = Inputs.range([10, 50], {step: 1, value: 50, label: "Number of cross sections visualised"})
 
 tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Normal}(0, ${sigma_2}^2)`
 ```
@@ -341,9 +343,13 @@ tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Nor
 //| panel: fill
 //| echo: false
 //| width: 700
-//| fig-cap: "Cross-sections of the simple linear model showing Normal error curves at selected X values."
+//| fig-cap: "Cross-sections of the simple linear model normal error density."
 
-xSampleValues = d3.range(-8, 8.1, 2)
+xMin = -10;
+xMax = 10;
+step = (xMax - xMin) / (n_cs - 1);
+xSampleValues = d3.range(xMin, xMax + step/2, step);  
+
 ySectionValues = d3.range(-10, 10.001, 0.1)
 widthScale = Math.min(1.8, sigma_2 * 0.9)
 
@@ -380,7 +386,6 @@ Plot.plot({
     Plot.line(crossSectionTrendLine, {x: "x", y: "y", stroke: "black", strokeWidth: 2})
   ]
 });
-
 ```
 ::: Example
 -   Same model as above - given standard deviation
@@ -390,3 +395,50 @@ Plot.plot({
     -   which variance is larger?
     -   (hard) probability of finding E\[Y\]+2sd observation
 :::
+
+## A simple Linear model in R
+
+- finish this section and lead into the next on fitting models to data. 
+- simulate observations of Y from a specified linear model
+- to begin, we start with a collection of X values (we might imagine we measure these values in the wild)
+```{r}
+X <- runif(n=100, min=0, max= 50)
+X
+```
+- This code randomly chooses n = 100 numbers between (and including) 1 and 50 with equal probibility. 
+
+Next, we construct our linear model
+
+```{r}
+Simple_linear_model <- function(X){4 + 1.2*X + rnorm(length(X), mean=0, sd= 4)}
+```
+- This is function takes X values and returns the specified linear function with normally distributed random noise added.  
+
+- Now we can simulate observations of $Y$ given our list of $X$ values and out linear model:
+```{r}
+Y <- Simple_linear_model(X)
+Y
+```
+lets look at the joint distribution of X and Y:
+
+```{r}
+#| label: fig-plot
+#| fig-cap: "Data generated from the simple linear model $Y=4+1.2\\times X + \\varepsilon$, with $\\varepsilon\\sim N(0,16)$"
+ggplot(cbind(X,Y), aes(X,Y))+
+  geom_point()
+```
+
+Heres the same code running in webR - try adjusting some of the parameters (e.g. the number of samples) and running to plot a different random sample!
+```{webr}
+#| warning: false
+#| message: false
+X <- runif(n=100, min=0, max= 50)
+Simple_linear_model <- function(X){4 + 1.2*X + rnorm(length(X), mean=0, sd= 4)}
+
+Y <- Simple_linear_model(X)
+
+library(ggplot2)
+ggplot(cbind(X,Y), aes(X,Y))+
+  geom_point()
+```
+

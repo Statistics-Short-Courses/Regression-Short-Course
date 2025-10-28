@@ -80,6 +80,27 @@ $$ {#eq-deterministic-linear-model}
 
 - In other words, we are representing the expected value of $Y$ as a *straight line* with y-intercept $\beta_0$ and slope $\beta_1$:
 
+```{ojs}
+//| panel: sidebar
+//| echo: false
+viewof b1 = Inputs.range([-2, 2], {step: 0.1, label: "Slope (β₁)"})
+viewof b0 = Inputs.range([-10, 10], {step: 1, label: "Intercept (β₀)"})
+tex.block`E[Y] = ${b1}X + ${b0}`
+```
+
+```{ojs}
+//| panel: fill
+//| echo: false
+xRange = [-10,10]
+lineData = xRange.map(x => ({x, y: (b1 * x) + b0}))
+Plot.plot({
+  x:{domain: [-10,10], label: "X", grid: true},
+  y:{domain: [-10,10], label: "Y", grid: true},
+  marks: [
+    Plot.line(lineData, { x: "x", y: "y" })]
+})
+
+```
 
 -   Here, $\beta_0$ represents the value of $Y$ when $X=0$, and
     $\beta_1$ represents the change in Y for a one-unit increase in X.
@@ -258,7 +279,7 @@ Plot.plot({
   marginLeft: 48,
   marginBottom: 40,
   y: { label: "Density" },
-  x: { label: html`Error value (${tex`\varepsilon`})` },
+  x: {domain: [-10,10], label: html`Error value (${tex`\varepsilon`})` },
   marks: [
     Plot.areaY(normalDensity, {
       x: "x",
@@ -276,6 +297,8 @@ The Central Limit Theorem is a fundamental result of probability theory that pro
 :::
 
 ### The Simple Linear Model
+
+Putting these pieces together we are left with 
 
 $$
 Y=\beta_0+\beta_1X+\varepsilon, \quad{\varepsilon \sim N(0,\sigma^2)}

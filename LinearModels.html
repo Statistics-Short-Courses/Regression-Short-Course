@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; An introduction to linear statistical models – Introduction to Linear Regression in R</title>
+<title>1  An introduction to linear statistical models – Introduction to Linear Regression in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29093,21 +29093,21 @@ initializeRuntime();
 
 </script>
 <style>
-.Assumption {
---color1: #a08080;
---color2: #500000;
-}
-.Example {
+.Technical-Point {
 --color1: #c0c0c0;
 --color2: #808080;
 }
-.Technical-Point {
+.Example {
 --color1: #c0c0c0;
 --color2: #808080;
 }
 .ToDo {
 --color1: #c0c0c0;
 --color2: #808080;
+}
+.Assumption {
+--color1: #a08080;
+--color2: #500000;
 }
 </style>
 
@@ -29368,7 +29368,7 @@ margin: 1em 0;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearModels.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An introduction to linear statistical models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearModels.html"><span class="chapter-number">1</span>  <span class="chapter-title">An introduction to linear statistical models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -29388,7 +29388,7 @@ margin: 1em 0;
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class title="Search"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -29402,25 +29402,25 @@ margin: 1em 0;
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearModels.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An introduction to linear statistical models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">An introduction to linear statistical models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./FittingSLR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple Linear Regression: fitting a model to data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Simple Linear Regression: fitting a model to data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./MultipleLinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Multiple Linear Regression: Building more complex models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Multiple Linear Regression: Building more complex models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RegressionCase.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Case Study: (?)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Case Study: (?)</span></span></a>
   </div>
 </li>
     </ul>
@@ -29436,7 +29436,7 @@ margin: 1em 0;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An introduction to linear statistical models</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>  <span class="chapter-title">An introduction to linear statistical models</span></h1>
 </div>
 
 
@@ -29468,7 +29468,7 @@ Y=f(X)+\varepsilon
 <p>Here <span class="math inline">\(\varepsilon\)</span> represents the random variation in <span class="math inline">\(Y\)</span> that is not explained by <span class="math inline">\(X\)</span>.</p>
 <p>-This means that <span class="math inline">\(Y\)</span> is not perfectly determined by <span class="math inline">\(X\)</span>: even if we know the values of X, the outcome Y can still vary due to random noise.</p>
 <div id="Assumption-1" class="Assumption">
-<p></p><details class="Assumption fbx-default closebutton" open=""><summary><strong>Assumption 1</strong></summary><div><span class="math inline">\(Y\)</span> depends only on a deterministic function of <span class="math inline">\(X\)</span> and a random noise component<p></p>
+<p></p><details class="Assumption fbx-default closebutton" open><summary><strong>Assumption 1</strong></summary><div><span class="math inline">\(Y\)</span> depends only on a deterministic function of <span class="math inline">\(X\)</span> and a random noise component<p></p>
 </div></details>
 </div>
 <section id="a-simple-linear-model" class="level2" data-number="1.1">
@@ -29492,9 +29492,9 @@ E[Y]= \beta_0 + \beta_1\cdot X
 </ul>
 <div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
 <div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="87" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 86;"><span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"slope"</span>})</span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>viewof b0 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"intercept"</span>})</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`Y = </span><span class="sc">${</span>b1<span class="sc">}</span><span class="vs">X + </span><span class="sc">${</span>b0<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="86" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 85;"><span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&quot;Slope (β₁)&quot;</span>})</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>viewof b0 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&quot;Intercept (β₀)&quot;</span>})</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`E[Y] = </span><span class="sc">${</span>b1<span class="sc">}</span><span class="vs">X + </span><span class="sc">${</span>b0<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -29520,14 +29520,14 @@ E[Y]= \beta_0 + \beta_1\cdot X
 <div class="panel-fill panel-grid g-col-24 g-col-lg-17 pt-3 pt-lg-0">
 <div class="g-col-24">
 <div class="cell panel-fill">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="95" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 94;"><span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>xRange <span class="op">=</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>lineData <span class="op">=</span> xRange<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({x<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> (b1 <span class="op">*</span> x) <span class="op">+</span> b0}))</span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span>{<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"X"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span>{<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Y"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(lineData<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span> })]</span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="94" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 93;"><span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>xRange <span class="op">=</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>lineData <span class="op">=</span> xRange<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({x<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> (b1 <span class="op">*</span> x) <span class="op">+</span> b0}))</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span>{<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&quot;X&quot;</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span>{<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&quot;Y&quot;</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(lineData<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">&quot;x&quot;</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">&quot;y&quot;</span> })]</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
@@ -29557,7 +29557,7 @@ E[Y]= \beta_0 + \beta_1\cdot X
 <li>Here, <span class="math inline">\(\beta_0\)</span> represents the value of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X=0\)</span>, and <span class="math inline">\(\beta_1\)</span> represents the change in Y for a one-unit increase in X.</li>
 </ul>
 <div id="Assumption-2" class="Assumption">
-<p></p><details class="Assumption fbx-default closebutton" open=""><summary><strong>Assumption 2</strong></summary><div>Y and X have a linear relationship<p></p>
+<p></p><details class="Assumption fbx-default closebutton" open><summary><strong>Assumption 2</strong></summary><div>Y and X have a linear relationship<p></p>
 </div></details>
 </div>
 <div id="salary-growth-over-time" class="Example" title="Salary growth over time">
@@ -29566,7 +29566,7 @@ E[Y]= \beta_0 + \beta_1\cdot X
 <p><span class="math display">\[
 E[Y]= \$50,000 + \$5,000\cdot x.
 \]</span></p>
-<p>After 10 years of working at this company (i.e.&nbsp;<span class="math inline">\(X=10\)</span>), we would expect a salary of <span class="math display">\[E[Y]=\$50,000 + \$5,000\times10= \$100,000\]</span></p>
+<p>After 10 years of working at this company (i.e. <span class="math inline">\(X=10\)</span>), we would expect a salary of <span class="math display">\[E[Y]=\$50,000 + \$5,000\times10= \$100,000\]</span></p>
 </div></details>
 </div>
 <section id="your-turn" class="level4 webex-check webex-box">
@@ -29597,7 +29597,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4
 </script>
 </div>
 <ol start="2" type="1">
-<li>Complete the r function that predicts <span class="math inline">\(Y\)</span> from an input <span class="math inline">\(X\)</span> for this linear model (alternatively - give function e.g.&nbsp;‘this function predicts salary at company 2 with an input X years work’)</li>
+<li>Complete the r function that predicts <span class="math inline">\(Y\)</span> from an input <span class="math inline">\(X\)</span> for this linear model (alternatively - give function e.g. ‘this function predicts salary at company 2 with an input X years work’)</li>
 </ol>
 <div class="cell" data-exercise="r_function" data-envir="linear_predictor_function">
 <div>
@@ -29662,11 +29662,11 @@ Y=\beta_0 + \beta_1X + \varepsilon
 <li>On average, we expect these error terms to balance out:</li>
 </ul>
 <div id="Assumption-3" class="Assumption">
-<p></p><details class="Assumption fbx-default closebutton" open=""><summary><strong>Assumption 3</strong></summary><div>The mean of the error term is zero:<p></p>
+<p></p><details class="Assumption fbx-default closebutton" open><summary><strong>Assumption 3</strong></summary><div>The mean of the error term is zero:<p></p>
 <p><span class="math display">\[
 E[\varepsilon]=\mu=0
 \]</span></p>
-<p>i.e.&nbsp;The linear predictor gives the correct value of <span class="math inline">\(Y\)</span> on average</p>
+<p>i.e. The linear predictor gives the correct value of <span class="math inline">\(Y\)</span> on average</p>
 </div></details>
 </div>
 </section>
@@ -29677,7 +29677,7 @@ E[\varepsilon]=\mu=0
 <li>We assume that this variance is <em>constant</em> - like <span class="math inline">\(mu=0\)</span>, it is the same for all values of <span class="math inline">\(X\)</span> however we dont specify which particular value it takes:</li>
 </ul>
 <div id="Assumption-4" class="Assumption">
-<p></p><details class="Assumption fbx-default closebutton" open=""><summary><strong>Assumption 4</strong></summary><div>The variance of the error term is constant for all values of X: <span class="math display">\[Var(\varepsilon)=\sigma^2\]</span><p></p>
+<p></p><details class="Assumption fbx-default closebutton" open><summary><strong>Assumption 4</strong></summary><div>The variance of the error term is constant for all values of X: <span class="math display">\[Var(\varepsilon)=\sigma^2\]</span><p></p>
 </div></details>
 </div>
 </section>
@@ -29685,38 +29685,38 @@ E[\varepsilon]=\mu=0
 <h4 class="anchored" data-anchor-id="normal-distribution">Normal distribution</h4>
 <p>While the assumptions of mean 0 and constant variance describe the center and spread of the errors, they don’t fully specify the shape of their distribution. To model this more completely, we often assume that the errors follow a Normal distribution. This choice conveniently packages those assumptions — zero mean and constant variance — into a single, well-behaved model that is mathematically tractable and aligns with many real-world data patterns.</p>
 <div id="Assumption-5" class="Assumption">
-<p></p><details class="Assumption fbx-default closebutton" open=""><summary><strong>Assumption 5</strong></summary><div>The error is normally distributed (with mean <span class="math inline">\(\mu=0\)</span> and variance <span class="math inline">\(\sigma^2\)</span> . <span class="math display">\[\varepsilon \sim \mathcal{N}(0, \sigma^2)\]</span><p></p>
+<p></p><details class="Assumption fbx-default closebutton" open><summary><strong>Assumption 5</strong></summary><div>The error is normally distributed (with mean <span class="math inline">\(\mu=0\)</span> and variance <span class="math inline">\(\sigma^2\)</span> . <span class="math display">\[\varepsilon \sim \mathcal{N}(0, \sigma^2)\]</span><p></p>
 </div></details>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="265" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 264;"><span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a>viewof sigma <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="fl">0.2</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> {</span>
-<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
-<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>  <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span></span>
-<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">tex</span><span class="vs">`</span><span class="sc">\s</span><span class="vs">igma`</span><span class="sc">}</span><span class="vs">: Standard deviation`</span></span>
-<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a>normalDensity <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">4</span> <span class="op">*</span> sigma<span class="op">,</span> <span class="dv">4</span> <span class="op">*</span> sigma<span class="op">,</span> sigma <span class="op">/</span> <span class="dv">50</span>)<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({</span>
-<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a>  x<span class="op">,</span></span>
-<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a>  <span class="dt">density</span><span class="op">:</span> (<span class="dv">1</span> <span class="op">/</span> (<span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>) <span class="op">*</span> sigma)) <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span>(x <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma <span class="op">**</span> <span class="dv">2</span>))</span>
-<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`f(</span><span class="sc">\v</span><span class="vs">arepsilon) = </span><span class="sc">\f</span><span class="vs">rac{1}{</span><span class="sc">\s</span><span class="vs">qrt{2</span><span class="sc">\p</span><span class="vs">i}</span><span class="sc">\,${</span>sigma<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">}</span><span class="sc">\e</span><span class="vs">xp</span><span class="sc">\l</span><span class="vs">eft(-</span><span class="sc">\f</span><span class="vs">rac{</span><span class="sc">\v</span><span class="vs">arepsilon^{2}}{2(</span><span class="sc">${</span>sigma<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">)^{2}}</span><span class="sc">\r</span><span class="vs">ight)`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="278" data-source-offset="-432"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 277;"><span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">280</span><span class="op">,</span></span>
-<span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">48</span><span class="op">,</span></span>
-<span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span></span>
-<span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span> }<span class="op">,</span></span>
-<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`Error value (</span><span class="sc">${</span><span class="fu">tex</span><span class="vs">`</span><span class="sc">\v</span><span class="vs">arepsilon`</span><span class="sc">}</span><span class="vs">)`</span> }<span class="op">,</span></span>
-<span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">areaY</span>(normalDensity<span class="op">,</span> {</span>
-<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
-<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"density"</span><span class="op">,</span></span>
-<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.2</span><span class="op">,</span></span>
-<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#2a5599"</span><span class="op">,</span></span>
-<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">"#2a5599"</span></span>
-<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="264" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 263;"><span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a>viewof sigma <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="fl">0.2</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> {</span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a>  <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span></span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">tex</span><span class="vs">`</span><span class="sc">\s</span><span class="vs">igma`</span><span class="sc">}</span><span class="vs">: Standard deviation`</span></span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a>normalDensity <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">4</span> <span class="op">*</span> sigma<span class="op">,</span> <span class="dv">4</span> <span class="op">*</span> sigma<span class="op">,</span> sigma <span class="op">/</span> <span class="dv">50</span>)<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({</span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a>  x<span class="op">,</span></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a>  <span class="dt">density</span><span class="op">:</span> (<span class="dv">1</span> <span class="op">/</span> (<span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>) <span class="op">*</span> sigma)) <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span>(x <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma <span class="op">**</span> <span class="dv">2</span>))</span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`f(</span><span class="sc">\v</span><span class="vs">arepsilon) = </span><span class="sc">\f</span><span class="vs">rac{1}{</span><span class="sc">\s</span><span class="vs">qrt{2</span><span class="sc">\p</span><span class="vs">i}</span><span class="sc">\,${</span>sigma<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">}</span><span class="sc">\e</span><span class="vs">xp</span><span class="sc">\l</span><span class="vs">eft(-</span><span class="sc">\f</span><span class="vs">rac{</span><span class="sc">\v</span><span class="vs">arepsilon^{2}}{2(</span><span class="sc">${</span>sigma<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">)^{2}}</span><span class="sc">\r</span><span class="vs">ight)`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="277" data-source-offset="-432"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 276;"><span id="cb4-277"><a href="#cb4-277" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">280</span><span class="op">,</span></span>
+<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">48</span><span class="op">,</span></span>
+<span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span></span>
+<span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">&quot;Density&quot;</span> }<span class="op">,</span></span>
+<span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`Error value (</span><span class="sc">${</span><span class="fu">tex</span><span class="vs">`</span><span class="sc">\v</span><span class="vs">arepsilon`</span><span class="sc">}</span><span class="vs">)`</span> }<span class="op">,</span></span>
+<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">areaY</span>(normalDensity<span class="op">,</span> {</span>
+<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">&quot;x&quot;</span><span class="op">,</span></span>
+<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">&quot;density&quot;</span><span class="op">,</span></span>
+<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.2</span><span class="op">,</span></span>
+<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">&quot;#2a5599&quot;</span><span class="op">,</span></span>
+<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">&quot;#2a5599&quot;</span></span>
+<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-ojs-cell-3" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ojs-cell-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -29778,7 +29778,7 @@ E[\varepsilon]=\mu=0
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ojs-cell-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.1: Interactive normal distribution with adjustable standard deviation.
+Figure 1.1: Interactive normal distribution with adjustable standard deviation.
 </figcaption>
 </figure>
 </div>
@@ -30041,7 +30041,7 @@ window.onload = function() {
 
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJzbG9wZVwifSlcbnZpZXdvZiBiMCA9IElucHV0cy5yYW5nZShbLTEwLCAxMF0sIHtzdGVwOiAxLCBsYWJlbDogXCJpbnRlcmNlcHRcIn0pXG50ZXguYmxvY2tgWSA9ICR7YjF9WCArICR7YjB9YFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoieFJhbmdlID0gWy0xMCwxMF1cbmxpbmVEYXRhID0geFJhbmdlLm1hcCh4ID0+ICh7eCwgeTogKGIxICogeCkgKyBiMH0pKVxuUGxvdC5wbG90KHtcbiAgeDp7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IFwiWFwiLCBncmlkOiB0cnVlfSxcbiAgeTp7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IFwiWVwiLCBncmlkOiB0cnVlfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmxpbmUobGluZURhdGEsIHsgeDogXCJ4XCIsIHk6IFwieVwiIH0pXVxufSlcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIHNpZ21hID0gSW5wdXRzLnJhbmdlKFswLjIsIDVdLCB7XG4gIHZhbHVlOiAxLFxuICBzdGVwOiAwLjEsXG4gIGxhYmVsOiBodG1sYCR7dGV4YFxcc2lnbWFgfTogU3RhbmRhcmQgZGV2aWF0aW9uYFxufSlcblxubm9ybWFsRGVuc2l0eSA9IGQzLnJhbmdlKC00ICogc2lnbWEsIDQgKiBzaWdtYSwgc2lnbWEgLyA1MCkubWFwKHggPT4gKHtcbiAgeCxcbiAgZGVuc2l0eTogKDEgLyAoTWF0aC5zcXJ0KDIgKiBNYXRoLlBJKSAqIHNpZ21hKSkgKiBNYXRoLmV4cCgtKHggKiogMikgLyAoMiAqIHNpZ21hICoqIDIpKVxufSkpXG5cbnRleC5ibG9ja2BmKFxcdmFyZXBzaWxvbikgPSBcXGZyYWN7MX17XFxzcXJ0ezJcXHBpfVxcLCR7c2lnbWEudG9GaXhlZCgxKX19XFxleHBcXGxlZnQoLVxcZnJhY3tcXHZhcmVwc2lsb25eezJ9fXsyKCR7c2lnbWEudG9GaXhlZCgxKX0pXnsyfX1cXHJpZ2h0KWBcblxuUGxvdC5wbG90KHtcbiAgaGVpZ2h0OiAyODAsXG4gIG1hcmdpbkxlZnQ6IDQ4LFxuICBtYXJnaW5Cb3R0b206IDQwLFxuICB5OiB7IGxhYmVsOiBcIkRlbnNpdHlcIiB9LFxuICB4OiB7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IGh0bWxgRXJyb3IgdmFsdWUgKCR7dGV4YFxcdmFyZXBzaWxvbmB9KWAgfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmFyZWFZKG5vcm1hbERlbnNpdHksIHtcbiAgICAgIHg6IFwieFwiLFxuICAgICAgeTogXCJkZW5zaXR5XCIsXG4gICAgICBmaWxsT3BhY2l0eTogMC4yLFxuICAgICAgc3Ryb2tlOiBcIiMyYTU1OTlcIixcbiAgICAgIGZpbGw6IFwiIzJhNTU5OVwiXG4gICAgfSlcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjAnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2lnbWEnKSJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwID0gSW5wdXRzLnJhbmdlKFstMTAsIDEwXSwge3N0ZXA6IDEsIGxhYmVsOiBcIkludGVyY2VwdCAozrLigoApXCJ9KVxudGV4LmJsb2NrYEVbWV0gPSAke2IxfVggKyAke2IwfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InhSYW5nZSA9IFstMTAsMTBdXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IChiMSAqIHgpICsgYjB9KSlcblBsb3QucGxvdCh7XG4gIHg6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGxpbmVEYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiB9KV1cbn0pXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBzaWdtYSA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge1xuICB2YWx1ZTogMSxcbiAgc3RlcDogMC4xLFxuICBsYWJlbDogaHRtbGAke3RleGBcXHNpZ21hYH06IFN0YW5kYXJkIGRldmlhdGlvbmBcbn0pXG5cbm5vcm1hbERlbnNpdHkgPSBkMy5yYW5nZSgtNCAqIHNpZ21hLCA0ICogc2lnbWEsIHNpZ21hIC8gNTApLm1hcCh4ID0+ICh7XG4gIHgsXG4gIGRlbnNpdHk6ICgxIC8gKE1hdGguc3FydCgyICogTWF0aC5QSSkgKiBzaWdtYSkpICogTWF0aC5leHAoLSh4ICoqIDIpIC8gKDIgKiBzaWdtYSAqKiAyKSlcbn0pKVxuXG50ZXguYmxvY2tgZihcXHZhcmVwc2lsb24pID0gXFxmcmFjezF9e1xcc3FydHsyXFxwaX1cXCwke3NpZ21hLnRvRml4ZWQoMSl9fVxcZXhwXFxsZWZ0KC1cXGZyYWN7XFx2YXJlcHNpbG9uXnsyfX17Migke3NpZ21hLnRvRml4ZWQoMSl9KV57Mn19XFxyaWdodClgXG5cblBsb3QucGxvdCh7XG4gIGhlaWdodDogMjgwLFxuICBtYXJnaW5MZWZ0OiA0OCxcbiAgbWFyZ2luQm90dG9tOiA0MCxcbiAgeTogeyBsYWJlbDogXCJEZW5zaXR5XCIgfSxcbiAgeDoge2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBodG1sYEVycm9yIHZhbHVlICgke3RleGBcXHZhcmVwc2lsb25gfSlgIH0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5hcmVhWShub3JtYWxEZW5zaXR5LCB7XG4gICAgICB4OiBcInhcIixcbiAgICAgIHk6IFwiZGVuc2l0eVwiLFxuICAgICAgZmlsbE9wYWNpdHk6IDAuMixcbiAgICAgIHN0cm9rZTogXCIjMmE1NTk5XCIsXG4gICAgICBmaWxsOiBcIiMyYTU1OTlcIlxuICAgIH0pXG4gIF1cbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IxJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IwJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3NpZ21hJykifV19
 </script>
 <script type="module">
 window._ojs.runtime.setLocalResolver({});
@@ -30477,7 +30477,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./FittingSLR.html" class="pagination-link" aria-label="Simple Linear Regression: fitting a model to data">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple Linear Regression: fitting a model to data</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">Simple Linear Regression: fitting a model to data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

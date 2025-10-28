@@ -364,6 +364,59 @@ Plot.plot({
 });
 
 ```
+
+```{ojs}
+//| panel: fill
+//| echo: false
+//| width: 700
+//| fig-cap: "Cross-sections of the simple linear model showing Normal error curves at selected X values."
+
+xSampleValues = d3.range(-8, 8.1, 2)
+ySectionValues = d3.range(-10, 10.001, 0.1)
+widthScale = Math.min(1.8, sigma_2 * 0.9)
+
+densityCurveData = xSampleValues.flatMap(xVal => {
+  const mu = b0_2 + b1_2 * xVal;
+  const peakDensity = normalDensity(mu, mu, sigma_2);
+
+  const rightSide = ySectionValues.map(y => {
+    const density = normalDensity(y, mu, sigma_2);
+    const width = (density / peakDensity) * widthScale;
+    return {x: xVal + width, y, group: xVal};
+  });
+
+  const leftSide = ySectionValues.slice().reverse().map(y => {
+    const density = normalDensity(y, mu, sigma_2);
+    const width = (density / peakDensity) * widthScale;
+    return {x: xVal - width, y, group: xVal};
+  });
+
+  const closedPath = [...rightSide, ...leftSide, rightSide[0]];
+  return closedPath.map((point, index) => ({...point, order: index}));
+});
+
+crossSectionTrendLine = xValues.map(x => ({
+  x,
+  y: b0_2 + b1_2 * x
+}))
+
+Plot.plot({
+  x: {domain: [-10, 10], label: "X", grid: true},
+  y: {domain: [-10, 10], label: "Y", grid: true},
+  marks: [
+    Plot.line(densityCurveData, {
+      x: "x",
+      y: "y",
+      z: "group",
+      stroke: "#2a5599",
+      strokeWidth: 1.5,
+      curve: "basis"
+    }),
+    Plot.line(crossSectionTrendLine, {x: "x", y: "y", stroke: "black", strokeWidth: 2})
+  ]
+});
+
+```
 ::: Example
 -   Same model as above - given standard deviation
 -   Example Y values

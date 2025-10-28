@@ -333,13 +333,6 @@ This 'simple linear model' is the starting place for conducting linear regressio
 viewof b1_2 = Inputs.range([-2, 2], {step: 0.1, label: "Slope (β₁)"})
 viewof b0_2 = Inputs.range([-10, 10], {step: 1, label: "Intercept (β₀)"})
 viewof sigma_2 = Inputs.range([0.2, 5], {step: 0.1, value: 1, label: "Std. deviation (σ)"})
-viewof showHeatmapLayer = Inputs.toggle({label: "Show heatmap", value: true})
-viewof showCrossSectionLayer = Inputs.toggle({label: "Show cross-section curves", value: true})
-viewof crossSectionCount = Inputs.range([2, 12], {
-  step: 1,
-  value: 7,
-  label: "Number of cross-sections"
-})
 
 tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Normal}(0, ${sigma_2}^2)`
 ```
@@ -348,87 +341,27 @@ tex.block`Y = ${b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Nor
 //| panel: fill
 //| echo: false
 //| width: 700
-//| fig-cap: "Layers illustrating the simple linear model: toggle the heatmap of normal errors and the cross-sectional curves."
+//| fig.cap: "The probability density of observations ($Y$) under a simple linear model."
+ xValues = d3.range(-10,10.001, 0.3)
 
-const xValues = d3.range(-10, 10.001, 0.3);
-const xSectionDomain = [-8, 8];
-const ySectionValues = d3.range(-10, 10.001, 0.1);
-
-const computeHeatmapGrid = () =>
-  xValues.flatMap(x => {
-    const mu = b0_2 + b1_2 * x;
-    return xValues.map(y => ({
-      x,
-      y,
-      density: normalDensity(y, mu, sigma_2)
-    }));
-  });
-
-const computeCrossSectionGeometry = () => {
-  const widthScale = Math.min(1.8, sigma_2 * 0.9);
-  const count = Math.max(2, Math.round(crossSectionCount));
-  const step =
-    count === 1
-      ? 0
-      : (xSectionDomain[1] - xSectionDomain[0]) / (count - 1);
-  const xSampleValues = Array.from({length: count}, (_, i) =>
-    xSectionDomain[0] + i * step
-  );
-
-  const curves = xSampleValues.flatMap(xVal => {
-    const mu = b0_2 + b1_2 * xVal;
-    const peakDensity = normalDensity(mu, mu, sigma_2);
-
-    return ySectionValues.map((y, index) => {
-      const density = normalDensity(y, mu, sigma_2);
-      const width = (density / peakDensity) * widthScale;
-      return {x: xVal + width, y, group: xVal, order: index};
-    });
-  });
-
-  const trend = xValues.map(x => ({
-    x,
-    y: b0_2 + b1_2 * x
+ densityGrid = xValues.flatMap(x => {
+  const mu = b0_2 + b1_2 * x;
+  return xValues.map(y => ({
+    x, y,
+    density: normalDensity(y, mu, sigma_2)   
   }));
+});
 
-  return {curves, trend};
-};
-
-const heatmapGrid = showHeatmapLayer ? computeHeatmapGrid() : null;
-const crossSections = showCrossSectionLayer ? computeCrossSectionGeometry() : null;
-
-const plotOptions = {
+Plot.plot({
   x: {domain: [-10, 10], label: "X", grid: true},
   y: {domain: [-10, 10], label: "Y", grid: true},
-  marks: [
-    ...(showHeatmapLayer
-      ? [Plot.raster(heatmapGrid, {x: "x", y: "y", fill: "density", interpolate: "nearest"})]
-      : []),
-    ...(showCrossSectionLayer
-      ? [
-          Plot.line(crossSections.curves, {
-            x: "x",
-            y: "y",
-            z: "group",
-            stroke: "#2a5599",
-            strokeWidth: 1.5,
-            curve: "basis"
-          }),
-          Plot.line(crossSections.trend, {x: "x", y: "y", stroke: "black", strokeWidth: 2})
-        ]
-      : [])
-  ]
-};
-
-if (showHeatmapLayer) {
-  plotOptions.color = {
-    label: "Density",
+  color: {label: "Density",
     type: "sequential",
-    scheme: "Blues"
-  };
-}
-
-Plot.plot(plotOptions);
+    scheme: "Blues"},
+  marks: [
+    Plot.raster(densityGrid, {x: "x", y: "y", fill: "density", interpolate: "nearest"})
+  ]
+});
 
 ```
 ::: Example

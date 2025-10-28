@@ -29093,19 +29093,19 @@ initializeRuntime();
 
 </script>
 <style>
-.Assumption {
---color1: #a08080;
---color2: #500000;
-}
-.Example {
---color1: #c0c0c0;
---color2: #808080;
-}
 .Technical-Point {
 --color1: #c0c0c0;
 --color2: #808080;
 }
+.Assumption {
+--color1: #a08080;
+--color2: #500000;
+}
 .ToDo {
+--color1: #c0c0c0;
+--color2: #808080;
+}
+.Example {
 --color1: #c0c0c0;
 --color2: #808080;
 }
@@ -29492,9 +29492,9 @@ E[Y]= \beta_0 + \beta_1\cdot X
 </ul>
 <div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
 <div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="87" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 86;"><span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"slope"</span>})</span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>viewof b0 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"intercept"</span>})</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`Y = </span><span class="sc">${</span>b1<span class="sc">}</span><span class="vs">X + </span><span class="sc">${</span>b0<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="87" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 86;"><span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>viewof b1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope (β₁)"</span>})</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>viewof b0 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept (β₀)"</span>})</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`E[Y] = </span><span class="sc">${</span>b1<span class="sc">}</span><span class="vs">X + </span><span class="sc">${</span>b0<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -29561,7 +29561,7 @@ E[Y]= \beta_0 + \beta_1\cdot X
 </div></details>
 </div>
 <div id="salary-growth-over-time" class="Example" title="Salary growth over time">
-<p></p><details class="Example fbx-default closebutton"><summary><strong>Example 1: </strong>Salary growth over time</summary><div>You’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. We know that, on average, the <em>starting salary</em> at this company is $50,000, and salaries increase by $5000 per year of employment.<p></p>
+<p></p><details class="Example fbx-default closebutton" open=""><summary><strong>Example 1: </strong>Salary growth over time</summary><div>You’ve been offered a job at ~company A~, and want to predict your salary at this company after working there for 10 years. We know that, on average, the <em>starting salary</em> at this company is $50,000, and salaries increase by $5000 per year of employment.<p></p>
 <p>Using this information, we can construct a simple linear predictor of salary from employment time. Given an employment time of <span class="math inline">\(X=x\)</span> years, we can represent a employee’s expected salary (<span class="math inline">\(E[Y]\)</span>) as</p>
 <p><span class="math display">\[
 E[Y]= \$50,000 + \$5,000\cdot x.
@@ -29683,7 +29683,7 @@ E[\varepsilon]=\mu=0
 </section>
 <section id="normal-distribution" class="level4">
 <h4 class="anchored" data-anchor-id="normal-distribution">Normal distribution</h4>
-<p>While the assumptions of mean 0 and constant variance describe the center and spread of the errors, they don’t fully specify the shape of their distribution. To model this more completely, we often assume that the errors follow a Normal distribution. This choice conveniently packages those assumptions — zero mean and constant variance — into a single, well-behaved model that is mathematically tractable and aligns with many real-world data patterns.</p>
+<p>While the assumptions of mean 0 and constant variance describe the center and spread of the errors, they don’t fully specify the shape of their distribution. To model this more completely, we often assume that the errors follow a Normal distribution.</p>
 <div id="Assumption-5" class="Assumption">
 <p></p><details class="Assumption fbx-default closebutton" open=""><summary><strong>Assumption 5</strong></summary><div>The error is normally distributed (with mean <span class="math inline">\(\mu=0\)</span> and variance <span class="math inline">\(\sigma^2\)</span> . <span class="math display">\[\varepsilon \sim \mathcal{N}(0, \sigma^2)\]</span><p></p>
 </div></details>
@@ -29706,7 +29706,7 @@ E[\varepsilon]=\mu=0
 <span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">48</span><span class="op">,</span></span>
 <span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span></span>
 <span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span> }<span class="op">,</span></span>
-<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`Error value (</span><span class="sc">${</span><span class="fu">tex</span><span class="vs">`</span><span class="sc">\v</span><span class="vs">arepsilon`</span><span class="sc">}</span><span class="vs">)`</span> }<span class="op">,</span></span>
+<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span><span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"ε"</span> }<span class="op">,</span></span>
 <span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
 <span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">areaY</span>(normalDensity<span class="op">,</span> {</span>
 <span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
@@ -29791,12 +29791,115 @@ Figure&nbsp;1.1: Interactive normal distribution with adjustable standard deviat
 </section>
 <section id="the-simple-linear-model" class="level3">
 <h3 class="anchored" data-anchor-id="the-simple-linear-model">The Simple Linear Model</h3>
-<p>Putting these pieces together we are left with</p>
+<p>Putting these pieces together we are left with:</p>
 <p><span class="math display">\[
 Y=\beta_0+\beta_1X+\varepsilon, \quad{\varepsilon \sim N(0,\sigma^2)}
 \]</span></p>
+<p>This ‘simple linear model’ is the starting place for conducting linear regression - in which whe ‘fit’ (i.e.&nbsp;estimate the values of <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\sigma^2\)</span>) from data.</p>
+<div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
+<div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="314" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 313;"><span id="cb5-314"><a href="#cb5-314" aria-hidden="true" tabindex="-1"></a>viewof b1_2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope (β₁)"</span>})</span>
+<span id="cb5-315"><a href="#cb5-315" aria-hidden="true" tabindex="-1"></a>viewof b0_2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept (β₀)"</span>})</span>
+<span id="cb5-316"><a href="#cb5-316" aria-hidden="true" tabindex="-1"></a>viewof sigma2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="fl">0.2</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Std. deviation (σ)"</span>})</span>
+<span id="cb5-317"><a href="#cb5-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-318"><a href="#cb5-318" aria-hidden="true" tabindex="-1"></a>tex<span class="op">.</span><span class="fu">block</span><span class="vs">`Y = {b0_2} + </span><span class="sc">${</span>b1_2<span class="sc">}</span><span class="vs">X + </span><span class="sc">\v</span><span class="vs">arepsilon, </span><span class="sc">\q</span><span class="vs">uad </span><span class="sc">\v</span><span class="vs">arepsilon </span><span class="sc">\s</span><span class="vs">im </span><span class="sc">\t</span><span class="vs">ext{Normal}($ 0, </span><span class="sc">${</span>sigma2<span class="sc">}</span><span class="vs">^2)`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="panel-fill panel-grid g-col-24 g-col-lg-17 pt-3 pt-lg-0">
+<div class="g-col-24">
+<div class="cell panel-fill" width="700">
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="325" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 324;"><span id="cb6-325"><a href="#cb6-325" aria-hidden="true" tabindex="-1"></a>xValues <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">101</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="op">-</span><span class="dv">10</span> <span class="op">+</span> i <span class="op">*</span> <span class="fl">0.2</span>)<span class="op">;</span></span>
+<span id="cb6-326"><a href="#cb6-326" aria-hidden="true" tabindex="-1"></a> yValues <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">101</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="op">-</span><span class="dv">10</span> <span class="op">+</span> i <span class="op">*</span> <span class="fl">0.2</span>)<span class="op">;</span></span>
+<span id="cb6-327"><a href="#cb6-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-328"><a href="#cb6-328" aria-hidden="true" tabindex="-1"></a> normalDensity2 <span class="op">=</span> (y<span class="op">,</span> mean<span class="op">,</span> sd) <span class="kw">=&gt;</span></span>
+<span id="cb6-329"><a href="#cb6-329" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="op">/</span> (sd <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>))) <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ((y <span class="op">-</span> mean) <span class="op">/</span> sd) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb6-330"><a href="#cb6-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-331"><a href="#cb6-331" aria-hidden="true" tabindex="-1"></a> densityGrid <span class="op">=</span> xValues<span class="op">.</span><span class="fu">flatMap</span>(x <span class="kw">=&gt;</span> {</span>
+<span id="cb6-332"><a href="#cb6-332" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> mu <span class="op">=</span> b0_2 <span class="op">+</span> b1_2 <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb6-333"><a href="#cb6-333" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> yValues<span class="op">.</span><span class="fu">map</span>(y <span class="kw">=&gt;</span> ({</span>
+<span id="cb6-334"><a href="#cb6-334" aria-hidden="true" tabindex="-1"></a>    x<span class="op">,</span> y<span class="op">,</span></span>
+<span id="cb6-335"><a href="#cb6-335" aria-hidden="true" tabindex="-1"></a>    <span class="dt">density</span><span class="op">:</span> <span class="fu">normalDensity2</span>(y<span class="op">,</span> mu<span class="op">,</span> sigma2)   <span class="co">// &lt;- use sigma (not sigma2)</span></span>
+<span id="cb6-336"><a href="#cb6-336" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
+<span id="cb6-337"><a href="#cb6-337" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-338"><a href="#cb6-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-339"><a href="#cb6-339" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb6-340"><a href="#cb6-340" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"X"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb6-341"><a href="#cb6-341" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Y"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb6-342"><a href="#cb6-342" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Density"</span><span class="op">,</span></span>
+<span id="cb6-343"><a href="#cb6-343" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">"sequential"</span><span class="op">,</span></span>
+<span id="cb6-344"><a href="#cb6-344" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Blues"</span>}<span class="op">,</span></span>
+<span id="cb6-345"><a href="#cb6-345" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb6-346"><a href="#cb6-346" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">raster</span>(densityGrid<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"density"</span><span class="op">,</span> <span class="dt">interpolate</span><span class="op">:</span> <span class="st">"nearest"</span>})</span>
+<span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div id="Example-2" class="Example">
-<details class="Example fbx-default closebutton"><summary><strong>Example 2</strong></summary><div>
+<details class="Example fbx-default closebutton" open=""><summary><strong>Example 2</strong></summary><div>
 <ul>
 <li>Same model as above - given standard deviation</li>
 <li>Example Y values
@@ -30041,7 +30144,7 @@ window.onload = function() {
 
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJzbG9wZVwifSlcbnZpZXdvZiBiMCA9IElucHV0cy5yYW5nZShbLTEwLCAxMF0sIHtzdGVwOiAxLCBsYWJlbDogXCJpbnRlcmNlcHRcIn0pXG50ZXguYmxvY2tgWSA9ICR7YjF9WCArICR7YjB9YFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoieFJhbmdlID0gWy0xMCwxMF1cbmxpbmVEYXRhID0geFJhbmdlLm1hcCh4ID0+ICh7eCwgeTogKGIxICogeCkgKyBiMH0pKVxuUGxvdC5wbG90KHtcbiAgeDp7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IFwiWFwiLCBncmlkOiB0cnVlfSxcbiAgeTp7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IFwiWVwiLCBncmlkOiB0cnVlfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmxpbmUobGluZURhdGEsIHsgeDogXCJ4XCIsIHk6IFwieVwiIH0pXVxufSlcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIHNpZ21hID0gSW5wdXRzLnJhbmdlKFswLjIsIDVdLCB7XG4gIHZhbHVlOiAxLFxuICBzdGVwOiAwLjEsXG4gIGxhYmVsOiBodG1sYCR7dGV4YFxcc2lnbWFgfTogU3RhbmRhcmQgZGV2aWF0aW9uYFxufSlcblxubm9ybWFsRGVuc2l0eSA9IGQzLnJhbmdlKC00ICogc2lnbWEsIDQgKiBzaWdtYSwgc2lnbWEgLyA1MCkubWFwKHggPT4gKHtcbiAgeCxcbiAgZGVuc2l0eTogKDEgLyAoTWF0aC5zcXJ0KDIgKiBNYXRoLlBJKSAqIHNpZ21hKSkgKiBNYXRoLmV4cCgtKHggKiogMikgLyAoMiAqIHNpZ21hICoqIDIpKVxufSkpXG5cbnRleC5ibG9ja2BmKFxcdmFyZXBzaWxvbikgPSBcXGZyYWN7MX17XFxzcXJ0ezJcXHBpfVxcLCR7c2lnbWEudG9GaXhlZCgxKX19XFxleHBcXGxlZnQoLVxcZnJhY3tcXHZhcmVwc2lsb25eezJ9fXsyKCR7c2lnbWEudG9GaXhlZCgxKX0pXnsyfX1cXHJpZ2h0KWBcblxuUGxvdC5wbG90KHtcbiAgaGVpZ2h0OiAyODAsXG4gIG1hcmdpbkxlZnQ6IDQ4LFxuICBtYXJnaW5Cb3R0b206IDQwLFxuICB5OiB7IGxhYmVsOiBcIkRlbnNpdHlcIiB9LFxuICB4OiB7ZG9tYWluOiBbLTEwLDEwXSwgbGFiZWw6IGh0bWxgRXJyb3IgdmFsdWUgKCR7dGV4YFxcdmFyZXBzaWxvbmB9KWAgfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmFyZWFZKG5vcm1hbERlbnNpdHksIHtcbiAgICAgIHg6IFwieFwiLFxuICAgICAgeTogXCJkZW5zaXR5XCIsXG4gICAgICBmaWxsT3BhY2l0eTogMC4yLFxuICAgICAgc3Ryb2tlOiBcIiMyYTU1OTlcIixcbiAgICAgIGZpbGw6IFwiIzJhNTU5OVwiXG4gICAgfSlcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjAnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2lnbWEnKSJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBiMSA9IElucHV0cy5yYW5nZShbLTIsIDJdLCB7c3RlcDogMC4xLCBsYWJlbDogXCJTbG9wZSAozrLigoEpXCJ9KVxudmlld29mIGIwID0gSW5wdXRzLnJhbmdlKFstMTAsIDEwXSwge3N0ZXA6IDEsIGxhYmVsOiBcIkludGVyY2VwdCAozrLigoApXCJ9KVxudGV4LmJsb2NrYEVbWV0gPSAke2IxfVggKyAke2IwfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InhSYW5nZSA9IFstMTAsMTBdXG5saW5lRGF0YSA9IHhSYW5nZS5tYXAoeCA9PiAoe3gsIHk6IChiMSAqIHgpICsgYjB9KSlcblBsb3QucGxvdCh7XG4gIHg6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIlhcIiwgZ3JpZDogdHJ1ZX0sXG4gIHk6e2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGxpbmVEYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiB9KV1cbn0pXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBzaWdtYSA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge1xuICB2YWx1ZTogMSxcbiAgc3RlcDogMC4xLFxuICBsYWJlbDogaHRtbGAke3RleGBcXHNpZ21hYH06IFN0YW5kYXJkIGRldmlhdGlvbmBcbn0pXG5cbm5vcm1hbERlbnNpdHkgPSBkMy5yYW5nZSgtNCAqIHNpZ21hLCA0ICogc2lnbWEsIHNpZ21hIC8gNTApLm1hcCh4ID0+ICh7XG4gIHgsXG4gIGRlbnNpdHk6ICgxIC8gKE1hdGguc3FydCgyICogTWF0aC5QSSkgKiBzaWdtYSkpICogTWF0aC5leHAoLSh4ICoqIDIpIC8gKDIgKiBzaWdtYSAqKiAyKSlcbn0pKVxuXG50ZXguYmxvY2tgZihcXHZhcmVwc2lsb24pID0gXFxmcmFjezF9e1xcc3FydHsyXFxwaX1cXCwke3NpZ21hLnRvRml4ZWQoMSl9fVxcZXhwXFxsZWZ0KC1cXGZyYWN7XFx2YXJlcHNpbG9uXnsyfX17Migke3NpZ21hLnRvRml4ZWQoMSl9KV57Mn19XFxyaWdodClgXG5cblBsb3QucGxvdCh7XG4gIGhlaWdodDogMjgwLFxuICBtYXJnaW5MZWZ0OiA0OCxcbiAgbWFyZ2luQm90dG9tOiA0MCxcbiAgeTogeyBsYWJlbDogXCJEZW5zaXR5XCIgfSxcbiAgeDoge2RvbWFpbjogWy0xMCwxMF0sIGxhYmVsOiBcIs61XCIgfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmFyZWFZKG5vcm1hbERlbnNpdHksIHtcbiAgICAgIHg6IFwieFwiLFxuICAgICAgeTogXCJkZW5zaXR5XCIsXG4gICAgICBmaWxsT3BhY2l0eTogMC4yLFxuICAgICAgc3Ryb2tlOiBcIiMyYTU1OTlcIixcbiAgICAgIGZpbGw6IFwiIzJhNTU5OVwiXG4gICAgfSlcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ilxudmlld29mIGIxXzIgPSBJbnB1dHMucmFuZ2UoWy0yLCAyXSwge3N0ZXA6IDAuMSwgbGFiZWw6IFwiU2xvcGUgKM6y4oKBKVwifSlcbnZpZXdvZiBiMF8yID0gSW5wdXRzLnJhbmdlKFstMTAsIDEwXSwge3N0ZXA6IDEsIGxhYmVsOiBcIkludGVyY2VwdCAozrLigoApXCJ9KVxudmlld29mIHNpZ21hMiA9IElucHV0cy5yYW5nZShbMC4yLCA1XSwge3N0ZXA6IDAuMSwgdmFsdWU6IDEsIGxhYmVsOiBcIlN0ZC4gZGV2aWF0aW9uICjPgylcIn0pXG5cbnRleC5ibG9ja2BZID0ge2IwXzJ9ICsgJHtiMV8yfVggKyBcXHZhcmVwc2lsb24sIFxccXVhZCBcXHZhcmVwc2lsb24gXFxzaW0gXFx0ZXh0e05vcm1hbH0oJCAwLCAke3NpZ21hMn1eMilgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTUiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIgeFZhbHVlcyA9IEFycmF5LmZyb20oe2xlbmd0aDogMTAxfSwgKF8sIGkpID0+IC0xMCArIGkgKiAwLjIpO1xuIHlWYWx1ZXMgPSBBcnJheS5mcm9tKHtsZW5ndGg6IDEwMX0sIChfLCBpKSA9PiAtMTAgKyBpICogMC4yKTtcblxuIG5vcm1hbERlbnNpdHkyID0gKHksIG1lYW4sIHNkKSA9PlxuICAoMSAvIChzZCAqIE1hdGguc3FydCgyICogTWF0aC5QSSkpKSAqIE1hdGguZXhwKC0wLjUgKiAoKHkgLSBtZWFuKSAvIHNkKSAqKiAyKTtcblxuIGRlbnNpdHlHcmlkID0geFZhbHVlcy5mbGF0TWFwKHggPT4ge1xuICBjb25zdCBtdSA9IGIwXzIgKyBiMV8yICogeDtcbiAgcmV0dXJuIHlWYWx1ZXMubWFwKHkgPT4gKHtcbiAgICB4LCB5LFxuICAgIGRlbnNpdHk6IG5vcm1hbERlbnNpdHkyKHksIG11LCBzaWdtYTIpICAgLy8gPC0gdXNlIHNpZ21hIChub3Qgc2lnbWEyKVxuICB9KSk7XG59KTtcblxuUGxvdC5wbG90KHtcbiAgeDoge2RvbWFpbjogWy0xMCwgMTBdLCBsYWJlbDogXCJYXCIsIGdyaWQ6IHRydWV9LFxuICB5OiB7ZG9tYWluOiBbLTEwLCAxMF0sIGxhYmVsOiBcIllcIiwgZ3JpZDogdHJ1ZX0sXG4gIGNvbG9yOiB7bGFiZWw6IFwiRGVuc2l0eVwiLFxuICAgIHR5cGU6IFwic2VxdWVudGlhbFwiLFxuICAgIHNjaGVtZTogXCJCbHVlc1wifSxcbiAgbWFya3M6IFtcbiAgICBQbG90LnJhc3RlcihkZW5zaXR5R3JpZCwge3g6IFwieFwiLCB5OiBcInlcIiwgZmlsbDogXCJkZW5zaXR5XCIsIGludGVycG9sYXRlOiBcIm5lYXJlc3RcIn0pXG4gIF1cbn0pO1xuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IxJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IwJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3NpZ21hJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IxXzInKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYjBfMicpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzaWdtYTInKSJ9XX0=
 </script>
 <script type="module">
 window._ojs.runtime.setLocalResolver({});

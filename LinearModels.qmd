@@ -19,7 +19,8 @@ custom-numbered-blocks:
     Assumption:
       colors: [a08080, 500000]
       collapse: false
-    Example: default
+    Example: 
+      collapse: false
     ToDo: default
     Technical-Point: default
     
@@ -251,7 +252,7 @@ $$Var(\varepsilon)=\sigma^2$$
 
 #### Normal distribution 
 
-While the assumptions of mean 0 and constant variance describe the center and spread of the errors, they don’t fully specify the shape of their distribution. To model this more completely, we often assume that the errors follow a Normal distribution. This choice conveniently packages those assumptions — zero mean and constant variance — into a single, well-behaved model that is mathematically tractable and aligns with many real-world data patterns.
+While the assumptions of mean 0 and constant variance describe the center and spread of the errors, they don’t fully specify the shape of their distribution. To model this more completely, we often assume that the errors follow a Normal distribution.
 
 ::: Assumption
 The error is normally distributed (with mean $\mu=0$ and variance $\sigma^2$ .
@@ -279,7 +280,7 @@ Plot.plot({
   marginLeft: 48,
   marginBottom: 40,
   y: { label: "Density" },
-  x: {domain: [-10,10], label: html`Error value (${tex`\varepsilon`})` },
+  x: {domain: [-10,10], label: "ε" },
   marks: [
     Plot.areaY(normalDensity, {
       x: "x",
@@ -298,12 +299,55 @@ The Central Limit Theorem is a fundamental result of probability theory that pro
 
 ### The Simple Linear Model
 
-Putting these pieces together we are left with 
+Putting these pieces together we are left with:
 
 $$
 Y=\beta_0+\beta_1X+\varepsilon, \quad{\varepsilon \sim N(0,\sigma^2)}
 $$
 
+This 'simple linear model' is the starting place for conducting linear regression - in which whe 'fit' (i.e. estimate the values of $\beta_0$, $\beta_1$, and $\sigma^2$) from data. 
+
+```{ojs}
+//| panel: sidebar
+//| echo: false
+
+viewof b1_2 = Inputs.range([-2, 2], {step: 0.1, label: "Slope (β₁)"})
+viewof b0_2 = Inputs.range([-10, 10], {step: 1, label: "Intercept (β₀)"})
+viewof sigma2 = Inputs.range([0.2, 5], {step: 0.1, value: 1, label: "Std. deviation (σ)"})
+
+tex.block`Y = {b0_2} + ${b1_2}X + \varepsilon, \quad \varepsilon \sim \text{Normal}($ 0, ${sigma2}^2)`
+```
+
+```{ojs}
+//| panel: fill
+//| echo: false
+//| width: 700
+ xValues = Array.from({length: 101}, (_, i) => -10 + i * 0.2);
+ yValues = Array.from({length: 101}, (_, i) => -10 + i * 0.2);
+
+ normalDensity2 = (y, mean, sd) =>
+  (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((y - mean) / sd) ** 2);
+
+ densityGrid = xValues.flatMap(x => {
+  const mu = b0_2 + b1_2 * x;
+  return yValues.map(y => ({
+    x, y,
+    density: normalDensity2(y, mu, sigma2)   // <- use sigma (not sigma2)
+  }));
+});
+
+Plot.plot({
+  x: {domain: [-10, 10], label: "X", grid: true},
+  y: {domain: [-10, 10], label: "Y", grid: true},
+  color: {label: "Density",
+    type: "sequential",
+    scheme: "Blues"},
+  marks: [
+    Plot.raster(densityGrid, {x: "x", y: "y", fill: "density", interpolate: "nearest"})
+  ]
+});
+
+```
 ::: Example
 -   Same model as above - given standard deviation
 -   Example Y values

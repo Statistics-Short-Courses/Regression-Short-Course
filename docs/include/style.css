@@ -1,17 +1,14 @@
 /* hide later sections until exercises are complete */
-body#progressive section:has(div.wait[data-check="true"]):not(:has(div div div div div.exercise-grade.alert-success)) ~ *,
-body#progressive section:has(section div.wait[data-check="true"]):not(:has(section div div div div div.exercise-grade.alert-success)) ~ *,
+/* Hide while there exists any pending exercise (wait cell without data-complete). */
+body#progressive section:has(.cell.wait[data-check="true"]:not([data-complete="true"])) ~ *,
 body#progressive section:has(ul.task-list input[type="checkbox"]:not(:checked)) ~ * {
   display: none !important;
 }
-
-/* reveal later sections when exercises are complete */
-section:has(div div div div div.exercise-grade.alert-success) ~ * {
-  display: block;
-}
+/* reveal later sections when exercises are complete: implicit when no pending remain */
 
 /* general pill styling */
-body#progressive section:has(div.wait[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after, body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)) {
+/* Only show the pill on the innermost section that still has a pending exercise. */
+body#progressive section:has(.cell.wait[data-check="true"]:not([data-complete="true"])):not(:has(section .cell.wait[data-check="true"]:not([data-complete="true"])))::after, body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)) {
   display: inline-block;
   position: absolute;
   left: 0;
@@ -23,7 +20,7 @@ body#progressive section:has(div.wait[data-check="true"]):not(:has(div.exercise-
 }
 
 /* message pill to explain hidden sections */
-body#progressive section:has(div.wait[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after {
+body#progressive section:has(.cell.wait[data-check="true"]:not([data-complete="true"])):not(:has(section .cell.wait[data-check="true"]:not([data-complete="true"])))::after {
   content: "(Complete to continue.)";
   color: #664d03;
   background-color: #fff3cd;
@@ -31,7 +28,7 @@ body#progressive section:has(div.wait[data-check="true"]):not(:has(div.exercise-
 }
 
 /* remove message after completed sections */
-section:has(div.exercise-grade.alert-success)::after {
+section:not(:has(.cell.wait[data-check="true"]:not([data-complete="true"])))::after {
   content: "";
 }
 

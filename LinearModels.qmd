@@ -22,10 +22,10 @@ callout-icon: false
 ```{r}
 #| include: false
 library(ggplot2)
-library(exams2forms)
 ```
 
 # An introduction to linear statistical models
+## Statistical models
 
 -   A primary goal of statistical modelling is to characterise the
     relationship between variables, for now lets call them $X$ and $Y$.
@@ -137,7 +137,7 @@ After 10 years of working at this company (i.e. $X=10$), we would expect
 a salary of $$E[Y]=\$50,000 + \$5,000\times10= \$100,000$$
 :::
 
-::: {.callout-note}
+:::: {.callout-note}
 ### Exercise: A competing offer
 
 A second company also has a job available. The *starting salary* is
@@ -166,7 +166,7 @@ beta_1 <- _______
 
 
 ::: {.solution exercise="ex_1.1.1"}
-##### Solution
+#### Solution
 
 ```{webr}
 #| exercise: ex_1.1.1
@@ -201,7 +201,7 @@ Using the parameter variables you just defined, calculate the expected salary af
 E_Y <- _____+_____*_____
 ```
 ::: {.solution exercise="ex_1.1.2"}
-##### Solution
+#### Solution
 
 ```{webr}
 #| exercise: ex_1.1.2
@@ -223,8 +223,7 @@ gradethis::grade_this_code()
 #### Using R functions
 Great, so our expected salary after working at the company for 10 years is
 ```{webr}
-#|edit: false
-#|envir: Ex1
+#| envir: Ex1
 E_Y
 ```
 
@@ -291,9 +290,7 @@ gradethis::grade_this_code()
 add plot comparing two (companies) linear salary growth?
 :::
 
-:::
-
--   [ ] Continue to the next section
+::::
 
 ## Random Errors
 

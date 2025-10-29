@@ -26,4 +26,4 @@ include-after-body:
  - include/webex.js
  - include/displayall.js
  - include/gating.js
- - include/skip-exercises.js
+

@@ -1659,6 +1659,124 @@ if (window.location.href.includes('displayall')) {
 }
 
 </script>
+<script>
+(function () {
+  function markComplete(exId) {
+    document.querySelectorAll('.cell.wait[data-check="true"][data-exercise="' + exId + '"]').forEach(function (el) {
+      el.setAttribute('data-complete', 'true');
+    });
+  }
+
+  function handleGradeNode(node) {
+    if (!(node instanceof Element)) return;
+    if (node.classList.contains('exercise-grade') && node.classList.contains('alert-success')) {
+      var host = node.closest('[data-exercise]');
+      var exId = host && host.getAttribute('data-exercise');
+      if (exId) markComplete(exId);
+    } else if (node.querySelectorAll) {
+      node.querySelectorAll('.exercise-grade.alert-success').forEach(function (child) {
+        var host = child.closest('[data-exercise]');
+        var exId = host && host.getAttribute('data-exercise');
+        if (exId) markComplete(exId);
+      });
+    }
+  }
+
+  function scanExisting() {
+    document.querySelectorAll('.exercise-grade.alert-success').forEach(handleGradeNode);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Initial pass for any pre-rendered success states
+    scanExisting();
+    // Observe dynamically added grade alerts
+    var mo = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes && m.addedNodes.forEach(handleGradeNode);
+      });
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'exercise-skip:v1';
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function pageKeyPrefix() {
+    return location.pathname + '::';
+  }
+
+  function isSkipped(state, exId) {
+    return !!state[pageKeyPrefix() + exId];
+  }
+
+  function setSkipped(state, exId, skipped) {
+    const key = pageKeyPrefix() + exId;
+    if (skipped) state[key] = true; else delete state[key];
+    saveState(state);
+  }
+
+  function applySkipAttr(el, skipped) {
+    if (skipped) {
+      el.setAttribute('data-skip', 'true');
+      el.setAttribute('data-complete', 'true');
+    } else {
+      el.removeAttribute('data-skip');
+      // Only remove data-complete if this cell wasn't actually completed
+      // by grading (has a success alert). If it was graded, leave complete.
+      const graded = !!el.querySelector('.exercise-grade.alert-success');
+      if (!graded) el.removeAttribute('data-complete');
+    }
+  }
+
+  function buildButton(el, state, exId) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-sm btn-outline-secondary skip-exercise-btn';
+    const skipped = isSkipped(state, exId);
+    btn.textContent = skipped ? 'Undo skip' : 'Skip exercise';
+    btn.setAttribute('aria-pressed', skipped ? 'true' : 'false');
+    btn.style.margin = '0.5rem 0';
+
+    btn.addEventListener('click', function () {
+      const nowSkipped = btn.getAttribute('aria-pressed') !== 'true';
+      applySkipAttr(el, nowSkipped);
+      setSkipped(state, exId, nowSkipped);
+      btn.textContent = nowSkipped ? 'Undo skip' : 'Skip exercise';
+      btn.setAttribute('aria-pressed', nowSkipped ? 'true' : 'false');
+    });
+    return btn;
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const state = loadState();
+    document.querySelectorAll('.cell.wait[data-check="true"]').forEach(function (cell) {
+      const exId = cell.getAttribute('data-exercise');
+      if (!exId) return;
+
+      // Reapply stored skip state
+      applySkipAttr(cell, isSkipped(state, exId));
+
+      // Insert the button just before the exercise cell
+      const btn = buildButton(cell, state, exId);
+      const parent = cell.parentElement || cell;
+      parent.insertBefore(btn, cell);
+    });
+  });
+})();
+</script>
+
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InggPSBBcnJheS5mcm9tKHtsZW5ndGg6IDUwfSwgZDMucmFuZG9tTm9ybWFsKDE4MCwgNTApKVxubm9pc2UgPSBBcnJheS5mcm9tKHtsZW5ndGg6IDUwfSwgZDMucmFuZG9tTm9ybWFsKDAsIDE1KSlcbnkgPSB4Lm1hcCgoeGksIGkpID0+IDAuNSAqIHhpIC0gMTAgKyBub2lzZVtpXSlcblxubGluZWFyRGF0YSA9IHgubWFwKCh4aSwgaSkgPT4gKHsgeDogeGksIHk6IHlbaV0gfSkpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgYjBhZGogPSBJbnB1dHMucmFuZ2UoWy01MCwgNTBdLCB7c3RlcDogMSwgbGFiZWw6IGh0bWxgJHt0ZXhgXFxiZXRhXzBgfTogSW50ZXJjZXB0IChhZGp1c3RtZW50KWB9KVxudmlld29mIGIxID0gSW5wdXRzLnJhbmdlKFstMiwgMl0sIHtzdGVwOiAwLjAxLCBsYWJlbDogIGh0bWxgJHt0ZXhgXFxiZXRhXzFgfTogU2xvcGVgfSlcblxuYjAgPSAoOTAgLSBiMSAqIDE4MCkgKyBiMGFkalxuXG5yZXNpZHVhbERhdGEgPSBsaW5lYXJEYXRhLm1hcChkID0+IHtcbiAgY29uc3QgeWhhdCA9IGIxICogZC54ICsgYjA7XG4gIGNvbnN0IHJlcyAgPSBkLnkgLSB5aGF0O1xuICByZXR1cm4ge1xuICAgIC4uLmQsXG4gICAgeWhhdCxcbiAgICByZXNpZHVhbDogcmVzLFxuICAgIHNpZ246IHJlcyA+PSAwID8gXCJwb3NpdGl2ZVwiIDogXCJuZWdhdGl2ZVwiLFxuICAgIGFic1JlczogTWF0aC5hYnMocmVzKVxuICB9O1xufSlcblxuUk1TUiA9IE1hdGguc3FydChkMy5zdW0ocmVzaWR1YWxEYXRhLCBkID0+IGQucmVzaWR1YWwgKiogMikgLyByZXNpZHVhbERhdGEubGVuZ3RoKVxuXG50ZXguYmxvY2tgeSA9ICR7YjF9eCArICR7YjB9YFxuXG50ZXguYmxvY2tgXFxzcXJ0e1xcZnJhY3sxfXtufVxcc3VtX3tpfXJfaV57Mn19ID0gJHtSTVNSLnRvRml4ZWQoMil9YFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG54UmFuZ2UgPSBkMy5leHRlbnQocmVzaWR1YWxEYXRhLGQgPT4gZC54KVxubGluZURhdGEgPSB4UmFuZ2UubWFwKHggPT4gKHt4LCB5OiBiMSAqIHggKyBiMH0pKVxuXG5QbG90LnBsb3Qoe1xuICBtYXJrczogW1xuICAgIFBsb3QucnVsZVgocmVzaWR1YWxEYXRhLCB7eDogXCJ4XCIsXG4gICAgICB5MTogXCJ5XCIsXG4gICAgICB5MjogXCJ5aGF0XCIsXG4gICAgICBzdHJva2U6IFwic2lnblwiLCBcbiAgICAgIHN0cm9rZU9wYWNpdHk6IDAuNzUsXG4gICAgICBzdHJva2VXaWR0aDogZCA9PiAxICsgZC5hYnNSZXMgLyAxMixcbiAgICAgICB0aXRsZTogZCA9PiBgeD0ke2QueC50b0ZpeGVkKDEpfVxueT0ke2QueS50b0ZpeGVkKDEpfVxuxbc9JHtkLnloYXQudG9GaXhlZCgxKX1cbnJlcz0ke2QucmVzaWR1YWwudG9GaXhlZCgxKX1cbnJlc8KyPSR7KGQucmVzaWR1YWwqKjIpLnRvRml4ZWQoMSl9YFxuICAgIH0pLFxuXG4gICAgUGxvdC5saW5lKGxpbmVEYXRhLCB7IHg6IFwieFwiLCB5OiBcInlcIiB9KSxcblxuICAgIFBsb3QuZG90KGxpbmVhckRhdGEsIHsgeDogXCJ4XCIsIHk6IFwieVwiLCByOiAzIH0pXG4gIF0sXG4gIHg6IHsgZG9tYWluOiB4UmFuZ2UgfSxcbiAgeTogeyBkb21haW46IFswLCAxODBdLCBsYWJlbDogXCJ5XCIgfSxcbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IwYWRqJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2IxJykifV19
 </script>

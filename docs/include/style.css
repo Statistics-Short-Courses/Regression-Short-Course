@@ -1,5 +1,7 @@
 /* hide later sections until exercises are complete */
-section:has(div[data-check="true"]):not(:has(div div div div div.exercise-grade.alert-success)) ~ * {
+body#progressive section:has(div.wait[data-check="true"]):not(:has(div div div div div.exercise-grade.alert-success)) ~ *,
+body#progressive section:has(section div.wait[data-check="true"]):not(:has(section div div div div div.exercise-grade.alert-success)) ~ *,
+body#progressive section:has(ul.task-list input[type="checkbox"]:not(:checked)) ~ * {
   display: none !important;
 }
 
@@ -8,16 +10,8 @@ section:has(div div div div div.exercise-grade.alert-success) ~ * {
   display: block;
 }
 
-/* message pill to explain hidden sections */
-section:has(div[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after {
-  content: "(Complete to continue.)";
-  color: #664d03;
-  background-color: #fff3cd;
-  border-color: #ffecb5;
-}
-
 /* general pill styling */
-section:has(div[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after {
+body#progressive section:has(div.wait[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after, body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)) {
   display: inline-block;
   position: absolute;
   left: 0;
@@ -26,4 +20,48 @@ section:has(div[data-check="true"]):not(:has(div.exercise-grade.alert-success)):
   border-radius: 0.25rem;
   padding: 0.5em;
   width: fit-content;
+}
+
+/* message pill to explain hidden sections */
+body#progressive section:has(div.wait[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after {
+  content: "(Complete to continue.)";
+  color: #664d03;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
+}
+
+/* remove message after completed sections */
+section:has(div.exercise-grade.alert-success)::after {
+  content: "";
+}
+
+/* action pill for next sections and toc */
+body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)) {
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #b6d4fe;
+  cursor: pointer;
+}
+
+/* (hover) */
+body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)):hover, ul.task-list:has(input[type="checkbox"]:not(:checked)) label:hover {
+  color: #055160;
+  background-color: #cff4fc;
+  border-color: #b6effb;
+  cursor: pointer;
+}
+
+/* remove action pill on click or displayall */
+ul.task-list:has(input[type="checkbox"]:checked), ul.task-list input[type="checkbox"], body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)) {
+  display: none;
+}
+
+/* hide toc until end */
+body#progressive #quarto-content:has(.showtoc input[type="checkbox"]:not(:checked)) nav#TOC {
+  visibility: hidden;
+}
+
+/* show toc at end */
+#quarto-content:has(.showtoc input[type="checkbox"]::checked) nav#TOC {
+  visibility: inherit;
 }

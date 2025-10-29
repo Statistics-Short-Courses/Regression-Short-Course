@@ -1,0 +1,29 @@
+/* hide later sections until exercises are complete */
+section:has(div[data-check="true"]):not(:has(div div div div div.exercise-grade.alert-success)) ~ * {
+  display: none !important;
+}
+
+/* reveal later sections when exercises are complete */
+section:has(div div div div div.exercise-grade.alert-success) ~ * {
+  display: block;
+}
+
+/* message pill to explain hidden sections */
+section:has(div[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after {
+  content: "(Complete to continue.)";
+  color: #664d03;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
+}
+
+/* general pill styling */
+section:has(div[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  border-radius: 0.25rem;
+  padding: 0.5em;
+  width: fit-content;
+}

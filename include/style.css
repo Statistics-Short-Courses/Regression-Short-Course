@@ -1,0 +1,39 @@
+/* hide later sections until exercises are complete or box is checked*/
+section:has(div[data-check="true"]):not(:has(div div div div div.exercise-grade.alert-success)) ~ *,
+section:has(ul.task-list input[type="checkbox"]:not(:checked)) ~ * {
+  display: none !important;
+}
+
+/* general pill styling */
+section:has(div[data-check="true"]):not(:has(div.exercise-grade.alert-success))::after, 
+ul.task-list:has(input[type="checkbox"]:not(:checked)) {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  border-radius: 0.25rem;
+  padding: 0.5em;
+  width: fit-content;
+}
+
+/* action pill for next sections*/
+ul.task-list:has(input[type="checkbox"]:not(:checked)) {
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #b6d4fe;
+  cursor: pointer;
+}
+
+/* (hover) */
+ul.task-list:has(input[type="checkbox"]:not(:checked)):hover, ul.task-list:has(input[type="checkbox"]:not(:checked)) label:hover {
+  color: #055160;
+  background-color: #cff4fc;
+  border-color: #b6effb;
+  cursor: pointer;
+}
+
+/* remove action pill on click */
+ul.task-list:has(input[type="checkbox"]:checked), ul.task-list input[type="checkbox"] {
+  display: none;
+}

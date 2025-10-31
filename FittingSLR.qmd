@@ -21,6 +21,7 @@ $\beta$, $\sigma$ based on this.
 
 ::: Exercise
 ## test
+Just a little more
 :::
 
 ## Estimating parameters

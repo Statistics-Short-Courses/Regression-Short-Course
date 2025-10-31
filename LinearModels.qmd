@@ -2,8 +2,7 @@
 format: 
   live-html:
     toc: true
-code-block-bg: true
-code-block-border-left: "#31BAE9"
+
 
 execute:
   echo: true
@@ -18,13 +17,16 @@ filters:
 custom-numbered-blocks:
   classes:
     Assumption:
-      color: [F44336, FFCDD2]
+      colors: [FFCDD2, F44336]
+      boxstyle: foldbox.simple
       collapse: false
     Example:
-      color: [2196F3, BBDEFB]
+      colors: [BBDEFB, 2196F3]
+      boxstyle: foldbox.simple
       collapse: false
     Exercise:
-      color: [4CAF50, C8E6C9]
+      colors: [C8E6C9, 4CAF50]
+      boxstyle: foldbox.simple
       collapse: false
 ---
 
@@ -151,34 +153,29 @@ $$
 #| code-summary: "show code"
 ggplot()+
   aes()+
-  geom_abline(intercept=5e4, slope=5e3, colour='2196F3')+
+  geom_abline(intercept=5e4, slope=5e3, colour='#2196F3')+
   lims(x=c(0,15),y=c(4e4,13e4))+
   labs(x="Years Employment", y= "Expecteted Salary")
-  
 ```
 
-After 10 years of working at this company (i.e. $X=10$), we would expect
-a salary of $$E[Y]=\$50,000 + \$5,000\times10= \$100,000$$
+After 10 years of working at this company (i.e. $X=10$), we would expect a salary of $$E[Y]=\$50,000 + \$5,000\times10= \$100,000$$
 :::
 
 ::: Exercise
 ### A competing offer
 
-A second company also has a job available. The *starting salary* is
-higher here - \$70,000 on average - but payrises are smaller. You are
-told that, on average, employees working for the company for 5 years
-earn \$20,000 more per year than when they started.
+A second company also has a job available. The *starting salary* ishigher here - \$70,000 on average - but payrises are smaller. You are told that, on average, employees working for the company for 6 years earn \$18,000 more per year than when they started.
 
-You want to use a simple linear prediction to calculate your expected
-salary ($E[Y]$) after $X$ years of employment.
+You want to use a simple linear prediction to calculate your expectedsalary ($E[Y]$) after $X$ years of employment.
 
 $$
 E[Y] = \beta_0 + \beta_1 X
 $$ 
 
 :::: {}
-#### Choosing parameters What are the coefficients $\beta_0$
-and $\beta_1$ in this case?
+#### Choosing parameters
+
+What are the coefficients $\beta_0$ and $\beta_1$ in this case?
 
 Assign the relevant values to variables in R
 
@@ -197,7 +194,7 @@ beta_1 <- _______
 #| solution: true
 #| envir: Ex1
 beta_0 <- 70000
-beta_1 <- 4000
+beta_1 <- 3000
 ```
 :::::
 
@@ -214,17 +211,18 @@ gradethis::grade_this_code()
 ::::{}
 #### Linear prediction
 
-Great, so our linear predictor of the expected salary looks something
-like: $$
-E[Y]= \$70,000 + \$4,000\cdot X
+Great, so our linear predictor of the expected salary looks something like: 
+$$
+E[Y]= \$70,000 + \$3,000\cdot X
 $$
 
 ```{r}
 ggplot()+
   aes()+
-  geom_abline(intercept=7e4, slope=4e3)+
-  lims(x=c(0,15),y=c(65e3,13e4))+
-  labs(x="Years Employment", y= "Expecteted Salary")
+  geom_abline(intercept=7e4, slope=3e3, colour="#4CAF50")+
+  geom_abline(intercept=5e4, slope=5e3, colour='#2196F3')+
+  lims(x=c(0,15),y=c(4e4,13e4))+
+  labs(x="Years Employment", y= "Expecteted Salary ($)")
 ```
 
 Using the parameter variables you just defined, calculate the expected

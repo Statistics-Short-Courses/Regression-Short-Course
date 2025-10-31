@@ -5,8 +5,8 @@ format:
 
 execute:
   echo: true
-  warning: false
-  message: false
+  warning: true
+  message: true
 
 editor: 
   markdown: 
@@ -117,8 +117,8 @@ Plot.plot({
 
 ```
 
--   Here, $\beta_0$ represents the value of $Y$ when $X=0$, and
-    $\beta_1$ represents the change in Y for a one-unit increase in X.
+-   Here, $\beta_0$ represents the expected value of $Y$ ($E[Y]$) when $X=0$, and
+    $\beta_1$ represents the change in $E[Y]$ for a one-unit increase in $X$.
 
 :::{.callout-important}
 ### Assumption

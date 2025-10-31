@@ -789,17 +789,27 @@ end -- function renderDiv
 -- TODO: make everything with walk. Looks so nice
 local function resolveref(data)
   return { 
-   RawInline = function(el)
+    RawInline = function(el)
       local refid = el.text:match("\\ref{(.*)}")
-      if refid then 
-        if data[refid] then
-          local href = '#'..refid
-          if fbx.ishtmlbook then 
-            href = data[refid].file .. '.html' .. href 
-          end  
-          return pandoc.Link(data[refid].refnum, href)
-      end  end
-    end
+      local brefid = el.text:match("\\longref{(.*)}")
+      local foundid = ifelse(refid, refid, ifelse(brefid,brefid, nil))
+      
+      if foundid then
+        if data[foundid] then
+          local target = data[foundid]
+          local linktext = target.refnum
+          if brefid then linktext = target.reflabel.." "..target.refnum end
+          local href = '#'..foundid
+            if fbx.ishtmlbook then 
+              href = data[foundid].file .. '.html' .. href 
+            end  
+            return pandoc.Link(linktext, href)
+        else
+          quarto.log.warning("unknown reference ",foundid, " <=============  inserted ?? instead")
+          return({pandoc.Strong("??"),"->[",foundid,"]"}) --,"]<-",pandoc.Strong("??")})
+        end  
+      end
+    end    
   }
 end
 

@@ -1,6 +1,13 @@
 ---
 format: live-html
 engine: knitr
+
+filters:
+  - custom-numbered-blocks
+  
+custom-numbered-blocks:
+  classes:
+    Exercise: default
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
@@ -11,6 +18,10 @@ values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
 contexts we don't know the true relationship between $X$ and $Y$ in
 advance. Instead, we are given *data* and try to *infer* the values of
 $\beta$, $\sigma$ based on this.
+
+::: Exercise
+## test
+:::
 
 ## Estimating parameters
 

@@ -14,6 +14,13 @@ editor:
     
 embed-resources: true
 callout-icon: false
+
+filters:
+  - custom-numbered-blocks
+  
+custom-numbered-blocks:
+  classes:
+    Exercise: default
 ---
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
@@ -22,6 +29,7 @@ callout-icon: false
 ```{r}
 #| include: false
 library(ggplot2)
+set_theme(theme_bw())
 ```
 
 # An introduction to linear statistical models
@@ -117,6 +125,11 @@ Plot.plot({
 Y and X have a linear relationship
 :::
 
+::: Exercise
+test
+:::
+
+
 ::: {.callout-tip}
 ### Example: Salary growth over time
 
@@ -132,12 +145,21 @@ can represent a employee's expected salary ($E[Y]$) as
 $$
 E[Y]= \$50,000 + \$5,000\cdot x.
 $$
+```{r}
+
+ggplot()+
+  aes()+
+  geom_abline(intercept=5e4, slope=5e3, colour="green")+
+  lims(x=c(0,15),y=c(4e4,13e4))+
+  labs(x="Years Employment", y= "Expecteted Salary")
+  
+```
 
 After 10 years of working at this company (i.e. $X=10$), we would expect
 a salary of $$E[Y]=\$50,000 + \$5,000\times10= \$100,000$$
 :::
 
-:::: {.callout-note}
+::: Exercise
 ### Exercise: A competing offer
 
 A second company also has a job available. The *starting salary* is
@@ -192,6 +214,15 @@ Great, so our linear predictor of the expected salary looks something like:
 $$
 E[Y]= \$70,000 + \$4,000\cdot X
 $$
+
+```{r}
+ggplot()+
+  aes()+
+  geom_abline(intercept=7e4, slope=4e3)+
+  lims(x=c(0,15),y=c(65e3,13e4))+
+  labs(x="Years Employment", y= "Expecteted Salary")
+```
+
 
 Using the parameter variables you just defined, calculate the expected salary after working for this companyfor 10 years
 
@@ -278,7 +309,7 @@ gradethis::grade_this_code()
 add plot comparing two (companies) linear salary growth?
 :::
 
-::::
+:::
 
 ## Random Errors
 
@@ -704,8 +735,7 @@ ggplot(df, aes(X, Y)) +
   labs(
     title = "Simulated data from a simple linear model",
     subtitle = sprintf("β0 = %.1f, β1 = %.1f, σ = %.1f, n = %d", beta_0, beta_1, sigma, n),
-    x = "X", y = "Y") +
-theme_minimal()
+    x = "X", y = "Y")
 ```
 ::: showtoc
 -   [ ] Show table of contents

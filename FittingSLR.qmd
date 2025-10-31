@@ -16,6 +16,10 @@ $\beta$, $\sigma$ based on this.
 
 ### Residuals
 
+Suppose we collect paired observations $\{(x_i, y_i)\}_{i=1}^{n}$ and fit a candidate line $\hat y_i = \hat \beta_0 + \hat \beta_1 x_i$. The residual for the $i$th observation is the vertical deviation between the observed and fitted value, $r_i = y_i - \hat y_i$. Residuals capture the part of $y$ that is not explained by the line, so patterns in the residuals suggest that the model is missing structure in the data.
+
+In the interactive plot below the residuals are shown as vertical line segments. Blue segments correspond to positive residuals (points above the fitted line) and red segments correspond to negative residuals (points below the fitted line). Longer segments indicate observations that the current line fits poorly.
+
 ### Estimating $\beta$
 
 Which line fits the data best (how low can the RMSE go)?
@@ -91,6 +95,10 @@ res²=${(d.residual**2).toFixed(1)}`
 
 ### Fitting a model using least squares - lm()
 
+The least squares estimator chooses $\hat \beta_0$ and $\hat \beta_1$ so that the sum of squared residuals $\sum_{i=1}^{n} r_i^2$ is as small as possible. Because the square function penalises large deviations heavily, least squares prefers lines that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
+
+In R the `lm()` function computes these estimates in a single line, returning both the fitted coefficients and the residual standard deviation (labelled `Residual standard error` in the output). The code below fits a simple linear regression to our simulated data.
+
 ```{webr}
 #| input:
 #|   - linearData
@@ -99,17 +107,53 @@ lm(y~x,linearData)
 ```
 ### Estimating $\sigma$
 
+Once the line has been fitted, we estimate the standard deviation of the error terms by measuring the spread of the residuals. Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation
+$$
+\hat \sigma = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n} r_i^2}.
+$$
+In R this value appears as the residual standard error. Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
+
 ## Checking assumptions
 
 ### Independence of observations
+
+Linear regression relies on the observations being independent. Time series data or spatially linked measurements often violate this assumption. When in doubt, look for study-design clues (for example repeated measurements on the same participant) or plot the residuals in the order they were collected; long runs of positive or negative residuals suggest dependence.
+
 ### Linear relationships
+
+The expected response should change linearly with the predictor. Scatterplots of $(x_i, y_i)$ and residual-versus-fitted plots are useful diagnostics. A curved pattern in either plot indicates that we may need a transformation or additional predictors to capture the relationship.
+
 ### Constant Variance
+
+Also called homoscedasticity, this assumption requires that the spread of the residuals remains roughly constant for all fitted values. Residual plots that show a funnel shape (narrow for small $\hat y$ but wide for large $\hat y$) point to heteroscedasticity, in which case we might transform $y$, use weighted least squares, or adopt a different variance model.
+
 ### Normality of error
 
+Least squares still works without normal errors, but the inference tools we use later (confidence intervals and hypothesis tests) rely on approximate normality of residuals. A normal Q-Q plot provides a quick check: substantial deviations from the diagonal line suggest heavier tails or skewness than the normal distribution.
+
 ## Inference for Simple Linear Regression
+
 ### Inference about $\sigma$
+
+With the assumptions above in place, the scaled residual sum of squares follows a $\chi^2_{n-2}$ distribution. This allows us to build a confidence interval for $\sigma$ or to test competing claims about the error variance. In practice we use the R output `sigma` together with the degrees of freedom to construct intervals.
 ### Inference about $\beta_1$
+
+To determine whether the predictor is associated with the response we frame the null hypothesis $H_0: \beta_1 = 0$ and use the t-statistic
+$$
+t = \frac{\hat \beta_1 - 0}{\operatorname{SE}(\hat \beta_1)}.
+$$
+The standard error is obtained from the fitted model and the test statistic is compared against a $t_{n-2}$ distribution. R reports the t-statistic, the corresponding p-value, and a confidence interval for $\beta_1$, letting us draw formal conclusions about the strength and direction of the linear association.
 
 ## Interpreting \`summary()\` output
 
+The `summary()` function wraps all of these pieces into a single report. Focus on:
+- the coefficients table, which lists estimates, standard errors, t-values, and p-values for $\beta_0$ and $\beta_1$;
+- the residual standard error and degrees of freedom, which relate to $\hat \sigma$ and the variability around the line;
+- the multiple $R^2$, quantifying the proportion of variation in $y$ explained by the predictor;
+- the F-statistic, which matches the t-test for $\beta_1$ in the simple regression setting.
+
+Interpreting each component in context helps translate the statistical output into practical insight about the data.
+
 ## Using the model for prediction
+
+After a model has been checked and deemed appropriate, we can use it to predict responses for new values of the predictor. In R the `predict()` function returns both fitted values (point predictions) and prediction intervals that account for residual variability. When reporting predictions always state the uncertainty, because individual observations vary more than the fitted mean. Remember that predictions are most reliable for $x$ values within the range of the observed data; extrapolating far beyond the sample can produce misleading results.

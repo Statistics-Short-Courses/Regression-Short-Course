@@ -11,6 +11,8 @@ book:
   - FittingSLR.qmd
   - MultipleLinearRegression.qmd
   - RegressionCase.qmd
+  - glossary.qmd
+  
 format:
   live-html:
     toc: true

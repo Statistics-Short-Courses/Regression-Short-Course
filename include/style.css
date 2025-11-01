@@ -49,7 +49,7 @@ body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)):hover, u
 }
 
 /* remove action pill on click or displayall */
-ul.task-list:has(input[type="checkbox"]:checked), ul.task-list input[type="checkbox"], body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)) {
+ul.task-list:has(input[type="checkbox"]:checked), ul.task-list input[type="checkbox"], body#displayall ul.task-list:has(input[type="checkbox"]:not(:checked)) {
   display: none;
 }
 

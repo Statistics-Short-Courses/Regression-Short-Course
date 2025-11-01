@@ -24,9 +24,22 @@ custom-numbered-blocks:
       colors: [C8E6C9, 4CAF50]
       boxstyle: foldbox.simple
       collapse: false
+    Technical-point:
+      colors: [C8E6C9, 4CAF50]
+      boxstyle: foldbox.simple
+      collapse: true
+      
+crossref:
+  chapters: true
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include ./_extensions/r-wasm/live/_gradethis.qmd >}}
 
+```{r}
+#| include: false
+library(ggplot2)
+set_theme(theme_bw())
+```
 
 # Simple Linear Regression: fitting a model to data
 
@@ -35,6 +48,8 @@ values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
 contexts we don't know the true relationship between $X$ and $Y$ in
 advance. Instead, we are given *data* and try to *infer* the values of
 $\beta$ and $\sigma$ based on this.
+
+Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this data. 
 
 ## Estimating parameters
 
@@ -51,33 +66,36 @@ $$
 \hat{\sigma}: \text{Estimated standard deviation}.
 $$
 
+We also define $\hat{Y}$ as the predicted value of $Y$ given our estimated model:
 
+$$
+\hat{Y}=\hat{\beta_0}+\hat{\beta_1}X
+$$
 Looking at some data, we try to find the values of our parameters that best 'fit' its distribution. Adjust the sliders below to find a line that you think fits the data:
-
 
 ```{ojs}
 //| echo: false
 //| export: linearData
-x = Array.from({length: 50}, d3.randomNormal(180, 50))
-noise = Array.from({length: 50}, d3.randomNormal(0, 15))
-y = x.map((xi, i) => 0.5 * xi - 10 + noise[i])
+x = Array.from({length: 10}, d3.randomNormal(0,4 ))
+noise = Array.from({length: 50}, d3.randomNormal(0, 2))
+y = x.map((xi, i) => 0.5 * xi - 3 + noise[i])
+
+xRange = d3.extent(x)
+
 
 linearData = x.map((xi, i) => ({ x: xi, y: y[i] }))
 ```
 
-
 ```{ojs}
 //| panel: sidebar
 //| echo: false
-viewof b0adj_1 = Inputs.range([-50, 50], {step: 1, label: html`${tex`\hat{\beta_0}`}: Estimated Intercept (asjust)`})
+viewof b0adj_1 = Inputs.range([-5, 5], {step: 1, label: html`${tex`\hat{\beta_0}`}: Estimated Intercept (asjust)`})
 viewof b1_1 = Inputs.range([-2, 2], {step: 0.01, label:  html`${tex`\hat{\beta_1}`}: Estimated Slope`})
 
-b0_1 = (90 - b1_1 * 180) + b0adj_1
+b0_1 = (-3 - 0.5*b1_1) + b0adj_1
 
-tex.block`E[Y] = ${b0_1} + ${b1_1}x`
+tex.block`\hat{Y} = ${b0_1} + ${b1_1}x`
 ```
- 
- 
 
 ```{ojs}
 //| panel: fill
@@ -91,7 +109,7 @@ Plot.plot({
     Plot.dot(linearData, { x: "x", y: "y", r: 3 })
   ],
   x: { domain: xRange },
-  y: { domain: [0, 180], label: "y" },
+  y: { domain: [-10, 5], label: "y" },
 })
 ```
 
@@ -99,43 +117,80 @@ Plot.plot({
 What is your best estimate for the values of $\beta_0$ and $\beta_1$ that best fit the given data?
 
 ```{webr}
+#| exercise: ex_2.1
+#| envir: Ex2
 #| define:
 #|   - beta_0_hat
 #|   - beta_1_hat
 beta_0_hat <- 1.2
 beta_1_hat <- 12
 ```
+:::: {.solution exercise="ex_1"}
+```{webr}
+#| exercise: ex_2.1
+#| solution: true
+```
+::::
+```{webr}
+#| exercise: ex_2.1
+#| envir: Ex2
+#| check: true
+#| class: wait
+grade_this({
+  if (is.numeric(get("beta_0_hat", envir = .envir_result)) && is.numeric(get("beta_1_hat", envir = .envir_result))){pass("Good guess!")}
+  fail("both \\$\\beta_1\\$ and beta_0 should be numbers")
+})
+```
+
 :::
--   [ ] Continue 
-
 ###
-
 Ok great, so we have an estimate for our line-of-best-fit:
 ```{ojs}
 //| echo: false
-
-tex.block`E[Y] = ${beta_0_hat} + ${beta_1_hat}\times X`
+tex.block`\hat{Y} = ${beta_0_hat} + ${beta_1_hat}\cdot X`
 ```
 
+but what do we mean by 'best' fit here? How do we evaluate this estimate and maybe compare it to other estimates?
 
-but what do we mean by 'best' fit here?
-
--   [ ] Continue to the next section
+-   [ ] Continue
 
 ### Residuals
 
+Residuals are the difference between observed values of $Y$ (the points in the above scatter plot), and the value expected (or predicted) by our estimated linear predictor $\hat{Y} = \hat{\beta_0}+\hat{\beta_1}X$. We denote residuals with the letter $e$:
+$$
+e=Y-\hat{Y} = Y - \hat{\beta_0}+\hat{\beta_1}X. 
+$$
+
+Residuals, $e$, are similar to the errors, $\varepsilon$, that we encountered in chapter 1 - but they are distinct. In many situations, we do not know the values of $\beta_0$ an $\beta_1$ - so we cannot calculate the errors, $\varepsilon= Y- E[Y]= Y-\beta_0 + \beta_1 X$. However, we have are our estimates, $\hat{\beta_0}$ and $\hat{\beta_1}$, so we can calculate residuals. 
+
+Indeed - calculating residuals gives us a way to assess how well our estimated model fits the data.  We can think of the residuals as being the 'mismatch' between our estimated linear predictor and each data point. By *minimizing* the size of residuals, we can get a better fit of our line to data.
+
+- [ ] Continue 
+
 ### Estimating $\beta$ by minimising residuals
 
-Guess the linear model (how low can the RMSE go)?
+#### Guess the linear predictor (how low can the residuals go)?
 
+Our estimated line now also displays residuals for each data point.
+Underneath the model equation is the *Sum of Squared Residuals* (SSR), which adds up all the residuals (the square means that they are all positive). 
+
+$$
+SSR=\sum_{i=1}^{n} e_i^2
+$$
+
+This gives us a numerical measure of how well the line fits the data - see how low you can get the SSR by adjusting slope and intercept.
+
+$$
+e_i = Y_i - \hat{Y}_i
+$$
 
 ```{ojs}
 //| panel: sidebar
 //| echo: false
-viewof b0adj = Inputs.range([-50, 50], {step: 1, label: html`${tex`\hat{\beta_0}`}: Estimated Intercept`})
+viewof b0adj = Inputs.range([-5, 5], {step: 1, label: html`${tex`\hat{\beta_0}`}: Estimated Intercept`})
 viewof b1 = Inputs.range([-2, 2], {step: 0.01, label:  html`${tex`\hat{\beta_1}`}: Estimated Slope`})
 
-b0 = (90 - b1 * 180) + b0adj
+b0 = -3 + b0adj
 
 residualData = linearData.map(d => {
   const yhat = b1 * d.x + b0;
@@ -148,18 +203,17 @@ residualData = linearData.map(d => {
     absRes: Math.abs(res)
   };
 })
+  
+SSRes = d3.sum(residualData, d => d.residual ** 2)
 
-RMSR = Math.sqrt(d3.sum(residualData, d => d.residual ** 2) / residualData.length)
+tex.block`\hat{Y} = ${b1}X + ${b0}`
 
-tex.block`y = ${b1}x + ${b0}`
-
-tex.block`\sqrt{\frac{1}{n}\sum_{i}r_i^{2}} = ${RMSR.toFixed(2)}`
+tex.block`\sum_{i}r_i^{2} = ${SSRes.toFixed(2)}`
 ```
 
 ```{ojs}
 //| panel: fill
 //| echo: false
-xRange = d3.extent(residualData,d => d.x)
 lineData = xRange.map(x => ({x, y: b1 * x + b0}))
 
 Plot.plot({
@@ -169,46 +223,112 @@ Plot.plot({
       y2: "yhat",
       stroke: "sign", 
       strokeOpacity: 0.75,
-      strokeWidth: d => 1 + d.absRes / 12,
-       title: d => `x=${d.x.toFixed(1)}
-y=${d.y.toFixed(1)}
-ŷ=${d.yhat.toFixed(1)}
-res=${d.residual.toFixed(1)}
-res²=${(d.residual**2).toFixed(1)}`
-    }),
+      strokeWidth: d => 1 + d.absRes}),
 
     Plot.line(lineData, { x: "x", y: "y" }),
 
     Plot.dot(linearData, { x: "x", y: "y", r: 3 })
   ],
   x: { domain: xRange },
-  y: { domain: [0, 180], label: "y" },
+  y: { domain: [-10,5], label: "y" },
 })
 ```
-### Estimating \sigma by the spread of residuals
 
+
+::: Exercise
+Based on this visualisation, what do you think the minimum possible $SSR$ achievable is?
+```{webr}
+#| exercise: Ex_2.2
+#| envir: Ex2
+#| define:
+#|   - SSR
+SSR <- 50
+```
+:::: {.solution exercise="Ex_2.2"}
+```{webr}
+#| exercise: Ex_2.2
+#| solution: true
+```
+::::
+```{webr}
+#| exercise: Ex_2.2
+#| check: true
+#| class: wait
+grade_this({
+  if (is.numeric(get("SSR", envir = .envir_result))){
+    pass("Good guess!")}
+  fail("SSR should be a number!")
+})
+```
+If you want you can update your $\hat{\beta}$ estimates too (otherwise just proceed):
+
+```{webr}
+#| exercise: ex_2.3
+#| envir: Ex2
+beta_0_hat <- ______
+
+beta_1_hat <- ______
+```
+
+:::
+::: Technical-point
+#### Why squares?
+The least squares estimator chooses $\hat \beta_0$ and $\hat \beta_1$ so that the sum of squared residuals $\sum_{i=1}^{n} r_i^2$ is as small as possible. But why take squares?
+As mentioned, squaring numbers returns a positive result. Therefore the square gives some idea of the 'absolute' value of the residuals (and doesn't allow negative residuals to cancel out positve ones). But why not just take the absolute value?
+Because the square function penalises large deviations heavily, least squares prefers lines that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
+:::
 ### Fitting a model using least squares
 
-The least squares estimator chooses $\hat \beta_0$ and $\hat \beta_1$ so that the sum of squared residuals $\sum_{i=1}^{n} r_i^2$ is as small as possible. Because the square function penalises large deviations heavily, least squares prefers lines that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
+We call the estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ which minimise the sum of squares the *least squares estimates*. Some nice mathematics tells us that the least squares esimates for a simple linear model are *unique* - that is, there is one set of values for $\hat{\beta_0}$ and $\hat{\beta_1}$ which satisfy this property. Moreover, we don't have to manually adjust our parameters to keep lowering SSR - there is a convenient closed form expression which allows us to compute $\hat{\beta_0}$ and $\hat{\beta_1}$ very efficiently. As a statistical programming language, this is something R does very easily..
 
-#### The lm() function in R
 
-In R the `lm()` function computes these estimates in a single line, returning both the fitted coefficients and the residual standard deviation (labelled `Residual standard error` in the output). The code below fits a simple linear regression to our simulated data.
+#### The `lm()` function
+
+In R the `lm()` function computes the least squares estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ for our simple linear model in a single command, printing both of the fitted coefficients. 
 
 ```{webr}
 #| input:
 #|   - linearData
-
-lm(y~x,linearData)
+lm_1 <- lm(y~x,linearData)
+lm_1
 ```
+
+How do these estimates compare with yours? Lets have a look at the line it produces. 
+
+```{webr}
+#| envir: Ex2
+#| code-fold: true
+#| code-summary: "show code"
+# we extract the coefficients from the lm object by indexing with `$`
+ls_beta_0_hat <- lm_1$coefficients[1]
+ls_beta_1_hat <- lm_1$coefficients[2]
+
+ggplot(linearData)+
+  aes(x=x,y=y)+
+  geom_point()+
+  geom_abline(
+    intercept=ls_beta_0_hat,
+    slope=ls_beta_1_hat)+
+    geom_abline(
+    intercept=beta_0_hat,
+    slope=beta_1_hat)
+```
+
+-   [ ] Continue
 
 ### Estimating $\sigma$
 
-Once the line has been fitted, we estimate the variance of the (actual) error terms by measuring the spread of the residuals. Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation (aka. the {{< glossary Residual-Standard-Error >}})
+Once the line has been fitted, we estimate the variance of the (actual) error terms by measuring the spread of the residuals.
+
+Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation (aka. the {{< glossary Residual-Standard-Error >}})
 $$
 \hat \sigma = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n} r_i^2}.
 $$
 In R output, this value is often called the. Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
+
+
+### Estimating \sigma by the spread of residuals
+
 
 ## Checking assumptions
 

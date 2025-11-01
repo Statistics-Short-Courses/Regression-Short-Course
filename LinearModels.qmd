@@ -28,8 +28,8 @@ custom-numbered-blocks:
       boxstyle: foldbox.simple
       collapse: false
 ---
-
-{{< include ./_extensions/r-wasm/live/_knitr.qmd >}} {{< include ./_extensions/r-wasm/live/_gradethis.qmd >}}
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include ./_extensions/r-wasm/live/_gradethis.qmd >}}
 
 ```{r}
 #| include: false
@@ -64,6 +64,8 @@ Here $\varepsilon$ represents the random variation in $Y$ that is not explained 
 ::: Assumption
 $Y$ depends only on a deterministic function of $X$ and a random noise component
 :::
+
+- [ ] Continue
 
 ## Linear prediction
 
@@ -638,9 +640,8 @@ ggplot(df, aes(X, Y)) +
 Heres the same code running in webR - try adjusting some of the parameters (e.g. the number of samples) and running to plot a different random sample!
 
 ```{webr}
-#| warning: false
-#| message: false
-
+#| code-fold: true
+#| code-summary: "show code"
 n <- 100
 X <- runif(n, min=0, max= 50)
 

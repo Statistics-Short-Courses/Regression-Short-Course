@@ -21,7 +21,7 @@ body#progressive section:has(.cell.wait[data-check="true"]:not([data-complete="t
 
 /* message pill to explain hidden sections */
 body#progressive section:has(.cell.wait[data-check="true"]:not([data-complete="true"])):not(:has(section .cell.wait[data-check="true"]:not([data-complete="true"])))::after {
-  content: "(Complete to continue.)";
+  content: "Complete (or skip) exercises to continue";
   color: #664d03;
   background-color: #fff3cd;
   border-color: #ffecb5;

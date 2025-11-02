@@ -8,9 +8,9 @@ book:
   chapters:
   - index.qmd
   - LinearModels.qmd
-  - FittingSLR.qmd
+  - SimpleLinearRegression.qmd
   - MultipleLinearRegression.qmd
-  - RegressionCase.qmd
+  - RegressionCaseStudy.qmd
   - glossary.qmd
   page-navigation: false
   

@@ -130,6 +130,7 @@ $$
 ```{r}
 #| code-fold: true
 #| code-summary: "show code"
+#| fig-cap: "test"
 ggplot()+
   geom_abline(intercept=5e4, slope=5e3, colour='#2196F3')+
   lims(x=c(0,15),y=c(4e4,13e4))+
@@ -195,6 +196,8 @@ Great, so our linear predictor of the expected salary looks something like:
 $$
 E[Y]= \$70,000 + \$3,000\cdot X
 $$
+
+here is a plot of that linear relationship alongside that of company 1:
 
 ```{r}
 #| code-fold: true

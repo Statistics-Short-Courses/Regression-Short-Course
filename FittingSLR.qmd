@@ -47,9 +47,9 @@ in the previous section, you were given a linear model - we knew the
 values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
 contexts we don't know the true relationship between $X$ and $Y$ in
 advance. Instead, we are given *data* and try to *infer* the values of
-$\beta$ and $\sigma$ based on this.
+$\beta$ and $\sigma$ by analysing the data.
 
-Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this data. 
+Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a similar such linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this data. 
 
 ## Estimating parameters
 

@@ -320,15 +320,22 @@ ggplot(linearData)+
 
 Once the line has been fitted, we estimate the variance of the (actual) error terms by measuring the spread of the residuals.
 
+We can extract the individual residual values from the fitted `lm` object:
+
+```{webr}
+e <- lm_1$residuals
+ggplot(e)+
+  aes(x=e)+
+  geom_hist()
+```
+
 Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation (aka. the {{< glossary Residual-Standard-Error >}})
 $$
 \hat \sigma = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n} r_i^2}.
 $$
-In R output, this value is often called the. Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
+In R output, this value is often called the Standard error. Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
 
-
-### Estimating \sigma by the spread of residuals
-
+- [ ] Continue
 
 ## Checking assumptions
 
@@ -348,7 +355,40 @@ Also called homoscedasticity, this assumption requires that the spread of the re
 
 Least squares still works without normal errors, but the inference tools we use later (confidence intervals and hypothesis tests) rely on approximate normality of residuals. A normal Q-Q plot provides a quick check: substantial deviations from the diagonal line suggest heavier tails or skewness than the normal distribution.
 
+### Examples of assumption violations
+- In this case the assumptions hold - as expected because I told you the data were sampled from an actual linear model. 
+
+
 ## Inference for Simple Linear Regression
+
+
+- Here we have been given some data sampled from a linear model, do you think the a parameter estimates obtained so far represent the underlying model well? 
+
+- since we have the opportunity, lets take another sample from the same model: 
+
+```{webr}
+n <- 20
+x <- rnorm(n,0,4)
+error <-  rnorm(n,0, 2)
+y <- 0.5 * x - 3 + error
+linearData_new <- data.frame(x,y)
+```
+
+And fit a linear regression via least squares
+```{webr}
+lm_2 <- lm(y~x,linearData_new)
+lm
+```
+lets compare out two datasets (remember, these come from the same underlying linear model with $\beta_0=-3$ and $\beta_1=0.5$ and their lines of best fit:
+```{webr}
+ggplot()+
+  geom_point(data=linearData, aes())
+```
+- Repeating this process produces the sampling distribution of our parameters.
+
+- in the real world we wont have the luxury of generating new samples by running R commands, so we have to make do with the data we have. Thankfully, if our assumptions of the underlying model are true then we can expect the same process of convergence to a stable sampling distribution to hold true and our parameter estimates for beta to have a t-distribution. 
+
+### Inference about $\beta$
 
 ### Inference about $\sigma$
 

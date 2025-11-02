@@ -156,7 +156,7 @@ but what do we mean by 'best' fit here? How do we evaluate this estimate and may
 
 ### Residuals
 
-Residuals are the difference between observed values of $Y$ (the points in the above scatter plot), and the value expected (or predicted) by our estimated linear predictor $\hat{Y} = \hat{\beta_0}+\hat{\beta_1}X$. We denote residuals with the letter $e$:
+Residuals are the difference between observed values of $Y$, and the value predicted by our estimated linear predictor $\hat{Y}$. We denote residuals with the letter $e$:
 $$
 e=Y-\hat{Y} = Y - \hat{\beta_0}+\hat{\beta_1}X. 
 $$

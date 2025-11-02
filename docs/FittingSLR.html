@@ -110,15 +110,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 <style>
-.Exercise {
-  --color1: #C8E6C9;
-  --color2: #4CAF50;
-}
 .Assumption {
   --color1: #FFCDD2;
   --color2: #F44336;
 }
 .Technical-point {
+  --color1: #C8E6C9;
+  --color2: #4CAF50;
+}
+.Exercise {
   --color1: #C8E6C9;
   --color2: #4CAF50;
 }
@@ -463,7 +463,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJjbGFzcyI6IndhaXQiLCJlZGl0Ijp0cnVlLCJlbnZpciI6IkV4
 </section>
 <section id="residuals" class="level3">
 <h3 class="anchored" data-anchor-id="residuals">Residuals</h3>
-<p>Residuals are the difference between observed values of <span class="math inline">\(Y\)</span> (the points in the above scatter plot), and the value expected (or predicted) by our estimated linear predictor <span class="math inline">\(\hat{Y} = \hat{\beta_0}+\hat{\beta_1}X\)</span>. We denote residuals with the letter <span class="math inline">\(e\)</span>: <span class="math display">\[
+<p>Residuals are the difference between observed values of <span class="math inline">\(Y\)</span>, and the value predicted by our estimated linear predictor <span class="math inline">\(\hat{Y}\)</span>. We denote residuals with the letter <span class="math inline">\(e\)</span>: <span class="math display">\[
 e=Y-\hat{Y} = Y - \hat{\beta_0}+\hat{\beta_1}X.
 \]</span></p>
 <p>Residuals, <span class="math inline">\(e\)</span>, are similar to the errors, <span class="math inline">\(\varepsilon\)</span>, that we encountered in chapter 1 - but they are distinct. In many situations, we do not know the values of <span class="math inline">\(\beta_0\)</span> an <span class="math inline">\(\beta_1\)</span> - so we cannot calculate the errors, <span class="math inline">\(\varepsilon= Y- E[Y]= Y-\beta_0 + \beta_1 X\)</span>. However, we have are our estimates, <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span>, so we can calculate residuals.</p>

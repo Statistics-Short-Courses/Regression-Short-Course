@@ -10,6 +10,16 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to Linear Regression in R",
+    "section": "",
+    "text": "Preface\nThis notebook provides an introduction (or refresher) to linear regression, a fundamental tool for modeling relationships between variables. We’ll explore the concepts, fit models in R, interpret results, and visualize fits.\nBy the end, you should be able to:\n\nUnderstand the linear regression model and its assumptions.\nFit and interpret simple and multiple regression models in R.\nDiagnose model fit using residual plots and summary statistics.\nUse model output to make predictions and assess uncertainty.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
     "objectID": "LinearModels.html",
     "href": "LinearModels.html",
     "title": "1  An introduction to linear statistical models",
@@ -24,6 +34,7 @@
     "href": "LinearModels.html#statistical-models",
     "title": "1  An introduction to linear statistical models",
     "section": "",
+    "text": "A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call them \\(X\\) and \\(Y\\).\nIn this context, we designate one variable, \\(Y\\) as the outcome or dependent variable, and attempt to construct a model describing how it depends on the other variable(s), \\(X\\), which we call predictors or independent variables.\nWe can express the idea that \\(Y\\) depends on \\(X\\) mathematically as \\[\nY=f(X)\n\\]\nThat is, \\(Y\\) is some function of \\(X\\) (we have not yet specified what kind of function). Given values of \\(X\\), we can use this function to predict or explain corresponding values of \\(Y\\).\nThis is similar to deterministic models you may know from physics - for example \\[E=MC^2\\], where \\(E\\) (the outcome), depends on \\(M\\) (a predictor) through the function \\(f(M)=MC^2\\)).\nIn statistical modelling we take another step and assume that \\(Y\\) is not a purely determinsitic function of \\(X\\), but that it varies somewhat randomly around such a relationship. We capture this by introducing a random error term , \\(\\varepsilon\\): \\[\nY=f(X)+\\varepsilon\n\\tag{1.1}\\]\n\n\n\nThis means that \\(Y\\) is not perfectly determined by \\(X\\): even if we know the values of X, the outcome Y can still vary due to random noise.\n\n\nAssumption 1\\(Y\\) depends only on a deterministic function of \\(X\\) and a random noise component\n\n\n\nContinue",
     "text": "A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call them \\(X\\) and \\(Y\\).\nIn this context, we designate one variable, \\(Y\\) as the outcome or dependent variable, and attempt to construct a model describing how it depends on the other variable(s), \\(X\\), which we call predictors or independent variables.\nWe can express the idea that \\(Y\\) depends on \\(X\\) mathematically as \\[\nY=f(X)\n\\]\nThat is, \\(Y\\) is some function of \\(X\\) (we have not yet specified what kind of function). Given values of \\(X\\), we can use this function to predict or explain corresponding values of \\(Y\\).\nThis is similar to deterministic models you may know from physics - for example \\[E=MC^2\\], where \\(E\\) (the outcome), depends on \\(M\\) (a predictor) through the function \\(f(M)=MC^2\\)).\nIn statistical modelling we take another step and assume that \\(Y\\) is not a purely determinsitic function of \\(X\\), but that it varies somewhat randomly around such a relationship. We capture this by introducing a random error term , \\(\\varepsilon\\): \\[\nY=f(X)+\\varepsilon\n\\tag{1.1}\\]\n\n\n\nThis means that \\(Y\\) is not perfectly determined by \\(X\\): even if we know the values of X, the outcome Y can still vary due to random noise.\n\n\nAssumption 1\\(Y\\) depends only on a deterministic function of \\(X\\) and a random noise component\n\n\n\nContinue",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>An introduction to linear statistical models</span>"
@@ -64,7 +75,7 @@
     "href": "FittingSLR.html",
     "title": "2  Simple Linear Regression: fitting a model to data",
     "section": "",
-    "text": "2.1 Estimating parameters\nin the previous section, you were given a linear model - we knew the values of \\(\\beta_0\\), \\(\\beta_1\\) and even \\(\\sigma\\). However, in most contexts we don’t know the true relationship between \\(X\\) and \\(Y\\) in advance. Instead, we are given data and try to infer the values of \\(\\beta\\) and \\(\\sigma\\) based on this.\nIndeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it’s values for \\(\\beta\\) and \\(\\sigma\\)) produced this data.",
+    "text": "2.1 Estimating parameters\nin the previous section, you were given a linear model - we knew the values of \\(\\beta_0\\), \\(\\beta_1\\) and even \\(\\sigma\\). However, in most contexts we don’t know the true relationship between \\(X\\) and \\(Y\\) in advance. Instead, we are given data and try to infer the values of \\(\\beta\\) and \\(\\sigma\\) by analysing the data.\nIndeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a similar such linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it’s values for \\(\\beta\\) and \\(\\sigma\\)) produced this data.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Simple Linear Regression: fitting a model to data</span>"
     ]

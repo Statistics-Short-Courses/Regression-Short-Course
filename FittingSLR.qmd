@@ -35,7 +35,7 @@ crossref:
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 {{< include ./_extensions/r-wasm/live/_gradethis.qmd >}}
 
-```{r}
+```{webr}
 #| include: false
 library(ggplot2)
 set_theme(theme_bw())
@@ -47,9 +47,9 @@ in the previous section, you were given a linear model - we knew the
 values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
 contexts we don't know the true relationship between $X$ and $Y$ in
 advance. Instead, we are given *data* and try to *infer* the values of
-$\beta$ and $\sigma$ based on this.
+$\beta$ and $\sigma$ by analysing the data.
 
-Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this data. 
+Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a similar such linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this data. 
 
 ## Estimating parameters
 
@@ -156,7 +156,7 @@ but what do we mean by 'best' fit here? How do we evaluate this estimate and may
 
 ### Residuals
 
-Residuals are the difference between observed values of $Y$ (the points in the above scatter plot), and the value expected (or predicted) by our estimated linear predictor $\hat{Y} = \hat{\beta_0}+\hat{\beta_1}X$. We denote residuals with the letter $e$:
+Residuals are the difference between observed values of $Y$, and the value predicted by our estimated linear predictor $\hat{Y}$. We denote residuals with the letter $e$:
 $$
 e=Y-\hat{Y} = Y - \hat{\beta_0}+\hat{\beta_1}X. 
 $$
@@ -234,7 +234,6 @@ Plot.plot({
 })
 ```
 
-
 ::: Exercise
 Based on this visualisation, what do you think the minimum possible $SSR$ achievable is?
 ```{webr}
@@ -277,6 +276,7 @@ The least squares estimator chooses $\hat \beta_0$ and $\hat \beta_1$ so that th
 As mentioned, squaring numbers returns a positive result. Therefore the square gives some idea of the 'absolute' value of the residuals (and doesn't allow negative residuals to cancel out positve ones). But why not just take the absolute value?
 Because the square function penalises large deviations heavily, least squares prefers lines that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
 :::
+
 ### Fitting a model using least squares
 
 We call the estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ which minimise the sum of squares the *least squares estimates*. Some nice mathematics tells us that the least squares esimates for a simple linear model are *unique* - that is, there is one set of values for $\hat{\beta_0}$ and $\hat{\beta_1}$ which satisfy this property. Moreover, we don't have to manually adjust our parameters to keep lowering SSR - there is a convenient closed form expression which allows us to compute $\hat{\beta_0}$ and $\hat{\beta_1}$ very efficiently. As a statistical programming language, this is something R does very easily..

@@ -4,6 +4,12 @@ body#progressive section:has(.cell.wait[data-check="true"]:not([data-complete="t
 body#progressive section:has(ul.task-list input[type="checkbox"]:not(:checked)) ~ * {
   display: none !important;
 }
+
+/* Also hide content that follows a manual gate (unchecked task list)
+   within the same section, not just subsequent sections. */
+body#progressive ul.task-list:has(input[type="checkbox"]:not(:checked)) ~ * {
+  display: none !important;
+}
 /* reveal later sections when exercises are complete: implicit when no pending remain */
 
 /* general pill styling */

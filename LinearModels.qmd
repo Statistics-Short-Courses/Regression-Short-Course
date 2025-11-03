@@ -72,7 +72,7 @@ Here $\varepsilon$ represents the random variation in $Y$ that is not explained 
 $Y$ depends only on a deterministic function of $X$ and a random noise component
 :::
 
-- [ ] Continue
+-  [ ] Continue
 
 ## Linear prediction
 
@@ -110,7 +110,6 @@ Plot.plot({
   marks: [
     Plot.line(lineData, { x: "x", y: "y" })]
 })
-
 ```
 
 -   Here, $\beta_0$ represents the expected value of $Y$ ($E[Y]$) when $X=0$, and $\beta_1$ represents the change in $E[Y]$ for a one-unit increase in $X$.
@@ -119,9 +118,7 @@ Plot.plot({
 Y and X have a linear relationship
 :::
 
-::: {}
-- [ ] Continue
-::: 
+-  [ ] Continue
 
 ::: Example
 ### Salary growth over time
@@ -159,7 +156,6 @@ E[Y] = \beta_0 + \beta_1 X
 $$
 
 ::::{}
-
 #### Choosing parameters
 
 What are the coefficients $\beta_0$ and $\beta_1$ in this case?
@@ -303,12 +299,13 @@ simple_linear_prediction(X)
 gradethis::grade_this_code()
 ```
 ::::
-::::{}
+:::: {}
 ### Good work!  {.unnumbered}
 Next we'll add the second main component to our linear predictor to make it a linear statistical model
 ::::
--  [ ] Continue
 :::
+
+-  [ ] Continue
 
 ## Random Errors
 
@@ -682,9 +679,5 @@ df <- data.frame(X = X, Y = Y)
 
 ggplot(df, aes(X, Y)) +
   geom_point(alpha = 0.7) +
-  geom_abline(intercept = beta_0, slope = beta_1, linetype = "dashed") +
-  labs(
-    title = "Simulated data from a simple linear model",
-    subtitle = sprintf("β0 = %.1f, β1 = %.1f, σ = %.1f, n = %d", beta_0, beta_1, sigma, n),
-    x = "X", y = "Y")
+  geom_abline(intercept = beta_0, slope = beta_1, linetype = "dashed")
 ```

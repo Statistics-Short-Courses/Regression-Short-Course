@@ -345,31 +345,44 @@ In R output, this value is often called the Standard error. Interpreting $\hat \
 ## Checking assumptions
 
 ### Independence of observations
-
-Linear regression relies on the observations being independent. Time series data or spatially linked measurements often violate this assumption. When in doubt, look for study-design clues (for example repeated measurements on the same participant) or plot the residuals in the order they were collected; long runs of positive or negative residuals suggest dependence.
+-   **What it means:** Linear regression relies on the observations being independent; each response should be unaffected by the others.
+-   **Common violations:** Time series data, spatial measurements, or repeated observations on the same unit often introduce dependence.
+-   **How to diagnose:** Look for clues in the study design and plot residuals in their collection order—long runs of positive or negative residuals hint at dependence.
+-   **Possible remedies:** Incorporate correlation structures (e.g., mixed models), difference consecutive observations, or collect data to ensure independence.
 
 ### Linear relationships
-
-The expected response should change linearly with the predictor. Scatterplots of $(x_i, y_i)$ and residual-versus-fitted plots are useful diagnostics. A curved pattern in either plot indicates that we may need a transformation or additional predictors to capture the relationship.
+-   **What it means:** The expected response should change linearly with the predictor.
+-   **Diagnostics:** Scatterplots of $(x_i, y_i)$ and residual-versus-fitted plots are useful checks.
+-   **Warning signs:** Curved patterns or systematic structure in these plots suggest the linear form is inadequate.
+-   **Possible remedies:** Try transforming variables, adding polynomial terms, or introducing additional predictors.
 
 ### Constant Variance
-
-Also called homoscedasticity, this assumption requires that the spread of the residuals remains roughly constant for all fitted values. Residual plots that show a funnel shape (narrow for small $\hat y$ but wide for large $\hat y$) point to heteroscedasticity, in which case we might transform $y$, use weighted least squares, or adopt a different variance model.
+-   **What it means:** Also called homoscedasticity, the variability of residuals should stay roughly constant across fitted values.
+-   **Diagnostics:** Residual-versus-fitted plots should show an even vertical spread.
+-   **Warning signs:** Funnel or fan shapes (narrow for small $\hat y$ but wide for large $\hat y$) reveal heteroscedasticity.
+-   **Possible remedies:** Transform the response, use weighted least squares, or model the variance explicitly.
 
 ### Normality of error
-
-Least squares still works without normal errors, but the inference tools we use later (confidence intervals and hypothesis tests) rely on approximate normality of residuals. A normal Q-Q plot provides a quick check: substantial deviations from the diagonal line suggest heavier tails or skewness than the normal distribution.
+-   **What it means:** Least squares inference (confidence intervals, hypothesis tests) assumes residuals are approximately normal.
+-   **Diagnostics:** Use a normal Q-Q plot to compare residual quantiles with the theoretical normal line.
+-   **Warning signs:** Systematic bends or heavy tail departures from the diagonal indicate skewness or heavy tails.
+-   **Possible remedies:** Transform the response, refit with robust methods, or collect more data to stabilise the distribution.
 
 ### Examples of assumption violations
-- In this case the assumptions hold - as expected because I told you the data were sampled from an actual linear model. 
+-   **Simulated example:** In this case the assumptions hold—as expected because the data were sampled from an actual linear model.
+-   **Real-world contrasts:** Add case studies where independence fails (e.g., repeated measures), the relationship is curved, the variance changes, or the residuals are non-normal.
+-   **Teaching tip:** For each violation, include visuals showing the problematic residual pattern and a suggested fix.
 
 
 ## Inference for Simple Linear Regression
 
 
-- Here we have been given some data sampled from a linear model, do you think the a parameter estimates obtained so far represent the underlying model well? 
+-   **Connection to simulation:** We have been given data sampled from a linear model—consider whether the parameter estimates obtained so far represent the underlying model well.
+-   **Repeat sampling experiment:** Since we can simulate data, take another sample from the same model to explore variability in the estimates.
+-   **Comparison visuals:** Overlay lines from multiple samples to build intuition for the sampling distribution of $\hat\beta$.
+-   **Key takeaway:** Even with the same generating process, estimates vary; inference quantifies this uncertainty.
 
-- since we have the opportunity, lets take another sample from the same model: 
+- since we have the opportunity, lets take another sample from the same model:
 
 ```{webr}
 n <- 20
@@ -391,31 +404,43 @@ ggplot()+
 ```
 - Repeating this process produces the sampling distribution of our parameters.
 
-- in the real world we wont have the luxury of generating new samples by running R commands, so we have to make do with the data we have. Thankfully, if our assumptions of the underlying model are true then we can expect the same process of convergence to a stable sampling distribution to hold true and our parameter estimates for beta to have a t-distribution. 
+- in the real world we wont have the luxury of generating new samples by running R commands, so we have to make do with the data we have. Thankfully, if our assumptions of the underlying model are true then we can expect the same process of convergence to a stable sampling distribution to hold true and our parameter estimates for beta to have a t-distribution.
 
 ### Inference about $\beta$
 
+-   **Objective:** Derive sampling distributions for $\hat{\beta}_0$ and $\hat{\beta}_1$ under the model assumptions.
+-   **Key results:** Emphasise unbiasedness, variance formulas, and the joint normality of the estimators.
+-   **Confidence intervals:** Outline the structure $\hat{\beta} \pm t_{n-2,\alpha/2} \cdot \operatorname{SE}(\hat{\beta})$.
+-   **Hypothesis tests:** Summarise how to test linear contrasts of the coefficients using t-statistics.
+
 ### Inference about $\sigma$
 
-With the assumptions above in place, the scaled residual sum of squares follows a $\chi^2_{n-2}$ distribution. This allows us to build a confidence interval for $\sigma$ or to test competing claims about the error variance. In practice we use the R output `sigma` together with the degrees of freedom to construct intervals.
+-   **Distributional result:** With the assumptions above, the scaled residual sum of squares follows a $\chi^2_{n-2}$ distribution.
+-   **Confidence interval:** Show how this leads to bounds for $\sigma$ using chi-squared quantiles.
+-   **Hypothesis test:** Note the form of tests comparing error variance claims.
+-   **Software link:** Point to the `sigma` output and degrees of freedom in R for practical calculation.
 ### Inference about $\beta_1$
 
-To determine whether the predictor is associated with the response we frame the null hypothesis $H_0: \beta_1 = 0$ and use the t-statistic
-$$
-t = \frac{\hat \beta_1 - 0}{\operatorname{SE}(\hat \beta_1)}.
-$$
-The standard error is obtained from the fitted model and the test statistic is compared against a $t_{n-2}$ distribution. R reports the t-statistic, the corresponding p-value, and a confidence interval for $\beta_1$, letting us draw formal conclusions about the strength and direction of the linear association.
+-   **Hypothesis:** To assess association, test $H_0: \beta_1 = 0$ versus an appropriate alternative.
+-   **Test statistic:** Introduce the t-statistic $t = \frac{\hat \beta_1 - 0}{\operatorname{SE}(\hat \beta_1)}$ and its $t_{n-2}$ reference distribution.
+-   **Software output:** Interpret R's t-statistic, p-value, and confidence interval for $\beta_1$.
+-   **Practical interpretation:** Translate statistical significance into statements about direction and strength of association.
 
 ## Interpreting \`summary()\` output
 
-The `summary()` function wraps all of these pieces into a single report. Focus on:
-- the coefficients table, which lists estimates, standard errors, t-values, and p-values for $\beta_0$ and $\beta_1$;
-- the residual standard error and degrees of freedom, which relate to $\hat \sigma$ and the variability around the line;
-- the multiple $R^2$, quantifying the proportion of variation in $y$ explained by the predictor;
-- the F-statistic, which matches the t-test for $\beta_1$ in the simple regression setting.
+-   **Purpose:** `summary()` wraps the model fit, assumptions, and inference into a single report.
+-   **Coefficients table:** Highlight estimates, standard errors, t-values, and p-values for $\beta_0$ and $\beta_1$.
+-   **Residual standard error:** Connect this to $\hat \sigma$ and the degrees of freedom shown in the output.
+-   **Model fit metrics:** Explain multiple $R^2$ and adjusted $R^2$ as measures of explained variation.
+-   **Overall test:** Describe how the F-statistic in simple regression aligns with the $\beta_1$ t-test.
+-   **Workflow tip:** Encourage students to read the table line by line, linking each quantity back to the modelling steps above.
 
 Interpreting each component in context helps translate the statistical output into practical insight about the data.
 
 ## Using the model for prediction
 
-After a model has been checked and deemed appropriate, we can use it to predict responses for new values of the predictor. In R the `predict()` function returns both fitted values (point predictions) and prediction intervals that account for residual variability. When reporting predictions always state the uncertainty, because individual observations vary more than the fitted mean. Remember that predictions are most reliable for $x$ values within the range of the observed data; extrapolating far beyond the sample can produce misleading results.
+-   **Prerequisite:** Only use the model for prediction after diagnostics suggest the assumptions hold.
+-   **Point prediction:** Use `predict()` to obtain fitted values for new $x$.
+-   **Interval estimates:** Emphasise the difference between confidence intervals for the mean response and prediction intervals for individual outcomes.
+-   **Communicating uncertainty:** Always report the uncertainty associated with predictions.
+-   **Scope of application:** Warn about extrapolating beyond the observed range of $x$ and discuss potential pitfalls.

@@ -37,19 +37,35 @@ crossref:
 
 ```{webr}
 #| include: false
-library(ggplot2)
+library(tidyverse)
 set_theme(theme_bw())
 ```
 
-# Simple Linear Regression: fitting a model to data
+```{r}
+#| include: false
+library(tidyverse)
+n <- 20
+linearData <- tibble(
+  x=rnorm(n,0,4),
+  y=0.5 * x - 3 + rnorm(n,0, 2)
+  )
+ojs_define(linearData)
+```
 
+# Simple Linear Regression
+##  Fitting models to data {.unnumbered}
 in the previous section, you were given a linear model - we knew the
 values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
 contexts we don't know the true relationship between $X$ and $Y$ in
 advance. Instead, we are given *data* and try to *infer* the values of
 $\beta$ and $\sigma$ by analysing the data.
 
-Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a similar such linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this data. 
+Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a similar such linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this 
+data. 
+
+
+
+- [ ] Continue
 
 ## Estimating parameters
 
@@ -73,18 +89,6 @@ $$
 $$
 Looking at some data, we try to find the values of our parameters that best 'fit' its distribution. Adjust the sliders below to find a line that you think fits the data:
 
-```{ojs}
-//| echo: false
-//| export: linearData
-x = Array.from({length: 10}, d3.randomNormal(0,4 ))
-noise = Array.from({length: 50}, d3.randomNormal(0, 2))
-y = x.map((xi, i) => 0.5 * xi - 3 + noise[i])
-
-xRange = d3.extent(x)
-
-
-linearData = x.map((xi, i) => ({ x: xi, y: y[i] }))
-```
 
 ```{ojs}
 //| panel: sidebar
@@ -100,6 +104,9 @@ tex.block`\hat{Y} = ${b0_1} + ${b1_1}x`
 ```{ojs}
 //| panel: fill
 //| echo: false
+
+xRange = d3.extent(linearData.x)
+
 lineData_1 = xRange.map(x => ({x, y: b1_1 * x + b0_1}))
 
 Plot.plot({

@@ -45,17 +45,18 @@ set_theme(theme_bw())
 
 ## Statistical models
 
--   A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call them $X$ and $Y$.
+-   A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call these variables $X$ and $Y$.
 
 -   In this context, we designate one variable, $Y$ as the *outcome* or *dependent variable*, and attempt to construct a *model* describing how it depends on the other variable(s), $X$, which we call *predictors* or *independent variables*.
 
--   We can express the idea that $Y$ depends on $X$ mathematically as $$
-    Y=f(X)
-    $$
+-   We can express the idea that $Y$ depends on $X$ mathematically as
+$$
+Y=f(X)
+$$
 
 -   That is, $Y$ is some function of $X$ (we have not yet specified what kind of function). Given values of $X$, we can use this function to *predict* or *explain* corresponding values of $Y$.
 
--   This is similar to *deterministic models* you may know from physics - for example $$E=MC^2$$, where $E$ (the outcome), depends on $M$ (a predictor) through the function $f(M)=MC^2$).
+-   This is similar to *deterministic models* you may know from physics - for example $E=MC^2$, where $E$ (the outcome), depends on $M$ (a predictor) through the function $f(M)=MC^2$).
 
 -   In statistical modelling we take another step and assume that $Y$ is not a purely determinsitic function of $X$, but that it varies somewhat randomly around such a relationship. We capture this by introducing a *random error term* , $\varepsilon$: $$
     Y=f(X)+\varepsilon
@@ -64,6 +65,8 @@ set_theme(theme_bw())
 Here $\varepsilon$ represents the random variation in $Y$ that is not explained by $X$.
 
 -   This means that $Y$ is not perfectly determined by $X$: even if we know the values of X, the outcome Y can still vary due to random noise.
+
+-  This is the setup for our statisical model, and while it may seem very general it makes a key assumption: that it is possible to model our outcome $Y$ *just* using the information from $X$ (along with random noise). We will discuss the relevance of this assumption more in chapter 2, but lets put a pin in it for now:
 
 ::: Assumption
 $Y$ depends only on a deterministic function of $X$ and a random noise component
@@ -115,6 +118,10 @@ Plot.plot({
 ::: Assumption
 Y and X have a linear relationship
 :::
+
+::: {}
+- [ ] Continue
+::: 
 
 ::: Example
 ### Salary growth over time
@@ -255,7 +262,9 @@ E_Y
 
 $$
 E[Y]= \$70,000+\$3,000\times10 = \$100,000
-$$ Sounds alright.
+$$
+
+ Sounds alright.
 
 Now to finish this section lets turn this linear prediction into our own R function that takes an input $X$ and returns the $E[Y]$
 
@@ -419,7 +428,8 @@ $$
 
 This means that for a given number of years $X$: - The expected salary is $50,000 + 5,000\cdot X$ - Actual salaries will vary around that average, typically within about ±\$4,000
 
-For example, after 5 years (X=5): $$
+For example, after 5 years (X=5): 
+$$
 E[Y]=\$50,000 + \$5,000 \times 5 = \$75,000 
 $$
 

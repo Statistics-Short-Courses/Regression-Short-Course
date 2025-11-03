@@ -45,17 +45,18 @@ set_theme(theme_bw())
 
 ## Statistical models
 
--   A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call them $X$ and $Y$.
+-   A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call these variables $X$ and $Y$.
 
 -   In this context, we designate one variable, $Y$ as the *outcome* or *dependent variable*, and attempt to construct a *model* describing how it depends on the other variable(s), $X$, which we call *predictors* or *independent variables*.
 
--   We can express the idea that $Y$ depends on $X$ mathematically as $$
-    Y=f(X)
-    $$
+-   We can express the idea that $Y$ depends on $X$ mathematically as
+$$
+Y=f(X)
+$$
 
 -   That is, $Y$ is some function of $X$ (we have not yet specified what kind of function). Given values of $X$, we can use this function to *predict* or *explain* corresponding values of $Y$.
 
--   This is similar to *deterministic models* you may know from physics - for example $$E=MC^2$$, where $E$ (the outcome), depends on $M$ (a predictor) through the function $f(M)=MC^2$).
+-   This is similar to *deterministic models* you may know from physics - for example $E=MC^2$, where $E$ (the outcome), depends on $M$ (a predictor) through the function $f(M)=MC^2$).
 
 -   In statistical modelling we take another step and assume that $Y$ is not a purely determinsitic function of $X$, but that it varies somewhat randomly around such a relationship. We capture this by introducing a *random error term* , $\varepsilon$: $$
     Y=f(X)+\varepsilon
@@ -65,11 +66,13 @@ Here $\varepsilon$ represents the random variation in $Y$ that is not explained 
 
 -   This means that $Y$ is not perfectly determined by $X$: even if we know the values of X, the outcome Y can still vary due to random noise.
 
+-  This is the setup for our statisical model, and while it may seem very general it makes a key assumption: that it is possible to model our outcome $Y$ *just* using the information from $X$ (along with random noise). We will discuss the relevance of this assumption more in chapter 2, but lets put a pin in it for now:
+
 ::: Assumption
 $Y$ depends only on a deterministic function of $X$ and a random noise component
 :::
 
-- [ ] Continue
+-  [ ] Continue
 
 ## Linear prediction
 
@@ -107,7 +110,6 @@ Plot.plot({
   marks: [
     Plot.line(lineData, { x: "x", y: "y" })]
 })
-
 ```
 
 -   Here, $\beta_0$ represents the expected value of $Y$ ($E[Y]$) when $X=0$, and $\beta_1$ represents the change in $E[Y]$ for a one-unit increase in $X$.
@@ -115,6 +117,8 @@ Plot.plot({
 ::: Assumption
 Y and X have a linear relationship
 :::
+
+-  [ ] Continue
 
 ::: Example
 ### Salary growth over time
@@ -130,6 +134,7 @@ $$
 ```{r}
 #| code-fold: true
 #| code-summary: "show code"
+#| fig-cap: "test"
 ggplot()+
   geom_abline(intercept=5e4, slope=5e3, colour='#2196F3')+
   lims(x=c(0,15),y=c(4e4,13e4))+
@@ -151,7 +156,6 @@ E[Y] = \beta_0 + \beta_1 X
 $$
 
 ::::{}
-
 #### Choosing parameters
 
 What are the coefficients $\beta_0$ and $\beta_1$ in this case?
@@ -195,6 +199,8 @@ Great, so our linear predictor of the expected salary looks something like:
 $$
 E[Y]= \$70,000 + \$3,000\cdot X
 $$
+
+here is a plot of that linear relationship alongside that of company 1:
 
 ```{r}
 #| code-fold: true
@@ -252,7 +258,9 @@ E_Y
 
 $$
 E[Y]= \$70,000+\$3,000\times10 = \$100,000
-$$ Sounds alright.
+$$
+
+ Sounds alright.
 
 Now to finish this section lets turn this linear prediction into our own R function that takes an input $X$ and returns the $E[Y]$
 
@@ -291,12 +299,13 @@ simple_linear_prediction(X)
 gradethis::grade_this_code()
 ```
 ::::
-::::{}
+:::: {}
 ### Good work!  {.unnumbered}
 Next we'll add the second main component to our linear predictor to make it a linear statistical model
 ::::
--  [ ] Continue
 :::
+
+-  [ ] Continue
 
 ## Random Errors
 
@@ -416,7 +425,8 @@ $$
 
 This means that for a given number of years $X$: - The expected salary is $50,000 + 5,000\cdot X$ - Actual salaries will vary around that average, typically within about ±\$4,000
 
-For example, after 5 years (X=5): $$
+For example, after 5 years (X=5): 
+$$
 E[Y]=\$50,000 + \$5,000 \times 5 = \$75,000 
 $$
 
@@ -669,9 +679,5 @@ df <- data.frame(X = X, Y = Y)
 
 ggplot(df, aes(X, Y)) +
   geom_point(alpha = 0.7) +
-  geom_abline(intercept = beta_0, slope = beta_1, linetype = "dashed") +
-  labs(
-    title = "Simulated data from a simple linear model",
-    subtitle = sprintf("β0 = %.1f, β1 = %.1f, σ = %.1f, n = %d", beta_0, beta_1, sigma, n),
-    x = "X", y = "Y")
+  geom_abline(intercept = beta_0, slope = beta_1, linetype = "dashed")
 ```

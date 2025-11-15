@@ -87,7 +87,6 @@ $$
 $$
 Looking at some data, we try to find the values of our parameters that best 'fit' its distribution. Adjust the sliders below to find a line that you think fits the data:
 
-
 ```{ojs}
 //| panel: sidebar
 //| echo: false
@@ -567,3 +566,5 @@ Interpreting each component in context helps translate the statistical output in
 -   **Interval estimates:** Emphasise the difference between confidence intervals for the mean response and prediction intervals for individual outcomes.
 -   **Communicating uncertainty:** Always report the uncertainty associated with predictions.
 -   **Scope of application:** Warn about extrapolating beyond the observed range of $x$ and discuss potential pitfalls.
+
+test. 

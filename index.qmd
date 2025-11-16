@@ -5,17 +5,18 @@ format: live-html
 
 # Preface {.unnumbered}
 
-This notebook provides an introduction (or refresher) to **linear
-regression**, a fundamental tool for modeling relationships between
-variables. We'll explore the concepts, fit models in R, interpret
-results, and visualize fits.
+This notebook provides an introduction (or refresher) to **linear regression**, a fundamental tool for modelling relationships between variables. We'll explore the concepts, fit models in R, interpret results, and visualize fits while building up from first principles to applied modelling.
 
 By the end, you should be able to:
 
 -   Understand the linear regression model and its assumptions.
-
 -   Fit and interpret simple and multiple regression models in R.
-
 -   Diagnose model fit using residual plots and summary statistics.
-
 -   Use model output to make predictions and assess uncertainty.
+
+The material is organised into the following chapters:
+
+-   **An introduction to linear statistical models** develops the building blocks of regression, including statistical model notation, linear prediction, and the role of random errors before presenting the simple linear model in R.
+-   **Simple Linear Regression** walks through estimating coefficients by least squares, checking assumptions with residual diagnostics, performing inference, and generating predictions from fitted models.
+-   **Multiple Linear Regression** extends the toolkit to handle several predictors, explores the impact of multicollinearity, and demonstrates how to incorporate categorical variables, interactions, polynomials, and transformations.
+-   **Regression case study** pulls the ideas together in a practical analysis so you can see how the modelling workflow unfolds on real data.

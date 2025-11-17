@@ -19,3 +19,5 @@ By the end, you should be able to:
 -   Diagnose model fit using residual plots and summary statistics.
 
 -   Use model output to make predictions and assess uncertainty.
+
+-   Present the results of a linear regression analysis for publication. 

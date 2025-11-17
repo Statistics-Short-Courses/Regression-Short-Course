@@ -278,7 +278,7 @@ beta_1_hat <- ______
 #### Why squares?
 The least squares estimator chooses $\hat \beta_0$ and $\hat \beta_1$ so that the sum of squared residuals $\sum_{i=1}^{n} r_i^2$ is as small as possible. But why take squares?
 As mentioned, squaring numbers returns a positive result. Therefore the square gives some idea of the 'absolute' value of the residuals (and doesn't allow negative residuals to cancel out positve ones). But why not just take the absolute value?
-Because the square function penalises large deviations heavily, least squares prefers lines that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
+Because the square function penalises large deviations heavily, least squares prefers li4nes that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
 :::
 
 ### Fitting a model using least squares
@@ -297,7 +297,7 @@ lm_1 <- lm(y~x,linearData)
 lm_1
 ```
 
-How do these estimates compare with yours? Lets have a look at the line it produces. 
+How do these estimates compare with yours? Lets compare the lines graphically:
 
 ::: {.panel-tabset}
 

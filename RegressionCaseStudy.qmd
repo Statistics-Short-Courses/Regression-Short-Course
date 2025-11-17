@@ -15,6 +15,4 @@ custom-numbered-blocks:
 
 ::: Exercise  
 
-a new test 
-
 :::

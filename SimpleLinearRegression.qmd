@@ -154,7 +154,6 @@ Ok great, so we have an estimate for our line-of-best-fit:
 //| echo: false
 tex.block`\hat{Y} = ${beta_0_hat} + ${beta_1_hat}\cdot X`
 ```
-
 but what do we mean by 'best' fit here? How do we evaluate this estimate and maybe compare it to other estimates?
 
 -   [ ] Continue
@@ -166,18 +165,18 @@ $$
 e=Y-\hat{Y} = Y - \hat{\beta_0}+\hat{\beta_1}X. 
 $$
 
-Residuals, $e$, are similar to the errors, $\varepsilon$, that we encountered in chapter 1 - but they are distinct. In many situations, we do not know the values of $\beta_0$ an $\beta_1$ - so we cannot calculate the errors, $\varepsilon= Y- E[Y]= Y-\beta_0 + \beta_1 X$. However, we have are our estimates, $\hat{\beta_0}$ and $\hat{\beta_1}$, so we can calculate residuals. 
+Residuals, $e$, are similar to the errors, $\varepsilon$, that we encountered in chapter 1 - but they are distinct. In many situations, we do not know the 'acutual' values of $\beta_0$ an $\beta_1$ - so we cannot calculate the errors, $\varepsilon= Y- E[Y]= Y-\beta_0 + \beta_1 X$. However, we do  have our estimates, $\hat{\beta_0}$ and $\hat{\beta_1}$, so we can calculate residuals. 
 
-Indeed - calculating residuals gives us a way to assess how well our estimated model fits the data.  We can think of the residuals as being the 'mismatch' between our estimated linear predictor and each data point. By *minimizing* the size of residuals, we can get a better fit of our line to data.
+Indeed - calculating residuals gives us a way to assess how well our estimated model fits the data.  We can think of the residuals as being the 'mismatch' between our estimated linear predictor and each data point. By *minimizing* the size of residuals (minimisiong the mismatch of our model to the data), we can get a better fit of our line to data.
 
 - [ ] Continue 
 
 ### Estimating $\beta$ by minimising residuals
 
-#### Guess the linear predictor (how low can the residuals go)?
+#### how low can the (squared) residuals go?
 
-Our estimated line now also displays residuals for each data point.
-Underneath the model equation is the *Sum of Squared Residuals* (SSR), which adds up all the residuals (the square means that they are all positive). 
+Below, the plot now also displays residuals for each data point.
+Underneath the model equation is the *Sum of Squared Residuals* (SSR), which gives a measure of the absolute difference between our linear predictor and the observed outcomes. 
 
 $$
 SSR=\sum_{i=1}^{n} e_i^2
@@ -240,13 +239,13 @@ Plot.plot({
 ```
 
 ::: Exercise
-Based on this visualisation, what do you think the minimum possible $SSR$ achievable is?
+Based on this visualisation, what do you think is the minimum possible $SSR$ achievable?
 ```{webr}
 #| exercise: Ex_2.2
 #| envir: Ex2
 #| define:
 #|   - SSR
-SSR <- 50
+SSR <- ________
 ```
 :::: {.solution exercise="Ex_2.2"}
 ```{webr}
@@ -277,9 +276,9 @@ beta_1_hat <- ______
 :::
 ::: Technical-point
 #### Why squares?
-The least squares estimator chooses $\hat \beta_0$ and $\hat \beta_1$ so that the sum of squared residuals $\sum_{i=1}^{n} r_i^2$ is as small as possible. But why take squares?
+The least squares estimator chooses $\hat \beta_0$ and $\hat \beta_1$ so that the sum of squared residuals $\sum_{i=1}^{n} e_i^2$ is as small as possible. But why take squares?
 As mentioned, squaring numbers returns a positive result. Therefore the square gives some idea of the 'absolute' value of the residuals (and doesn't allow negative residuals to cancel out positve ones). But why not just take the absolute value?
-Because the square function penalises large deviations heavily, least squares prefers li4nes that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
+Because the square function penalises large deviations heavily, least squares prefers lines that keep every point reasonably close to the fitted value rather than letting a few points drift far away.
 :::
 
 ### Fitting a model using least squares

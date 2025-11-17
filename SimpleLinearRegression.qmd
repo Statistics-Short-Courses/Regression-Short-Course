@@ -126,8 +126,8 @@ What is your best estimate for the values of $\beta_0$ and $\beta_1$ that best f
 #| define:
 #|   - beta_0_hat
 #|   - beta_1_hat
-beta_0_hat <- 1.2
-beta_1_hat <- 12
+beta_0_hat <- ______
+beta_1_hat <- ______
 ```
 :::: {.solution exercise="ex_1"}
 ```{webr}

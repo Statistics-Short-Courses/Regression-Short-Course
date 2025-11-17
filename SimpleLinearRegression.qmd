@@ -1,11 +1,14 @@
-﻿---
-format: live-html
-engine: knitr
+---
+format: 
+  live-html:
+    toc: true
 
 execute:
-  echo: false
+  echo: true
   warning: false
   message: false
+
+embed-resources: true
 
 filters:
   - custom-numbered-blocks
@@ -28,9 +31,6 @@ custom-numbered-blocks:
       colors: [C8E6C9, 4CAF50]
       boxstyle: foldbox.simple
       collapse: true
-      
-crossref:
-  chapters: true
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 {{< include ./_extensions/r-wasm/live/_gradethis.qmd >}}
@@ -145,9 +145,10 @@ grade_this({
   fail("both \\$\\beta_1\\$ and beta_0 should be numbers")
 })
 ```
-
 :::
+
 ###
+
 Ok great, so we have an estimate for our line-of-best-fit:
 ```{ojs}
 //| echo: false

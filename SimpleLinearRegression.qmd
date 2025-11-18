@@ -324,7 +324,7 @@ ggplot(linearData)+
 
 ### Estimating $\sigma$
 
-Once the line has been fitted, we estimate the variance of the (actual) error terms by measuring the spread of the residuals.
+Once the line has been fitted, we estimate the spread of the error terms (i.e. $\sigma$) by measuring the spread of the residuals around our line of best fit.
 
 We can extract the individual residual values from the fitted `lm` object:
 
@@ -333,6 +333,21 @@ e <- lm_1$residuals
 ggplot(e)+
   aes(x=e)+
   geom_hist()
+```
+::: Exercise 
+While we will often work with `lm` objects, it can be helpful to know how to calculate values ourselves.
+Complete the code below to calculate the residuals for the least-squares model:
+```{webr}
+Y_hat <- ls_beta_0_hat + ls_beta_0_hat*linearData$x
+
+myresiduals <- - Y_hat
+```
+:::
+
+We can check that these values are correct
+
+```{webr}
+e==myresiduals
 ```
 
 Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation (aka. the {{< glossary Residual-Standard-Error >}})

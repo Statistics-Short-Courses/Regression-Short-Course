@@ -41,9 +41,9 @@ library(ggplot2)
 set_theme(theme_bw())
 ```
 
-# An introduction to linear statistical models
+# An introduction to linear statistical models {#sec-chap1}
 
-## Statistical models
+## Statistical models {#sec-independence}
 
 -   A primary goal of statistical modelling is to characterise the relationship between variables, for now lets call these variables $X$ and $Y$.
 
@@ -114,7 +114,7 @@ Plot.plot({
 
 -   Here, $\beta_0$ represents the expected value of $Y$ ($E[Y]$) when $X=0$, and $\beta_1$ represents the change in $E[Y]$ for a one-unit increase in $X$.
 
-::: Assumption
+::: Assumption {#assumption-linearity}
 Y and X have a linear relationship
 :::
 
@@ -128,7 +128,7 @@ You've been offered a job at \~company A\~, and want to predict your salary at t
 Using this information, we can construct a simple linear predictor of salary from employment time. Given an employment time of $X=x$ years, we can represent a employee's expected salary ($E[Y]$) as
 
 $$
-E[Y]= \$50,000 + \$5,000\cdot x.
+E[Y]= \$50,000 + \$5,000 \cdot x.
 $$
 
 ::: {.panel-tabset}

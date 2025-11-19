@@ -13,7 +13,6 @@ book:
   - RegressionCaseStudy.qmd
   - glossary.qmd
   page-navigation: false
-  
 format:
   live-html:
     toc: true
@@ -22,6 +21,7 @@ format:
     toc-expand: 2
     toc-title: Contents
     number-depth: 2
+
 css: 
  - include/webex.css
  - include/style.css

@@ -28,9 +28,11 @@ custom-numbered-blocks:
       boxstyle: foldbox.simple
       collapse: false
     Technical-point:
-      colors: [C8E6C9, 4CAF50]
+      colors: [FFF9C4, FFEB3B]
       boxstyle: foldbox.simple
       collapse: true
+webr:
+  render-df: gt-interactive
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 {{< include ./_extensions/r-wasm/live/_gradethis.qmd >}}
@@ -44,31 +46,50 @@ set_theme(theme_bw())
 ```{r}
 #| include: false
 library(tidyverse)
+set_theme(theme_bw())
+```
+
+```{webr}
+#| include: false
+#| define:
+#|  - linearData
 n <- 20
-linearData <- tibble(
-  x=rnorm(n,0,4),
-  y=0.5 * x - 3 + rnorm(n,0, 2)
-  )
-ojs_define(linearData)
+x <- rnorm(n,0,4)
+y <- 0.5 * x - 3 + rnorm(n,0, 2)
+
+linearData <- data.frame(x,y)
 ```
 
 # Simple Linear Regression
 ##  Fitting models to data {.unnumbered}
-in the previous section, you were given a linear model - we knew the
-values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
-contexts we don't know the true relationship between $X$ and $Y$ in
-advance. Instead, we are given *data* and try to *infer* the values of
-$\beta$ and $\sigma$ by analysing the data.
+in the previous section, you were given a linear model - we knew the values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most contexts we don't know the true relationship between $X$ and $Y$ in advance. Instead, we are given *data* and try to *infer* the values of $\beta$ and $\sigma$ by analysing the data.
 
-Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a similar such linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this 
-data. 
+Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, we've generated data from a similar such linear model. Here it is:
+
+::: {.panel-tabset}
+### Plot
+```{webr}
+#| echo: false
+ggplot(linearData)+
+  aes(x=x, y=y)+
+  geom_point()
+```
+
+### Data
+
+```{webr}
+#| echo: false
+linearData
+```
+:::
+
+ your task for the remainder of the chapter (and in regression generally) is to try an make a (educated) guess about what model produced this data. 
 
 - [ ] Continue
 
 ## Estimating parameters
 
-### Hats
-lets distinguish our estimates from the 'true', underlying, parameter values by giving them $\hat{\text{hats}}$. so, we have
+We call the process of trying to guess the parameters in the data generating model (i.e. $\beta$ and $\sigma$), *estimation*, and our guesses are *estimates*. To avoid confusion, we distinguish our estimates from the 'true' parameter values by giving them $\hat{\text{hats}}$. So, we have
 
 $$
 \hat{\beta_0}: \text{Estimated intercept}
@@ -79,9 +100,7 @@ $$
 $$
 \hat{\sigma}: \text{Estimated standard deviation}.
 $$
-
 We also define $\hat{Y}$ as the predicted value of $Y$ given our estimated model:
-
 $$
 \hat{Y}=\hat{\beta_0}+\hat{\beta_1}X
 $$
@@ -305,29 +324,52 @@ coef(lm_1)
 -  [ ] How do these estimates compare with yours? 
 
 Lets compare the estimated linear fits graphically:
+
+::: {.panel-tabset}
+### Plot
 ```{webr}
 #| exercise: comparePlot
 #| envir: Ex2
+#| echo: false
+#| edit: false
 ggplot(linearData)+
   aes(x=x,y=y)+
   geom_point()+
   geom_abline( # the least squares estimate
-    intercept = lm_1$coefficients[1],
+    aes(intercept = lm_1$coefficients[1],
     slope = lm_1$coefficients[2],
-    colour = "green")+
+    colour = "Least squares fit")) +
   geom_abline( # Your guess
-    intercept = my_beta_0_hat,
+    aes(intercept = my_beta_0_hat,
     slope = my_beta_1_hat,
-    colour = "blue")
+    colour = "Your guess"))+
+  scale_colour_manual(values= c("Least squares fit"="#4CAF50","Your guess"='#2196F3'))
 ```
+### Code
+```{webr}
+#| eval: false
+ggplot(linearData)+
+  aes(x=x,y=y)+
+  geom_point()+
+  geom_abline( # the least squares estimate
+    aes(intercept = lm_1$coefficients[1],
+    slope = lm_1$coefficients[2],
+    colour = "Least squares fit")) +
+  geom_abline( # Your guess
+    aes(intercept = my_beta_0_hat,
+    slope = my_beta_1_hat,
+    colour = "Your guess"))+
+  scale_colour_manual(values= c("Least squares fit"="#4CAF50","Your guess"='#2196F3'))
+```
+:::
 -   [ ] Continue
 
 
 ### Estimating $\sigma$
 
-Once the line has been fitted (i.e. $\beta$ has been estimated as $\hat{\beta}$), we also have to estimate the distribution of error terms (remember, as per @sec-varAssumption, the error distribution has a constant value defined by $\sigma$). As you might expect, we utilise the residuals from our least squares linear predictor to estimate sigma.  The spread of the error terms by measuring the spread of the residuals around our line of best fit.
+Once the line has been fitted (i.e. $\beta$ has been estimated as $\hat{\beta}$), we also have to estimate the distribution of error terms (remember, as per @sec-varAssumption, the error distribution has a constant variance defined by $\sigma^2$). As you might expect, we again utilise the residuals from our least squares linear predictor to estimate $sigma$.  The spread of the error terms will be estimated by the spread of the residuals around our line of best fit.
 
-We can extract the individual residual values from the fitted `lm` object by indexing the `lm` object (e.g. `my_lm$residuals`) or with the `residuals()` function.
+We can extract the individual residual values from the fitted `lm` object by indexing (e.g. `my_lm$residuals`) or with the `residuals()` function.
 
 ::: Exercise
 #### Extracting residuals from an `lm` object
@@ -335,7 +377,7 @@ Extract the residuals by indexing our least squares fitted model `lm_1` and assi
 
 ```{webr}
 #| exercise: ex_2.2.1
-#| envir: ex_2.2.1
+#| envir: ex_2.2
 e <- ______
 ```
 :::: {.solution exercise="ex_2.2.1"}
@@ -343,8 +385,43 @@ e <- ______
 ```{webr}
 #| exercise: ex_2.2.1
 #| solution: true
-#| envir: ex_2.2.1
+#| envir: ex_2.2
 e <- lm_1$residuals
+```
+::::
+
+```{webr}
+#| exercise: ex_2.2.1
+#| envir: ex_2.2
+#| check: true
+#| class: wait
+grade_this_code()
+```
+:::
+
+### Residual Standard Error
+
+Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation (aka. the {{< glossary Residual-Standard-Error >}})
+$$
+\hat \sigma = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n} r_i^2}.
+$$
+Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
+
+::: Exercise
+#### Calculate the Residual Standard Error
+using your `e` object defined in the previous exercise, calculate the residual standard error of the least squares model (hint - there are 20 observations in the linearData dataset)
+```{webr}
+#| exercise: ex_2.2.3
+#| envir: ex_2.2
+rse <- ______
+```
+:::: {.solution exercise="ex_2.2.1"}
+#### Solution 
+```{webr}
+#| exercise: ex_2.2.3
+#| solution: true
+#| envir: ex_2.2
+rse <- sqrt(sum(e^2)/(nrow(linearData)-2))
 ```
 ::::
 
@@ -355,31 +432,14 @@ e <- lm_1$residuals
 #| class: wait
 grade_this_code()
 ```
-
-or, if desired we can calculate them ourselves:
-
-Complete the code below to calculate the residuals for the least-squares model:
-```{webr}
-Y_hat <- ls_beta_0_hat + ls_beta_0_hat*linearData$x
-
-e == linearData$y - Y_hat
-```
 :::
-
-### Residual Standard Error
-
-Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation (aka. the {{< glossary Residual-Standard-Error >}})
-$$
-\hat \sigma = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n} r_i^2}.
-$$
-In R output, this value is often called the Standard error. Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
 
 - [ ] Continue
 
-## Checking assumptions
+## Checking assumptions 
 
 ### Independence of observations
-- In chapter 1, we layed out the assumptions we made as we constructed a simple linear model. The first and most foundational assumption we made was that our outcome $Y$ only depended on the predictor $X$ (along with random error). This means that no other variables in our dataset influence $Y$, even through an influence on $X$. Since we are dealing with the simple case of one predictor variable $X$, it may seem that this assumtpion is garaunteed. However, a more subtle dependence may still be present: there may be some relationship between the observations themselves $X_i {{\perp \!\!\! \perp} X_j$ meaning that our observation $Y_i$ is depends on more than just $X_i$. 
+- In @sec-chap1, we layed out the assumptions we made as we constructed a simple linear model. The first and most foundational assumption we made was that our outcome $Y$ only depended on the predictor $X$ (along with random error). This means that no other variables in our dataset influence $Y$, even through an influence on $X$. Since we are dealing with the simple case of one predictor variable $X$, it may seem that this assumtpion is garaunteed. However, a more subtle dependence may still be present: there may be some relationship between the observations themselves $X_i {{\perp \!\!\! \perp} X_j$ meaning that our observation $Y_i$ is depends on more than just $X_i$. 
 
 - lets look at an example of how this might arise:
 
@@ -503,7 +563,7 @@ nonindependence_df |>
 :::
 
 ### Linearity 
-- 
+-  in @assumption-linearity
 -   **What it means:** The expected response should change linearly with the predictor.
 -   **Diagnostics:** Scatterplots of $(x_i, y_i)$ and residual-versus-fitted plots are useful checks.
 -   **Warning signs:** Curved patterns or systematic structure in these plots suggest the linear form is inadequate.
@@ -669,3 +729,7 @@ Interpreting each component in context helps translate the statistical output in
 -   **Scope of application:** Warn about extrapolating beyond the observed range of $x$ and discuss potential pitfalls.
 
 test. 
+
+
+## possible exercises
+- calculate residuals manually from beta coefficients 

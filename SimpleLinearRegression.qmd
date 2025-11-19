@@ -28,9 +28,11 @@ custom-numbered-blocks:
       boxstyle: foldbox.simple
       collapse: false
     Technical-point:
-      colors: [C8E6C9, 4CAF50]
+      colors: [FFF9C4, FFEB3B]
       boxstyle: foldbox.simple
       collapse: true
+webr:
+  render-df: gt-interactive
 ---
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 {{< include ./_extensions/r-wasm/live/_gradethis.qmd >}}
@@ -44,31 +46,50 @@ set_theme(theme_bw())
 ```{r}
 #| include: false
 library(tidyverse)
+set_theme(theme_bw())
+```
+
+```{webr}
+#| include: false
+#| define:
+#|  - linearData
 n <- 20
-linearData <- tibble(
-  x=rnorm(n,0,4),
-  y=0.5 * x - 3 + rnorm(n,0, 2)
-  )
-ojs_define(linearData)
+x <- rnorm(n,0,4)
+y <- 0.5 * x - 3 + rnorm(n,0, 2)
+
+linearData <- data.frame(x,y)
 ```
 
 # Simple Linear Regression
 ##  Fitting models to data {.unnumbered}
-in the previous section, you were given a linear model - we knew the
-values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most
-contexts we don't know the true relationship between $X$ and $Y$ in
-advance. Instead, we are given *data* and try to *infer* the values of
-$\beta$ and $\sigma$ by analysing the data.
+in the previous section, you were given a linear model - we knew the values of $\beta_0$, $\beta_1$ and even $\sigma$. However, in most contexts we don't know the true relationship between $X$ and $Y$ in advance. Instead, we are given *data* and try to *infer* the values of $\beta$ and $\sigma$ by analysing the data.
 
-Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, I simulated data from a similar such linear model - your task here (and in regression generally) is to try an make a (educated) guess about what linear model (summarised by it's values for $\beta$ and $\sigma$) produced this 
-data. 
+Indeed, at the end of the last session we generated data from a linear model. In preparation for this chapter, we've generated data from a similar such linear model. Here it is:
+
+::: {.panel-tabset}
+### Plot
+```{webr}
+#| echo: false
+ggplot(linearData)+
+  aes(x=x, y=y)+
+  geom_point()
+```
+
+### Data
+
+```{webr}
+#| echo: false
+linearData
+```
+:::
+
+ your task for the remainder of the chapter (and in regression generally) is to try an make a (educated) guess about what model produced this data. 
 
 - [ ] Continue
 
 ## Estimating parameters
 
-### Hats
-lets distinguish our estimates from the 'true', underlying, parameter values by giving them $\hat{\text{hats}}$. so, we have
+We call the process of trying to guess the parameters in the data generating model (i.e. $\beta$ and $\sigma$), *estimation*, and our guesses are *estimates*. To avoid confusion, we distinguish our estimates from the 'true' parameter values by giving them $\hat{\text{hats}}$. So, we have
 
 $$
 \hat{\beta_0}: \text{Estimated intercept}
@@ -79,9 +100,7 @@ $$
 $$
 \hat{\sigma}: \text{Estimated standard deviation}.
 $$
-
 We also define $\hat{Y}$ as the predicted value of $Y$ given our estimated model:
-
 $$
 \hat{Y}=\hat{\beta_0}+\hat{\beta_1}X
 $$
@@ -95,7 +114,7 @@ viewof b1_1 = Inputs.range([-2, 2], {step: 0.01, label:  html`${tex`\hat{\beta_1
 
 b0_1 = (-3 - 0.5*b1_1) + b0adj_1
 
-tex.block`\hat{Y} = ${b0_1} + ${b1_1}x`
+tex.block`\hat{Y} = ${b0_1.toFixed(2)} + ${b1_1.toFixed(2)}x`
 ```
 
 ```{ojs}
@@ -124,10 +143,10 @@ What is your best estimate for the values of $\beta_0$ and $\beta_1$ that best f
 #| exercise: ex_2.1
 #| envir: Ex2
 #| define:
-#|   - beta_0_hat
-#|   - beta_1_hat
-beta_0_hat <- ______
-beta_1_hat <- ______
+#|   - my_beta_0_hat
+#|   - my_beta_1_hat
+my_beta_0_hat <- ______
+my_beta_1_hat <- ______
 ```
 :::: {.solution exercise="ex_1"}
 ```{webr}
@@ -141,7 +160,7 @@ beta_1_hat <- ______
 #| check: true
 #| class: wait
 grade_this({
-  if (is.numeric(get("beta_0_hat", envir = .envir_result)) && is.numeric(get("beta_1_hat", envir = .envir_result))){pass("Good guess!")}
+  if (is.numeric(get("my_beta_0_hat", envir = .envir_result)) && is.numeric(get("my_beta_1_hat", envir = .envir_result))){pass("Good guess!")}
   fail("both \\$\\beta_1\\$ and beta_0 should be numbers")
 })
 ```
@@ -152,7 +171,7 @@ grade_this({
 Ok great, so we have an estimate for our line-of-best-fit:
 ```{ojs}
 //| echo: false
-tex.block`\hat{Y} = ${beta_0_hat} + ${beta_1_hat}\cdot X`
+tex.block`\hat{Y} = ${my_beta_0_hat} + ${my_beta_1_hat}\cdot X`
 ```
 but what do we mean by 'best' fit here? How do we evaluate this estimate and maybe compare it to other estimates?
 
@@ -182,11 +201,8 @@ $$
 SSR=\sum_{i=1}^{n} e_i^2
 $$
 
-This gives us a numerical measure of how well the line fits the data - see how low you can get the SSR by adjusting slope and intercept.
+where $e_i = Y_i - \hat{Y}_i$.  This gives us a numerical measure of how well the line fits the data - see how low you can get the SSR by adjusting slope and intercept.
 
-$$
-e_i = Y_i - \hat{Y}_i
-$$
 
 ```{ojs}
 //| panel: sidebar
@@ -268,9 +284,9 @@ If you want you can update your $\hat{\beta}$ estimates too (otherwise just proc
 ```{webr}
 #| exercise: ex_2.3
 #| envir: Ex2
-beta_0_hat <- ______
+my_beta_0_hat <- ______
 
-beta_1_hat <- ______
+my_beta_1_hat <- ______
 ```
 
 :::
@@ -288,70 +304,266 @@ We call the estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ which minimise the sum
 
 #### The `lm()` function
 
-In R the `lm()` function computes the least squares estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ for our simple linear model in a single command, printing both of the fitted coefficients. 
+In R the `lm()` function computes the least squares estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ for our simple linear model (among other things) in a single command: 
 
 ```{webr}
 #| input:
 #|   - linearData
 lm_1 <- lm(y~x,linearData)
-lm_1
 ```
-
-How do these estimates compare with yours? Lets compare the lines graphically:
-
-::: {.panel-tabset}
-
-## plot
+We can  extract the coefficients from the `lm` by indexing:
 
 ```{webr}
-#| envir: Ex2
-# we extract the coefficients from the lm object by indexing with `$`
-ls_beta_0_hat <- lm_1$coefficients[1]
-ls_beta_1_hat <- lm_1$coefficients[2]
+lm_1$coefficients
+```
+or by the `coef()` function:
 
+```{webr}
+coef(lm_1)
+```
+-  [ ] How do these estimates compare with yours? 
+
+Lets compare the estimated linear fits graphically:
+
+::: {.panel-tabset}
+### Plot
+```{webr}
+#| exercise: comparePlot
+#| envir: Ex2
+#| echo: false
+#| edit: false
 ggplot(linearData)+
   aes(x=x,y=y)+
   geom_point()+
-  geom_abline(
-    intercept=ls_beta_0_hat,
-    slope=ls_beta_1_hat)+
-    geom_abline(
-    intercept=beta_0_hat,
-    slope=beta_1_hat)
+  geom_abline( # the least squares estimate
+    aes(intercept = lm_1$coefficients[1],
+    slope = lm_1$coefficients[2],
+    colour = "Least squares fit")) +
+  geom_abline( # Your guess
+    aes(intercept = my_beta_0_hat,
+    slope = my_beta_1_hat,
+    colour = "Your guess"))+
+  scale_colour_manual(values= c("Least squares fit"="#4CAF50","Your guess"='#2196F3'))
+```
+### Code
+```{webr}
+#| eval: false
+ggplot(linearData)+
+  aes(x=x,y=y)+
+  geom_point()+
+  geom_abline( # the least squares estimate
+    aes(intercept = lm_1$coefficients[1],
+    slope = lm_1$coefficients[2],
+    colour = "Least squares fit")) +
+  geom_abline( # Your guess
+    aes(intercept = my_beta_0_hat,
+    slope = my_beta_1_hat,
+    colour = "Your guess"))+
+  scale_colour_manual(values= c("Least squares fit"="#4CAF50","Your guess"='#2196F3'))
 ```
 :::
 -   [ ] Continue
 
+
 ### Estimating $\sigma$
 
-Once the line has been fitted, we estimate the variance of the (actual) error terms by measuring the spread of the residuals.
+Once the line has been fitted (i.e. $\beta$ has been estimated as $\hat{\beta}$), we also have to estimate the distribution of error terms (remember, as per @sec-varAssumption, the error distribution has a constant variance defined by $\sigma^2$). As you might expect, we again utilise the residuals from our least squares linear predictor to estimate $sigma$.  The spread of the error terms will be estimated by the spread of the residuals around our line of best fit.
 
-We can extract the individual residual values from the fitted `lm` object:
+We can extract the individual residual values from the fitted `lm` object by indexing (e.g. `my_lm$residuals`) or with the `residuals()` function.
+
+::: Exercise
+#### Extracting residuals from an `lm` object
+Extract the residuals by indexing our least squares fitted model `lm_1` and assign them to the variable `e`
 
 ```{webr}
-e <- lm_1$residuals
-ggplot(e)+
-  aes(x=e)+
-  geom_hist()
+#| exercise: ex_2.2.1
+#| envir: ex_2.2
+e <- ______
 ```
+:::: {.solution exercise="ex_2.2.1"}
+#### Solution 
+```{webr}
+#| exercise: ex_2.2.1
+#| solution: true
+#| envir: ex_2.2
+e <- lm_1$residuals
+```
+::::
+
+```{webr}
+#| exercise: ex_2.2.1
+#| envir: ex_2.2
+#| check: true
+#| class: wait
+grade_this_code()
+```
+:::
+
+### Residual Standard Error
 
 Dividing the residual sum of squares by $n-2$ (one degree of freedom lost per fitted coefficient) gives the mean squared error, and taking the square root yields the residual standard deviation (aka. the {{< glossary Residual-Standard-Error >}})
 $$
 \hat \sigma = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n} r_i^2}.
 $$
-In R output, this value is often called the Standard error. Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
+Interpreting $\hat \sigma$ is often easier on the original $y$ scale: a typical observation falls about $\hat \sigma$ units away from the fitted line.
+
+::: Exercise
+#### Calculate the Residual Standard Error
+using your `e` object defined in the previous exercise, calculate the residual standard error of the least squares model (hint - there are 20 observations in the linearData dataset)
+```{webr}
+#| exercise: ex_2.2.3
+#| envir: ex_2.2
+rse <- ______
+```
+:::: {.solution exercise="ex_2.2.1"}
+#### Solution 
+```{webr}
+#| exercise: ex_2.2.3
+#| solution: true
+#| envir: ex_2.2
+rse <- sqrt(sum(e^2)/(nrow(linearData)-2))
+```
+::::
+
+```{webr}
+#| exercise: ex_2.2.1
+#| envir: ex_2.2.1
+#| check: true
+#| class: wait
+grade_this_code()
+```
+:::
 
 - [ ] Continue
 
-## Checking assumptions
+## Checking assumptions 
 
 ### Independence of observations
--   **What it means:** Linear regression relies on the observations being independent; each response should be unaffected by the others.
--   **Common violations:** Time series data, spatial measurements, or repeated observations on the same unit often introduce dependence.
--   **How to diagnose:** Look for clues in the study design and plot residuals in their collection orderâ€”long runs of positive or negative residuals hint at dependence.
--   **Possible remedies:** Incorporate correlation structures (e.g., mixed models), difference consecutive observations, or collect data to ensure independence.
+- In @sec-chap1, we layed out the assumptions we made as we constructed a simple linear model. The first and most foundational assumption we made was that our outcome $Y$ only depended on the predictor $X$ (along with random error). This means that no other variables in our dataset influence $Y$, even through an influence on $X$. Since we are dealing with the simple case of one predictor variable $X$, it may seem that this assumtpion is garaunteed. However, a more subtle dependence may still be present: there may be some relationship between the observations themselves $X_i {{\perp \!\!\! \perp} X_j$ meaning that our observation $Y_i$ is depends on more than just $X_i$. 
 
-### Linear relationships
+- lets look at an example of how this might arise:
+
+::: Example
+Researchers are interested in the relationship between IQ measurement and alcohol consumption. To this end they design a study wherein they visit a nearby pub over several days and measure individual's IQ and the amount of alcohol they've consumed. 
+
+```{r}
+#| include: false
+n_part <- 5
+n_obs <- 10
+mu_00 <- 100
+mu_01 <- 5 #between-person effect
+mu_10 <- -2 #withinperson effect
+
+nonindependence_df <- tibble(
+  participant = c("Anne", "John", "Laura", "Mary", "Steve"),
+  intake_mean = seq(from = 1, to = 10, by = 2),
+  u0 = rnorm(n_part, 0, 2)
+) |>
+  mutate(
+    IQ_baseline = mu_00 + mu_01 * intake_mean + u0,
+    β_within = mu_10
+  )|>
+  mutate(obs = list(1:n_obs)) |>
+  unnest(obs) |>
+  mutate(
+    intake = intake_mean + rnorm(n_obs, 0, 2), 
+    dev_intake = intake - intake_mean,
+    IQ = IQ_baseline + β_within * dev_intake + rnorm(n(), 0, 3)
+  )
+```
+Here is a plot of the data they collected:
+
+::: {.panel-tabset}
+## Plot
+```{r}
+#| echo: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake) +
+  geom_point()
+```
+## Code
+
+```{r}
+#| eval: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake) +
+  geom_point()
+```
+:::
+Fitting a simple linear model of IQ~Alcohol intake, would suggest that higher alcohol intake is associated with higher IQ scores. indeed, we can visualise a simple linear fit with the `geom_smooth(method="lm")` function
+
+::: {.panel-tabset}
+## Plot
+```{r}
+#| echo: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake) +
+  geom_point()+
+  geom_smooth(method="lm", se=FALSE)
+```
+## Code
+
+```{r}
+#| eval: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake) +
+  geom_point()+
+  geom_smooth(method="lm", se=FALSE)
+```
+:::
+which shows this positive trend. In some sense this is what the data shows, however it is not the whole story. Consider the following plot, with each observation coloured by participant:
+
+::: {.panel-tabset}
+## Plot
+```{r}
+#| echo: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake, colour = participant) +
+  geom_point()
+```
+## Code
+
+```{r}
+#| eval: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake, colour = participant) +
+  geom_point()
+```
+:::
+
+We can see that multiple observations (points) originate from the same participant - and therefore are likely to associated with one another. Moreover, if we focus on linear trends within each individual, our model(s) tell a different story:
+
+::: {.panel-tabset}
+## Plot
+```{r}
+#| echo: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake, colour = participant) +
+  geom_point()+
+  geom_smooth(method="lm", se=FALSE)
+```
+## Code
+
+```{r}
+#| eval: false
+nonindependence_df |>
+  ggplot() +
+  aes(x = IQ, y = intake, colour = participant) +
+  geom_point()+
+  geom_smooth(method="lm", se=FALSE)
+```
+:::
+:::
+
+### Linearity 
+-  in @assumption-linearity
 -   **What it means:** The expected response should change linearly with the predictor.
 -   **Diagnostics:** Scatterplots of $(x_i, y_i)$ and residual-versus-fitted plots are useful checks.
 -   **Warning signs:** Curved patterns or systematic structure in these plots suggest the linear form is inadequate.
@@ -373,57 +585,6 @@ In R output, this value is often called the Standard error. Interpreting $\hat \
 -   **Simulated example:** In this case the assumptions holdâ€”as expected because the data were sampled from an actual linear model.
 -   **Real-world contrasts:** Add case studies where independence fails (e.g., repeated measures), the relationship is curved, the variance changes, or the residuals are non-normal.
 -   **Teaching tip:** For each violation, include visuals showing the problematic residual pattern and a suggested fix.
-
-::: Example
-**Independence**
-
-Repeated measurements on the same individual violate the independence assumption because the shared subject creates dependence between observations. In the data below we record eight practice trials each week for a single violinist preparing for an audition. Within a week, longer practice hours are actually associated with slightly *lower* accuracy as fatigue sets in, but the week-level averages trend upward because the player gradually improves. The solid black regression fitted to the weekly averages therefore suggests a positive relationship that does not exist for the day-to-day observationsâ€”an ecological fallacy. Remedies such as multilevel or mixed-effects models can account for the nested structure, but they are beyond the scope of this course.
-
-```{webr}
-set.seed(2024)
-independence_example <- expand_grid(
-  session = factor(1:4, labels = paste("Week", 1:4)),
-  trial = 1:8
-) |>
-  mutate(
-    hours_practice = rnorm(n(), 0, 0.4) + as.integer(session),
-    accuracy = 70 + 6 * as.integer(session) - 4 * (hours_practice - as.integer(session)) + rnorm(n(), 0, 1.2)
-  )
-
-session_means <- independence_example |>
-  group_by(session) |>
-  summarise(
-    mean_hours = mean(hours_practice),
-    mean_accuracy = mean(accuracy),
-    .groups = "drop"
-  )
-
-ggplot(independence_example, aes(hours_practice, accuracy, colour = session)) +
-  geom_point(alpha = 0.6) +
-  geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
-  geom_point(
-    data = session_means,
-    aes(mean_hours, mean_accuracy),
-    inherit.aes = FALSE,
-    size = 3,
-    colour = "black"
-  ) +
-  geom_smooth(
-    data = session_means,
-    aes(mean_hours, mean_accuracy),
-    inherit.aes = FALSE,
-    method = "lm",
-    se = FALSE,
-    colour = "black"
-  ) +
-  labs(
-    x = "Hours of practice",
-    y = "Intonation accuracy (%)",
-    colour = "Week"
-  ) +
-  theme(legend.position = "bottom")
-```
-:::
 
 ::: Example
 **Linearity**
@@ -568,3 +729,7 @@ Interpreting each component in context helps translate the statistical output in
 -   **Scope of application:** Warn about extrapolating beyond the observed range of $x$ and discuss potential pitfalls.
 
 test. 
+
+
+## possible exercises
+- calculate residuals manually from beta coefficients 

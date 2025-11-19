@@ -131,15 +131,26 @@ $$
 E[Y]= \$50,000 + \$5,000\cdot x.
 $$
 
+::: {.panel-tabset}
+## Plot
 ```{r}
-#| code-fold: true
-#| code-summary: "show code"
+#| echo: false
 #| fig-cap: "test"
 ggplot()+
   geom_abline(intercept=5e4, slope=5e3, colour='#2196F3')+
   lims(x=c(0,15),y=c(4e4,13e4))+
   labs(x="Years Employment", y= "Expecteted Salary")
 ```
+## Code
+
+```{r}
+#| eval: false
+ggplot()+
+  geom_abline(intercept=5e4, slope=5e3, colour='#2196F3')+
+  lims(x=c(0,15),y=c(4e4,13e4))+
+  labs(x="Years Employment", y= "Expecteted Salary")
+```
+:::
 
 After 10 years of working at this company (i.e. $X=10$), we would expect a salary of $$E[Y]=\$50,000 + \$5,000\times10= \$100,000$$
 :::
@@ -202,9 +213,10 @@ $$
 
 here is a plot of that linear relationship alongside that of company 1:
 
+::: {.panel-tabset}
+## Plot
 ```{r}
-#| code-fold: true
-#| code-summary: "show code"
+#| echo: false
 #| fig-cap: "Linear trend of salary and years employed at two different companies"
 ggplot()+
   geom_abline(aes(intercept=7e4, slope=3e3, colour="1"))+
@@ -215,6 +227,20 @@ ggplot()+
        colour="Company")+
   scale_color_manual(values= c("1"="#4CAF50","2"='#2196F3'))
 ```
+## Code
+
+```{r}
+#| eval: false
+ggplot()+
+  geom_abline(aes(intercept=7e4, slope=3e3, colour="1"))+
+  geom_abline(aes(intercept=5e4, slope=5e3, colour="2"))+
+  lims(x=c(0,15),y=c(4e4,13e4))+
+  labs(x="Years Employment",
+       y= "Expecteted Salary ($)",
+       colour="Company")+
+  scale_color_manual(values= c("1"="#4CAF50","2"='#2196F3'))
+```
+:::
 Using the parameter variables you just defined, calculate the expected salary after working for this companyfor 10 years
 
 ```{webr}
@@ -639,7 +665,10 @@ head(Y)
 
 lets look at the joint distribution of X and Y:
 
+::: {.panel-tabset}
+## Plot
 ```{r}
+#| echo: false
 #| label: fig-plot
 #| fig-cap: "Data generated from the simple linear model $Y=4+1.2\\times X + \\varepsilon$, with $\\varepsilon\\sim N(0,16)$. Dashed line shows E[Y|X] = β0 + β1X"
 
@@ -653,6 +682,21 @@ ggplot(df, aes(X, Y)) +
   labs(x = "X", y = "Y") +
   theme_minimal()
 ```
+## Code
+
+```{r}
+#| eval: false
+library(ggplot2)
+
+df <- data.frame(X = X, Y = Y)
+
+ggplot(df, aes(X, Y)) +
+  geom_point(alpha = 0.7) +
+  geom_abline(intercept = beta_0, slope = beta_1, linetype = "dashed") +
+  labs(x = "X", y = "Y") +
+  theme_minimal()
+```
+:::
 
 Heres the same code running in webR - try adjusting some of the parameters (e.g. the number of samples) and running to plot a different random sample!
 
